@@ -1,0 +1,53 @@
+{
+  "id": "force.hegemony_7th_fleet",
+  "type": "force",
+  "name": "Hegemony 7th Fleet",
+  "tags": ["military", "patrol", "veteran", "disciplined"],
+  "attrs": {
+    "polity_id": "polity.hegemony",
+    "strength": 0.75,
+    "composition": {
+      "capital_ships": 2,
+      "cruisers": 8,
+      "destroyers": 24,
+      "fighters": 120,
+      "support": 15
+    },
+    "location": "region.vega",
+    "stance": "defensive",
+    "morale": 0.7,
+    "supply": 0.8,
+    "readiness": 0.85
+  },
+  "ai": {
+    "persona": "The 7th Fleet is the Hegemony's iron fist in Vega, a veteran formation hardened by years of anti-piracy operations and skirmishes with Free Trader raiders. They are professional, disciplined, and utterly loyal to the Hegemony—but prolonged garrison duty has dulled their edge. The crews are tired of chasing shadows and yearn for decisive action.",
+    "commander": "agent.admiral_chen",
+    "doctrine": {
+      "aggression": 0.6,
+      "caution": 0.7,
+      "preferred_tactics": ["overwhelming_force", "blockade", "systematic_sweep", "shock_and_awe"]
+    },
+    "goals": [
+      "maintain_system_control",
+      "interdict_smuggling",
+      "await_reinforcements",
+      "protect_supply_lines"
+    ],
+    "morale_factors": {
+      "current": 0.7,
+      "boosters": ["recent_victory", "shore_leave", "reinforcements"],
+      "drains": ["prolonged_deployment", "guerrilla_losses", "supply_shortages"]
+    },
+    "voice": {
+      "tone": "military_professional",
+      "vocabulary": ["formation", "execute", "by the numbers", "maintain discipline"],
+      "speech_patterns": "Communications follow strict protocol. Orders are crisp and unambiguous. Subordinates respond with acknowledgments, not questions."
+    },
+    "memory": ["evt_vega_deployment", "evt_convoy_ambush_023", "evt_pirate_sweep_success"],
+    "secrets": [
+      "Several captains are Free Trader sympathizers",
+      "Supply situation worse than reported",
+      "Admiral Chen suspects betrayal from within"
+    ]
+  }
+}

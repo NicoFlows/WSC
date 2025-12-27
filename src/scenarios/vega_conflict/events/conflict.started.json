@@ -1,0 +1,31 @@
+{
+  "id": "evt_10311",
+  "t_world": 1040.0,
+  "t_stream": null,
+  "type": "conflict.started",
+  "where": "region.vega",
+  "who": ["polity.hegemony", "polity.free_traders", "force.hegemony_7th_fleet", "force.free_trader_raiders"],
+  "data": {
+    "conflict_type": "open_warfare",
+    "trigger": "influence_threshold_crossed",
+    "trigger_details": {
+      "hegemony_influence": 0.55,
+      "free_trader_influence": 0.35,
+      "threshold": 0.5,
+      "catalyst": "convoy_interdiction_series"
+    },
+    "declared_objectives": {
+      "hegemony": "eliminate_raider_threat",
+      "free_traders": "break_blockade"
+    },
+    "initial_force_balance": {
+      "hegemony": 0.75,
+      "free_traders": 0.25
+    }
+  },
+  "causes": ["evt_10298", "evt_10305", "evt_10308"],
+  "source": "lens.grand_strategy",
+  "confidence": 1.0,
+  "importance": 0.85,
+  "narrative_summary": "After months of escalating raids on Hegemony convoys, Admiral Chen declared open warfare on the Free Trader presence in Vega. The 7th Fleet moved to battle stations as Captain Reva's Raiders prepared for the fight of their lives."
+}

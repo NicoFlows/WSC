@@ -1,0 +1,117 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.galaxy.local_cluster",
+  "name": "The Local Cluster",
+  "type": "galaxy_region",
+  "scale": "galaxy",
+  "tags": ["inhabited", "contested", "trade_hub", "frontier"],
+
+  "hierarchy": {
+    "parent": null,
+    "children": [
+      {
+        "location_id": "location.sector.coreward_reach",
+        "anchor": {"region": "coreward", "coords": {"x": 0, "y": 0, "z": 0}},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.sector.rimward_expanse",
+        "anchor": {"region": "rimward", "coords": {"x": 200, "y": -50, "z": 20}},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.sector.spinward_frontier",
+        "anchor": {"region": "spinward", "coords": {"x": -150, "y": 100, "z": -30}},
+        "entity_id": null
+      }
+    ]
+  },
+
+  "entity_id": null,
+
+  "bounds": {
+    "width": 500,
+    "height": 500,
+    "depth": 100,
+    "units": "light_years"
+  },
+
+  "geometry": {
+    "format": "graph",
+    "source": "wsc-manual-v1",
+    "data": {
+      "nodes": [
+        {
+          "id": "coreward_reach",
+          "name": "Coreward Reach",
+          "type": "sector",
+          "coords": {"x": 0, "y": 0, "z": 0},
+          "properties": {"systems": 12, "importance": 0.9, "development": "high"}
+        },
+        {
+          "id": "rimward_expanse",
+          "name": "Rimward Expanse",
+          "type": "sector",
+          "coords": {"x": 200, "y": -50, "z": 20},
+          "properties": {"systems": 8, "importance": 0.5, "development": "low"}
+        },
+        {
+          "id": "spinward_frontier",
+          "name": "Spinward Frontier",
+          "type": "sector",
+          "coords": {"x": -150, "y": 100, "z": -30},
+          "properties": {"systems": 6, "importance": 0.4, "development": "frontier"}
+        }
+      ],
+      "edges": [
+        {
+          "id": "lane_core_rim",
+          "from": "coreward_reach",
+          "to": "rimward_expanse",
+          "type": "major_route",
+          "properties": {"traffic": "heavy", "safety": 0.7}
+        },
+        {
+          "id": "lane_core_spin",
+          "from": "coreward_reach",
+          "to": "spinward_frontier",
+          "type": "minor_route",
+          "properties": {"traffic": "light", "safety": 0.4}
+        }
+      ]
+    }
+  },
+
+  "features": [
+    {
+      "id": "void_rift",
+      "name": "The Void Rift",
+      "type": "navigational_hazard",
+      "position": {"x": 100, "y": 50, "z": 0},
+      "properties": {"description": "A region of unstable space that disrupts jump drives"}
+    },
+    {
+      "id": "ancient_gate",
+      "name": "The Precursor Gate",
+      "type": "anomaly",
+      "position": {"x": -50, "y": -30, "z": 10},
+      "properties": {"description": "Dormant alien megastructure of unknown purpose"}
+    }
+  ],
+
+  "connections": [],
+
+  "terrain": {
+    "default": "deep_space",
+    "atmosphere": "none",
+    "temperature": "variable",
+    "hazards": ["radiation_zones", "piracy", "unstable_jump_points"]
+  },
+
+  "metadata": {
+    "created": "2025-01-15T00:00:00Z",
+    "generator": "manual",
+    "notes": "Top-level galactic region for the Vega Conflict example scenario",
+    "suitable_agents": ["galactic-4x"]
+  }
+}

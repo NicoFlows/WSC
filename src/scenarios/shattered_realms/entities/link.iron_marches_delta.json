@@ -1,0 +1,38 @@
+{
+  "id": "link.iron_marches.delta",
+  "type": "link",
+  "name": "The Iron Road",
+  "tags": ["major_route", "trade_route", "contested"],
+  "attrs": {
+    "endpoints": ["region.iron_marches", "region.delta"],
+    "kind": "overland_route",
+    "capacity": 0.7,
+    "risk": 0.3,
+    "bidirectional": true,
+    "distance": 200,
+    "travel_time": "2_weeks"
+  },
+  "ai": {
+    "persona": "The Iron Road is the primary trade artery between Ironhold's forges and the Freehold's markets. Caravans of iron, steel, and finished weapons flow south; luxury goods, grain, and foreign wares flow north. The road passes through disputed borderlands, and both nations maintain patrols—as do bandits who prey on the wealthy convoys. Recent tensions have made the route more dangerous.",
+    "traffic_pattern": {
+      "commercial": 0.7,
+      "military": 0.2,
+      "civilian": 0.1,
+      "peak_times": ["spring_thaw", "autumn_harvest"]
+    },
+    "hazards": [
+      {"type": "bandits", "probability": 0.2, "location": "borderlands"},
+      {"type": "toll_disputes", "probability": 0.3, "location": "border_posts"},
+      {"type": "weather", "probability": 0.4, "location": "mountain_passes"}
+    ],
+    "voice": {
+      "tone": "merchant_wary",
+      "speech_patterns": "Caravan masters speak of routes, risks, and rates. Everyone watches the hills."
+    },
+    "control_points": [
+      {"name": "Iron Gate", "controller": "polity.ironhold", "security": 0.9},
+      {"name": "Merchant's Rest", "controller": "neutral", "security": 0.5},
+      {"name": "Delta Customs", "controller": "polity.freehold", "security": 0.7}
+    ]
+  }
+}

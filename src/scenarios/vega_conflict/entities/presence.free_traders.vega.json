@@ -1,0 +1,33 @@
+{
+  "id": "presence.free_traders.vega",
+  "type": "presence",
+  "name": "Free Trader Presence in Vega",
+  "tags": ["underground", "resistance", "growing"],
+  "attrs": {
+    "polity_id": "polity.free_traders",
+    "region_id": "region.vega",
+    "influence": 0.35,
+    "control": false,
+    "states_active": ["smuggling_operations", "recruitment_drive"],
+    "states_pending": ["supply_cache_establishment"],
+    "states_cooldown": []
+  },
+  "ai": {
+    "persona": "The Free Traders maintain a shadow presence in Vega, operating through sympathetic locals, hidden fuel caches, and a network of informants. They can't challenge the Hegemony openly, but they make occupation expensive. Every patrol that goes missing, every shipment that vanishes, every recruit that slips away—it all adds up.",
+    "goals": [
+      "maintain_smuggling_routes",
+      "protect_sympathizer_network",
+      "gather_intelligence",
+      "prepare_for_opportunity"
+    ],
+    "doctrine": {
+      "aggression": 0.3,
+      "stealth": 0.9,
+      "local_support": 0.7
+    },
+    "voice": {
+      "tone": "conspiratorial",
+      "speech_patterns": "Communications are encrypted, brief, and use heavy code words. 'The package is ready' might mean anything from a supply drop to an assassination."
+    }
+  }
+}

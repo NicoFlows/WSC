@@ -1,0 +1,37 @@
+{
+  "id": "region.duskwall",
+  "type": "region",
+  "name": "The Duskwall",
+  "tags": ["borderland", "militarized", "sacred", "vigilant"],
+  "attrs": {
+    "coords": {"x": 35, "y": 70},
+    "security": 0.7,
+    "economy": 0.4,
+    "population": 0.4,
+    "hazards": ["void_incursions", "corrupted_creatures", "psychological_warfare"],
+    "terrain": "fortress_badlands"
+  },
+  "ai": {
+    "persona": "The Duskwall is humanity's shield against the Hollow Wastes. A chain of fortress-monasteries stretches across the border, manned by the Duskwatch—warrior-priests who have sworn to hold the line until death and beyond. The land itself bears scars from void corruption: twisted trees, patches where reality thins, ruins of towns that fell to darkness. Yet the Watchers endure, their signal fires burning eternal.",
+    "atmosphere": {
+      "mood": "grim_resolute",
+      "visual": "Fortress silhouettes against perpetual twilight, signal fires, scarred earth",
+      "sounds": ["warning bells", "prayers", "distant inhuman screaming", "blade sharpening"]
+    },
+    "active_tensions": [
+      "increasing_void_incursions",
+      "supply_shortages",
+      "corruption_spreading",
+      "morale_crisis"
+    ],
+    "rumors": [
+      "The Void has a new herald—something ancient awakened",
+      "Some Watchers have been corrupted from within",
+      "The last battle approaches"
+    ],
+    "voice": {
+      "tone": "solemn_defiant",
+      "speech_patterns": "Watchers speak in ritual phrases, prayers woven into conversation. Gallows humor masks genuine fear."
+    }
+  }
+}

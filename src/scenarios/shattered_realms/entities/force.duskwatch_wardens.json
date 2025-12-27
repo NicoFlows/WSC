@@ -1,0 +1,36 @@
+{
+  "id": "force.duskwatch_wardens",
+  "type": "force",
+  "name": "The Duskwatch Wardens",
+  "tags": ["elite", "religious", "anti_void", "mixed"],
+  "attrs": {
+    "affiliation": "polity.duskwatch",
+    "strength": 0.6,
+    "morale": 0.9,
+    "quality": 0.85,
+    "location": "region.duskwall",
+    "commander": "agent.high_warden_sera",
+    "composition": ["warden_knights", "void_hunters", "chaplains", "siege_defenders"]
+  },
+  "ai": {
+    "persona": "The Duskwatch Wardens are the last line between civilization and the Void. Every member has sworn oaths that bind their souls, sacrificed comfort for eternal vigilance. They fight with weapons blessed against corruption, armor warded by ancient rites. Their fortress-monasteries have never fallen from without—only betrayal from within has ever breached their walls. They are few, but each is worth ten ordinary soldiers against void creatures.",
+    "doctrine": {
+      "preferred_terrain": ["fortress", "defensive"],
+      "tactics": ["fortress_defense", "void_banishment", "purification_rituals", "coordinated_seal"],
+      "weaknesses": ["open_field", "numerical_disadvantage", "long_campaigns"]
+    },
+    "voice": {
+      "tone": "ritualistic_grim",
+      "speech_patterns": "Wardens speak in formal cadences, prayers woven into orders. They name their weapons and address the Void directly in battle."
+    },
+    "current_orders": "hold_the_line",
+    "recent_battles": [
+      {"name": "The Third Incursion", "result": "victory", "losses": "moderate"}
+    ],
+    "notable_units": [
+      {"name": "The Sealed Gate", "specialty": "void_banishment", "morale": 0.95},
+      {"name": "The Ashwalkers", "specialty": "patrol", "morale": 0.8},
+      {"name": "The Final Light", "specialty": "last_stand", "morale": 1.0}
+    ]
+  }
+}

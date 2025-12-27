@@ -1,0 +1,36 @@
+{
+  "id": "region.silverwood",
+  "type": "region",
+  "name": "The Silverwood",
+  "tags": ["ancient_forest", "magical", "elven", "isolated"],
+  "attrs": {
+    "coords": {"x": 20, "y": 45},
+    "security": 0.9,
+    "economy": 0.5,
+    "population": 0.3,
+    "hazards": ["enchanted_mists", "territorial_spirits", "time_distortions"],
+    "terrain": "ancient_forest"
+  },
+  "ai": {
+    "persona": "The Silverwood is an ancient forest where time flows differently. Trees here have witnessed the rise and fall of human empires. The elves shaped this place over millennia—or perhaps it shaped them. Paths shift for the unwelcome; clearings appear for the worthy. At its heart, the city of Starfall grows from living trees, its spires reaching toward stars that seem closer here than anywhere else in the world.",
+    "atmosphere": {
+      "mood": "ethereal",
+      "visual": "Silver-barked trees, bioluminescent flowers, starlight filtering through canopy",
+      "sounds": ["wind chimes in impossible melodies", "distant singing", "absolute silence"]
+    },
+    "active_tensions": [
+      "isolationist_vs_interventionist_factions",
+      "void_corruption_at_borders",
+      "human_refugees_seeking_sanctuary"
+    ],
+    "rumors": [
+      "The Archon has lived since before the Shattering",
+      "Elves who leave the forest age rapidly",
+      "Something sleeps beneath the oldest tree"
+    ],
+    "voice": {
+      "tone": "ancient_musical",
+      "speech_patterns": "Elves speak in flowing sentences, often leaving thoughts unfinished. Time references are vague—'recently' might mean decades."
+    }
+  }
+}

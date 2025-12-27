@@ -1,0 +1,43 @@
+{
+  "id": "locale.starfall",
+  "type": "locale",
+  "name": "Starfall - City of Living Trees",
+  "tags": ["elven_capital", "magical", "ancient", "hidden"],
+  "attrs": {
+    "region": "region.silverwood",
+    "affiliation": "polity.silverwood",
+    "population": 0.4,
+    "wealth": 0.6,
+    "services": ["arcane_academy", "star_observatory", "tree_singers", "memory_wells"],
+    "defenses": 0.9
+  },
+  "ai": {
+    "persona": "Starfall is not built—it is grown. Over millennia, the elves have sung to the silverwood trees, shaping them into soaring spires, arching bridges, and chamber-halls where leaves form living ceilings. The city exists in harmony with the forest, its boundaries fluid, its defenses woven from the forest's own magic. At its center, the Star Tower rises above the canopy, where the Archon communes with powers beyond mortal understanding.",
+    "atmosphere": {
+      "mood": "serene_ancient",
+      "visual": "Silver-barked tree-towers, bioluminescent gardens, starlight filtering through crystal domes",
+      "sounds": ["distant singing", "wind through silver leaves", "water over ancient stones", "silence"]
+    },
+    "districts": [
+      {"name": "The Canopy", "type": "noble", "description": "High towers where elder elves dwell"},
+      {"name": "The Roots", "type": "residential", "description": "Ground-level homes for common elves"},
+      {"name": "The Wellspring", "type": "magical", "description": "Arcane academies and ritual spaces"},
+      {"name": "The Twilight Market", "type": "commercial", "description": "Where outsiders may trade"}
+    ],
+    "notable_locations": [
+      {"name": "The Star Tower", "type": "palace"},
+      {"name": "The Memory Wells", "type": "magical"},
+      {"name": "The Grove of Ancestors", "type": "religious"},
+      {"name": "The Singing Academy", "type": "educational"}
+    ],
+    "current_events": [
+      "Debate over human contact",
+      "Void corruption at forest edges",
+      "Young elves questioning isolation"
+    ],
+    "voice": {
+      "tone": "melodic_formal",
+      "speech_patterns": "Elvish is the primary language. Common is spoken slowly, as if translation occurs in real-time."
+    }
+  }
+}

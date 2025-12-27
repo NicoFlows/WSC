@@ -1,0 +1,43 @@
+{
+  "id": "locale.thornhold",
+  "type": "locale",
+  "name": "Thornhold - The Iron Throne",
+  "tags": ["capital", "fortress", "royal_seat", "industrial"],
+  "attrs": {
+    "region": "region.iron_marches",
+    "affiliation": "polity.ironhold",
+    "population": 0.8,
+    "wealth": 0.75,
+    "services": ["royal_court", "grand_forge", "military_academy", "temple_of_steel"],
+    "defenses": 0.95
+  },
+  "ai": {
+    "persona": "Thornhold is the greatest fortress-city in the known world, carved from the living rock of Mount Thorn over a thousand years. The Iron Throne sits at its heart, in a great hall where the walls are lined with the weapons of conquered enemies. Below the city, the Grand Forge burns eternal, fed by volcanic vents. Here the king rules, the legions train, and the fate of nations is decided in smoke-filled chambers.",
+    "atmosphere": {
+      "mood": "powerful_tense",
+      "visual": "Towering walls of black stone, forge-light glowing from below, banners snapping in mountain wind",
+      "sounds": ["forge hammers", "marching", "court intrigue whispers", "wind through battlements"]
+    },
+    "districts": [
+      {"name": "The Crown", "type": "royal", "description": "Palace complex and noble residences"},
+      {"name": "The Anvil", "type": "industrial", "description": "Forge district and craftsmen quarters"},
+      {"name": "The Shield", "type": "military", "description": "Barracks, training grounds, armories"},
+      {"name": "The Commons", "type": "residential", "description": "Worker housing and markets"}
+    ],
+    "notable_locations": [
+      {"name": "The Iron Throne", "type": "palace"},
+      {"name": "The Grand Forge", "type": "industrial"},
+      {"name": "The Hall of Ancestors", "type": "religious"},
+      {"name": "The War College", "type": "military"}
+    ],
+    "current_events": [
+      "King's health declining",
+      "Succession tensions",
+      "Increased military recruitment"
+    ],
+    "voice": {
+      "tone": "formal_martial",
+      "speech_patterns": "City dwellers speak with mountain accents, formal when addressing nobility. Forge-workers have their own cant."
+    }
+  }
+}

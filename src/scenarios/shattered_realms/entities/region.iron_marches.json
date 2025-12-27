@@ -1,0 +1,36 @@
+{
+  "id": "region.iron_marches",
+  "type": "region",
+  "name": "The Iron Marches",
+  "tags": ["highlands", "fortified", "industrial", "human_dominated"],
+  "attrs": {
+    "coords": {"x": 45, "y": 30},
+    "security": 0.8,
+    "economy": 0.7,
+    "population": 0.75,
+    "hazards": ["harsh_winters", "mountain_passes", "orc_raids"],
+    "terrain": "mountain_highlands"
+  },
+  "ai": {
+    "persona": "The Iron Marches are the heart of the Iron Kingdom—a rugged highland region of granite peaks and deep valleys. Iron mines pierce every mountainside, their forges filling the air with smoke and the ring of hammers. The people here are as hard as the metal they work, proud of their heritage and suspicious of outsiders. Castle towns crown every major peak, connected by ancient roads built by forgotten kings.",
+    "atmosphere": {
+      "mood": "industrious",
+      "visual": "Snow-capped peaks, smoking forges, banner-draped castles",
+      "sounds": ["hammer on anvil", "wind through mountain passes", "marching boots"]
+    },
+    "active_tensions": [
+      "succession_crisis",
+      "orc_raiding_parties",
+      "forge_worker_unrest"
+    ],
+    "rumors": [
+      "The King's curse spreads to those who touch him",
+      "Prince Marcus meets with hooded figures at night",
+      "The old mines have broken into something ancient"
+    ],
+    "voice": {
+      "tone": "proud_practical",
+      "speech_patterns": "Locals speak bluntly, value action over words. Strong regional accent, many metallurgical metaphors."
+    }
+  }
+}

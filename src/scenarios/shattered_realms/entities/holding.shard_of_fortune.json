@@ -1,0 +1,32 @@
+{
+  "id": "holding.shard_of_fortune",
+  "type": "holding",
+  "name": "The Shard of Fortune",
+  "tags": ["divine_fragment", "artifact", "luck", "commerce"],
+  "attrs": {
+    "owner": "polity.freehold",
+    "holder": null,
+    "location": "locale.portway",
+    "kind": "divine_artifact",
+    "value": 0.95,
+    "condition": "disputed"
+  },
+  "ai": {
+    "persona": "The Shard of Fortune is a golden crystal that shifts and changes, never quite the same shape twice. It is held in the Vault of Houses, jointly controlled by the Merchant Council—because no one dares let a rival have sole possession. The Shard bends probability, favoring those who take risks and punishing those who play it safe. The Freehold's improbable prosperity is no coincidence.",
+    "powers": [
+      {"name": "Fortune's Favor", "effect": "Probability bends toward the bold"},
+      {"name": "Merchant's Luck", "effect": "Trade deals trend favorable"},
+      {"name": "Shared Ownership", "effect": "Power splits among all legitimate claimants"},
+      {"name": "Gambler's Curse", "effect": "Caution and fear invite misfortune"}
+    ],
+    "history": [
+      "Discovered by a shipwrecked merchant, founded the Freehold",
+      "Has changed hands through theft, purchase, and inheritance",
+      "Currently held by no individual—the Council guards it jointly"
+    ],
+    "voice": {
+      "tone": "laughing_capricious",
+      "speech_patterns": "The Shard communicates through coincidence, unlikely events, and dreams of dice and cards."
+    }
+  }
+}

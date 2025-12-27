@@ -1,0 +1,38 @@
+{
+  "id": "link.duskwall.hollow_wastes",
+  "type": "link",
+  "name": "The Breach Line",
+  "tags": ["contested", "dangerous", "sealed", "military"],
+  "attrs": {
+    "endpoints": ["region.duskwall", "region.hollow_wastes"],
+    "kind": "barrier_line",
+    "capacity": 0.0,
+    "risk": 1.0,
+    "bidirectional": true,
+    "distance": 300,
+    "travel_time": "forbidden"
+  },
+  "ai": {
+    "persona": "The Breach Line is not a road but a scar—the boundary between the living world and the Hollow Wastes. The Duskwatch maintains constant vigil along its length, their fortress-monasteries spaced at regular intervals. Warding stones mark the line, glowing with prayers that hold back the corruption. Sometimes the wards fail. Sometimes things cross over. The Wardens are always waiting.",
+    "traffic_pattern": {
+      "commercial": 0.0,
+      "military": 1.0,
+      "civilian": 0.0,
+      "incursions": "increasing"
+    },
+    "hazards": [
+      {"type": "void_incursion", "probability": 0.3, "location": "weak_points"},
+      {"type": "corruption", "probability": 0.5, "location": "entire_line"},
+      {"type": "reality_tears", "probability": 0.1, "location": "random"}
+    ],
+    "voice": {
+      "tone": "warning_sacred",
+      "speech_patterns": "Communication along the line is ritualized—warning bells, prayer signals, the names of the fallen."
+    },
+    "control_points": [
+      {"name": "Last Light Sector", "controller": "polity.duskwatch", "security": 0.9},
+      {"name": "The Weak Point", "controller": "contested", "security": 0.4},
+      {"name": "Old Crossing", "controller": "fallen", "security": 0.0}
+    ]
+  }
+}

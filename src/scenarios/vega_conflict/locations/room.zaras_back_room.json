@@ -1,0 +1,201 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.room.zaras_back_room",
+  "name": "Zara's Back Room",
+  "type": "private_office",
+  "scale": "room",
+  "tags": ["private", "secure", "intel_hub", "hidden", "cramped"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.site.zaras_shop",
+      "anchor": {"room": "back_room"},
+      "entity_id": "site.zaras_shop"
+    },
+    "children": []
+  },
+
+  "entity_id": null,
+
+  "bounds": {
+    "width": 3,
+    "height": 5,
+    "depth": 2.5,
+    "units": "m"
+  },
+
+  "geometry": {
+    "format": "rooms",
+    "source": "wsc-manual-v1",
+    "data": {
+      "grid_size": 0.5,
+      "grid_units": "m",
+      "rects": [
+        {
+          "id": "main_space",
+          "name": "Main Space",
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 10,
+          "properties": {"ceiling_height": 2.5}
+        }
+      ],
+      "doors": [
+        {
+          "id": "shop_door",
+          "from": "main_space",
+          "to": "location.site.zaras_shop",
+          "position": {"x": 0, "y": 4},
+          "type": "hinged",
+          "properties": {
+            "opens_inward": true,
+            "keypad_lock": true,
+            "code": "only_zara_knows"
+          }
+        },
+        {
+          "id": "escape_hatch",
+          "from": "main_space",
+          "to": "maintenance_tunnels",
+          "position": {"x": 5, "y": 9},
+          "type": "hatch",
+          "properties": {
+            "floor_level": true,
+            "hidden_under_rug": true,
+            "emergency_only": true
+          }
+        }
+      ],
+      "features": [
+        {
+          "id": "work_desk",
+          "type": "desk",
+          "position": {"x": 4, "y": 2, "w": 2, "h": 1},
+          "properties": {
+            "cluttered": true,
+            "data_pads": 3,
+            "coffee_mug": "cold"
+          }
+        },
+        {
+          "id": "intel_terminal",
+          "type": "computer_terminal",
+          "position": {"x": 5, "y": 3},
+          "properties": {
+            "encrypted": true,
+            "connected_to": "shadow_network",
+            "value": "extremely_high",
+            "booby_trapped": true
+          }
+        },
+        {
+          "id": "wall_safe",
+          "type": "safe",
+          "position": {"x": 5, "y": 1},
+          "properties": {
+            "biometric_lock": true,
+            "contains": ["credits", "data_chips", "insurance_files"],
+            "zara_only": true
+          }
+        },
+        {
+          "id": "cot",
+          "type": "bed",
+          "position": {"x": 1, "y": 7, "w": 2, "h": 3},
+          "properties": {
+            "simple": true,
+            "blanket_hidden_item": "hold_out_pistol"
+          }
+        },
+        {
+          "id": "storage_shelves",
+          "type": "shelving",
+          "position": {"x": 0, "y": 0, "w": 1, "h": 6},
+          "properties": {
+            "contents": ["spare_parts", "trade_goods", "disguises"],
+            "one_false_panel": true
+          }
+        },
+        {
+          "id": "mini_fridge",
+          "type": "appliance",
+          "position": {"x": 0, "y": 7},
+          "properties": {
+            "contents": ["ration_packs", "stimulants", "one_bottle_real_whiskey"]
+          }
+        }
+      ]
+    }
+  },
+
+  "features": [
+    {
+      "id": "listening_device",
+      "name": "Bug Detector Display",
+      "type": "security",
+      "position": {"x": 4, "y": 1},
+      "properties": {
+        "always_on": true,
+        "shows_shop_audio": true,
+        "alerts_on_surveillance": true
+      }
+    },
+    {
+      "id": "wall_photos",
+      "name": "Wall of Contacts",
+      "type": "intel",
+      "position": {"wall": "north", "x": 2, "y": 1.5},
+      "properties": {
+        "photos_and_notes": true,
+        "some_crossed_out": true,
+        "hidden_by_calendar": "only_visible_if_searched"
+      }
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "to_shop",
+      "from": "shop_door",
+      "to": "location.site.zaras_shop",
+      "type": "door",
+      "properties": {"locked": true, "zara_has_key": true}
+    },
+    {
+      "id": "to_tunnels",
+      "from": "escape_hatch",
+      "to": "location.locale.port_nexus",
+      "type": "maintenance_hatch",
+      "properties": {
+        "hidden": true,
+        "destination": "maintenance_tunnels",
+        "one_way_easy": true
+      }
+    }
+  ],
+
+  "terrain": {
+    "default": "metal_floor",
+    "atmosphere": "stale",
+    "temperature": "warm",
+    "hazards": ["booby_trapped_terminal"]
+  },
+
+  "metadata": {
+    "created": "2025-01-15T00:00:00Z",
+    "generator": "manual",
+    "notes": "Zara's real workspace. This is where she runs her intelligence operation. The escape hatch leads to maintenance tunnels - her emergency exit if things go bad.",
+    "suitable_agents": ["party-rpg"],
+    "scene_notes": {
+      "atmosphere": "Cramped, warm, smells of recycled air and cold coffee. The hum of electronics is constant.",
+      "lighting": "Harsh overhead light, softened by the glow of multiple screens",
+      "sound": "Soft static from the bug detector, distant station ambience through the walls",
+      "secrets": [
+        "The terminal has files on both Hegemony and Free Trader operations",
+        "The wall safe contains Zara's 'insurance' - dirt on powerful people",
+        "Someone has been paying Zara to track the Wandering Star's movements"
+      ]
+    }
+  }
+}

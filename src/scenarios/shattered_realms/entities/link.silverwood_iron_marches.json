@@ -1,0 +1,39 @@
+{
+  "id": "link.silverwood.iron_marches",
+  "type": "link",
+  "name": "The Twilight Path",
+  "tags": ["hidden_route", "magical", "restricted"],
+  "attrs": {
+    "endpoints": ["region.silverwood", "region.iron_marches"],
+    "kind": "enchanted_path",
+    "capacity": 0.2,
+    "risk": 0.1,
+    "bidirectional": true,
+    "distance": "variable",
+    "travel_time": "1_day_to_1_week"
+  },
+  "ai": {
+    "persona": "The Twilight Path exists between the Silverwood and the Iron Marches, but it is no ordinary road. The elves opened it centuries ago for diplomatic purposes, and it remains only by their sufferance. The path shifts; travelers who are unwelcome find themselves walking in circles or emerging days later in unexpected places. Those the elves favor make the journey in a single day.",
+    "traffic_pattern": {
+      "commercial": 0.0,
+      "military": 0.0,
+      "diplomatic": 0.8,
+      "civilian": 0.2,
+      "peak_times": ["solstices", "treaty_renewals"]
+    },
+    "hazards": [
+      {"type": "disorientation", "probability": 0.5, "location": "entire_path"},
+      {"type": "temporal_distortion", "probability": 0.2, "location": "deep_wood"},
+      {"type": "spirit_encounters", "probability": 0.3, "location": "crossings"}
+    ],
+    "voice": {
+      "tone": "mysterious_guiding",
+      "speech_patterns": "The path itself seems to communicate through signs, feelings, and the behavior of forest creatures."
+    },
+    "control_points": [
+      {"name": "The Eaves", "controller": "polity.silverwood", "security": 1.0},
+      {"name": "The Between", "controller": "spirits", "security": 0.5},
+      {"name": "Stone's Edge", "controller": "polity.ironhold", "security": 0.6}
+    ]
+  }
+}

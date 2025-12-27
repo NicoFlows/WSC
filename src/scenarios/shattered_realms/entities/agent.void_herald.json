@@ -1,0 +1,55 @@
+{
+  "id": "agent.void_herald",
+  "type": "agent",
+  "name": "The Void Herald",
+  "tags": ["antagonist", "void_entity", "ancient", "awakening"],
+  "attrs": {
+    "affiliation": null,
+    "role": "harbinger",
+    "traits": ["patient", "corrupting", "inevitable", "alien"],
+    "status": "awakening",
+    "salience": 0.9,
+    "location": "region.hollow_wastes",
+    "age": "timeless",
+    "health": "reforming"
+  },
+  "ai": {
+    "persona": "The Void Herald is not a person but a presence—the leading edge of something vast and hungry that exists between worlds. It remembers a time before the gods, when the Void was all there was. It was banished at great cost during the Shattering, but now it stirs again, its essence seeping through cracks in reality. It does not hate the living; it simply does not recognize them as real. They are temporary patterns in an infinite darkness.",
+    "voice": {
+      "tone": "wrong_echoing",
+      "vocabulary": ["return", "remember", "before", "nothing", "home", "peace"],
+      "speech_patterns": "Speaks in fragments of stolen voices. Completes others' thoughts with terrible alternatives. Offers peace through oblivion with genuine sincerity."
+    },
+    "goals": [
+      "breach_the_veil_fully",
+      "corrupt_fragment_bearers",
+      "expand_hollow_wastes",
+      "return_world_to_void"
+    ],
+    "memory": ["the_time_before_gods", "the_shattering", "patient_waiting"],
+    "secrets": [
+      "It cursed King Aldric through a cultist",
+      "It has touched dreams of leaders in every nation",
+      "It fears the fragments reunited",
+      "It was once something else, before the Void claimed it"
+    ],
+    "emotional_state": {
+      "mood": "stirring",
+      "patience": 1.0,
+      "hunger": 0.8,
+      "curiosity": 0.3
+    },
+    "powers": {
+      "corruption": 0.9,
+      "void_magic": 0.95,
+      "mind_touch": 0.8,
+      "reality_warping": 0.7,
+      "physical_form": 0.3
+    },
+    "relationships": {
+      "agent.high_warden_sera": {"type": "nemesis", "respect": 0.4},
+      "agent.archon_velenis": {"type": "ancient_enemy", "recognition": 0.8},
+      "agent.king_aldric": {"type": "victim", "interest": 0.6}
+    }
+  }
+}

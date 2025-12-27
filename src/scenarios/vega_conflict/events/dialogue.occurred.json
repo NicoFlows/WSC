@@ -1,0 +1,42 @@
+{
+  "id": "evt_10535",
+  "t_world": 1047.5,
+  "t_stream": "01:23:45",
+  "type": "dialogue.occurred",
+  "where": "site.port_nexus.docking_bay_7",
+  "who": ["agent.captain_reva", "agent.kai_chen"],
+  "data": {
+    "dialogue_type": "character_moment",
+    "scene_context": "post_battle_debrief",
+    "participants": [
+      {"agent": "agent.captain_reva", "role": "mentor", "emotional_state": "proud_worried"},
+      {"agent": "agent.kai_chen", "role": "protege", "emotional_state": "elated_uncertain"}
+    ],
+    "topics_discussed": [
+      "battle_performance",
+      "promotion_responsibilities",
+      "cost_of_leadership",
+      "personal_history_hint"
+    ],
+    "outcome": {
+      "relationship_change": {"trust": 0.02, "bond": 0.05},
+      "character_development": "kai_begins_understanding_burden_of_command",
+      "secrets_revealed": false,
+      "foreshadowing": ["reva_illness", "kai_parentage"]
+    },
+    "key_lines": [
+      {"speaker": "agent.captain_reva", "line": "You did good out there. Better than good."},
+      {"speaker": "agent.kai_chen", "line": "I just did what you would have done."},
+      {"speaker": "agent.captain_reva", "line": "That's what worries me."},
+      {"speaker": "agent.kai_chen", "line": "What do you mean?"},
+      {"speaker": "agent.captain_reva", "line": "Leadership means sending people to die. Today you got lucky. Someday you won't. And you'll have to live with it."}
+    ],
+    "ai_generated": true,
+    "ai_tier": "standard"
+  },
+  "causes": ["evt_10492", "evt_10495"],
+  "source": "lens.scene",
+  "confidence": 0.9,
+  "importance": 0.45,
+  "narrative_summary": "In the quiet after battle, Reva and Kai shared a rare moment of honesty. She congratulated him on his promotion but warned him about the weight of command. 'Leadership means sending people to die,' she told him. For the first time, Kai glimpsed the darkness behind his mentor's eyes."
+}

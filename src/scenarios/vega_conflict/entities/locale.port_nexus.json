@@ -1,0 +1,48 @@
+{
+  "id": "locale.port_nexus",
+  "type": "locale",
+  "name": "Port Nexus Station",
+  "tags": ["trade_hub", "neutral_ground", "diverse", "bustling"],
+  "attrs": {
+    "region_id": "region.vega",
+    "owner_polity_id": "polity.hegemony",
+    "services": ["market", "shipyard", "fuel_depot", "medical", "entertainment", "black_market"],
+    "security_level": 0.5,
+    "locale_type": "station",
+    "population": 45000,
+    "prosperity": 0.6,
+    "unrest": 0.4
+  },
+  "ai": {
+    "persona": "Port Nexus is the beating heart of Vega's commerce—a sprawling orbital station where Hegemony officials, Free Trader captains, and everyone in between conduct business under an uneasy truce. The station masters maintain a careful neutrality, knowing that if they lean too far either way, the delicate balance that keeps credits flowing will collapse. It's a place where information is currency, everyone has secrets, and the wrong word in the wrong ear can get you spaced.",
+    "atmosphere": {
+      "mood": "chaotic_vitality",
+      "visual": "Neon signs in a dozen languages, crowded corridors, ships docking and departing constantly",
+      "sounds": ["haggling in multiple languages", "ship engines", "distant alarms", "music from bars"],
+      "smells": ["recycled air", "exotic spices", "fuel", "cooking food", "ozone"]
+    },
+    "active_tensions": [
+      "hegemony_crackdown_pressure",
+      "smuggler_turf_wars",
+      "refugee_influx",
+      "labor_disputes"
+    ],
+    "rumors": [
+      "The station master is taking bribes from both sides",
+      "Something big is being smuggled through Bay 7",
+      "Hegemony intelligence has a new listening post",
+      "A Free Trader legend just docked in the outer ring",
+      "The reactor's been running hot—they're hiding something"
+    ],
+    "voice": {
+      "tone": "noir",
+      "vocabulary": ["deal", "discreet", "you didn't hear it from me", "everyone's got a price"],
+      "speech_patterns": "PA announcements are terse and multilingual. Locals speak in half-sentences, expecting you to fill in the gaps. Direct questions are rude; everything's implied."
+    },
+    "services_detail": {
+      "market": {"quality": 0.7, "variety": 0.9, "legality": 0.6},
+      "shipyard": {"quality": 0.6, "speed": 0.7, "discretion": 0.8},
+      "black_market": {"access": "requires_contact", "risk": 0.4}
+    }
+  }
+}

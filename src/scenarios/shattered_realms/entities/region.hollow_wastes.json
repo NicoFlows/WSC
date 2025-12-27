@@ -1,0 +1,36 @@
+{
+  "id": "region.hollow_wastes",
+  "type": "region",
+  "name": "The Hollow Wastes",
+  "tags": ["void_corrupted", "dangerous", "mysterious", "forbidden"],
+  "attrs": {
+    "coords": {"x": 35, "y": 85},
+    "security": 0.0,
+    "economy": 0.0,
+    "population": 0.1,
+    "hazards": ["void_corruption", "reality_tears", "void_creatures", "madness"],
+    "terrain": "corrupted_wasteland"
+  },
+  "ai": {
+    "persona": "The Hollow Wastes are what remains when the Void touches the world. Once fertile lands, now a nightmarish expanse where the laws of nature bend and break. The sky is wrong here—stars that shouldn't exist, a sun that gives no warmth. The corrupted wander its expanse: twisted creatures that were once human, elven, or worse. At its heart, something stirs—the source of the corruption, patient and hungry.",
+    "atmosphere": {
+      "mood": "dread",
+      "visual": "Impossible geometry, void-black tears in reality, corrupted flora and fauna",
+      "sounds": ["whispers in dead languages", "reality crackling", "silence that presses on the mind"]
+    },
+    "active_tensions": [
+      "void_expansion",
+      "herald_awakening",
+      "corruption_spread"
+    ],
+    "rumors": [
+      "The Void remembers the time before the gods",
+      "Those who enter can be saved—if reached in time",
+      "The Hollow Wastes are growing faster"
+    ],
+    "voice": {
+      "tone": "wrongness",
+      "speech_patterns": "The corrupted speak in fragments of their former selves, mixed with void-speech that hurts to hear."
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "locale.portway",
+  "type": "locale",
+  "name": "Portway - The Golden Confluence",
+  "tags": ["trade_hub", "multicultural", "wealthy", "chaotic"],
+  "attrs": {
+    "region": "region.delta",
+    "affiliation": "polity.freehold",
+    "population": 0.9,
+    "wealth": 0.95,
+    "services": ["merchant_houses", "black_market", "banking_guilds", "mercenary_halls"],
+    "defenses": 0.6
+  },
+  "ai": {
+    "persona": "Portway is the largest city on the continent, a sprawling maze of canals, bridges, and floating markets where three rivers meet the sea. Every nation trades here; every secret can be bought. The Merchant Council rules from the Golden Exchange, but real power flows through a thousand back-channel deals. Fortunes are made and lost hourly. The city never sleeps—and never forgets a debt.",
+    "atmosphere": {
+      "mood": "frantic_opportunistic",
+      "visual": "Canal-crossed districts, towering warehouses, ships of every design, golden domes of banking houses",
+      "sounds": ["market clamor", "ship bells", "multiple languages overlapping", "coins counting"]
+    },
+    "districts": [
+      {"name": "The Exchange", "type": "commercial", "description": "Banking houses and merchant headquarters"},
+      {"name": "The Warrens", "type": "slum", "description": "Poor districts and criminal territory"},
+      {"name": "The Docks", "type": "port", "description": "Shipyards, warehouses, sailor's taverns"},
+      {"name": "Embassy Row", "type": "diplomatic", "description": "Foreign missions and noble compounds"},
+      {"name": "The Gilded Mile", "type": "luxury", "description": "Wealthy residences and fine goods"}
+    ],
+    "notable_locations": [
+      {"name": "The Golden Exchange", "type": "government"},
+      {"name": "The Vault of Houses", "type": "bank"},
+      {"name": "The Whisper Market", "type": "black_market"},
+      {"name": "The Thousand Ships", "type": "harbor"}
+    ],
+    "current_events": [
+      "Trade negotiations with Ironhold",
+      "Pirate activity increasing",
+      "Guild war between merchant houses"
+    ],
+    "voice": {
+      "tone": "rapid_multilingual",
+      "speech_patterns": "Trade pidgin dominates. Everything is negotiation. Names are less important than current wealth."
+    }
+  }
+}

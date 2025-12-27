@@ -1,0 +1,52 @@
+{
+  "id": "polity.ironhold",
+  "type": "polity",
+  "name": "The Iron Kingdom",
+  "tags": ["militaristic", "human", "expansionist", "fragment_bearer"],
+  "attrs": {
+    "allegiance": null,
+    "government": "hereditary_monarchy",
+    "ethos": "strength_through_steel",
+    "doctrines": ["military_supremacy", "territorial_expansion", "forge_mastery"],
+    "resources": {
+      "wealth": 0.6,
+      "military": 0.9,
+      "influence": 0.6,
+      "divine_power": 0.3
+    },
+    "divine_fragment": "valor"
+  },
+  "ai": {
+    "persona": "The Iron Kingdom rose from the ashes of the Fall, forged in the crucible of the Collapse Wars. King Aldric rules from Thornhold, a city of steel and stone, where the hammers never stop ringing. The Iron legions are the most disciplined in the realms, their soldiers trained from childhood in the arts of war. The Kingdom believes that only strength can prevent another Fall.",
+    "doctrine": {
+      "aggression": 0.7,
+      "diplomacy": 0.3,
+      "development": 0.5,
+      "militarism": 0.9,
+      "risk_tolerance": 0.6,
+      "preferred_methods": ["military_pressure", "annexation", "intimidation", "fortress_building"]
+    },
+    "goals": [
+      "unite_realms_under_iron_rule",
+      "secure_all_divine_fragments",
+      "destroy_void_threat",
+      "ensure_aldric_legacy"
+    ],
+    "relationships": {
+      "polity.silverwood": {"stance": "suspicious", "trust": 0.3},
+      "polity.freehold": {"stance": "rival", "trust": 0.4},
+      "polity.duskwatch": {"stance": "respectful", "trust": 0.5}
+    },
+    "voice": {
+      "tone": "commanding",
+      "vocabulary": ["duty", "strength", "iron", "legacy", "discipline", "order"],
+      "speech_patterns": "Military precision in speech. Commands rather than requests. References to forging, tempering, steel. 'The weak are anvils, the strong are hammers.'"
+    },
+    "memory": [],
+    "secrets": [
+      "King Aldric is dying of a wasting curse",
+      "Princess Elena studies forbidden magic",
+      "The succession is contested among three heirs"
+    ]
+  }
+}

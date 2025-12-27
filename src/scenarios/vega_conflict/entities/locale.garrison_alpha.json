@@ -1,0 +1,47 @@
+{
+  "id": "locale.garrison_alpha",
+  "type": "locale",
+  "name": "Garrison Alpha",
+  "tags": ["military", "hegemony", "restricted", "fortified"],
+  "attrs": {
+    "region_id": "region.vega",
+    "owner_polity_id": "polity.hegemony",
+    "services": ["military_shipyard", "armory", "command_center", "detention"],
+    "security_level": 0.95,
+    "locale_type": "facility",
+    "population": 8000,
+    "prosperity": 0.7,
+    "unrest": 0.1
+  },
+  "ai": {
+    "persona": "Garrison Alpha is the Hegemony's primary military installation in Vega—a bristling fortress of weapon platforms, sensor arrays, and armored docking bays. From here, Admiral Chen coordinates the occupation, interrogates captured rebels, and plans the eventual crushing of Free Trader resistance. The station runs with mechanical efficiency, its crew trained to treat every moment as preparation for battle.",
+    "atmosphere": {
+      "mood": "military_discipline",
+      "visual": "Gray corridors, warning lights, uniformed personnel moving with purpose",
+      "sounds": ["boots on deck plates", "alert klaxons", "weapons drills", "crisp orders"],
+      "smells": ["gun oil", "recycled air", "antiseptic"]
+    },
+    "active_tensions": [
+      "supply_chain_vulnerabilities",
+      "intelligence_leaks",
+      "morale_from_extended_deployment"
+    ],
+    "rumors": [
+      "The admiral hasn't slept in days",
+      "They're interrogating someone important in Block D",
+      "Reinforcements are coming—or maybe being diverted elsewhere",
+      "The sensor net has blind spots the raiders know about"
+    ],
+    "voice": {
+      "tone": "military_formal",
+      "vocabulary": ["affirmative", "negative", "execute", "by the book", "maintain readiness"],
+      "speech_patterns": "All communications logged and monitored. Rank is always used. Questions are answered with facts, not opinions."
+    },
+    "restricted_areas": [
+      {"name": "Command Center", "clearance": "officer"},
+      {"name": "Detention Block D", "clearance": "intelligence"},
+      {"name": "Reactor Core", "clearance": "engineering_chief"},
+      {"name": "Admiral's Quarters", "clearance": "admiral_only"}
+    ]
+  }
+}

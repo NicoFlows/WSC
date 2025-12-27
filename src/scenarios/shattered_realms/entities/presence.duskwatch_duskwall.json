@@ -1,0 +1,29 @@
+{
+  "id": "presence.duskwatch.duskwall",
+  "type": "presence",
+  "name": "Duskwatch Order Control of the Duskwall",
+  "tags": ["military", "sacred", "defensive"],
+  "attrs": {
+    "polity": "polity.duskwatch",
+    "region": "region.duskwall",
+    "control": 0.9,
+    "influence": 0.8,
+    "legitimacy": 0.95,
+    "stability": 0.75,
+    "states": ["military_zone", "eternal_vigil"]
+  },
+  "ai": {
+    "persona": "The Duskwatch doesn't rule the Duskwall—they defend it. The civilian population is sparse, mostly support personnel for the fortress-monasteries. The Order's legitimacy comes not from conquest but from necessity: without them, the Void would consume everything. Other nations send tribute, recruits, and supplies in acknowledgment of this debt.",
+    "local_sentiment": {
+      "loyalty": 0.9,
+      "satisfaction": 0.5,
+      "fear": 0.6,
+      "hope": 0.6
+    },
+    "key_concerns": [
+      "supply_shortages",
+      "recruit_quality",
+      "void_incursion_frequency"
+    ]
+  }
+}

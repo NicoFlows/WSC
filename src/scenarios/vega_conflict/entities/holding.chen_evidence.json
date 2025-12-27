@@ -1,0 +1,44 @@
+{
+  "id": "holding.chen_evidence",
+  "type": "holding",
+  "name": "The Gamma Station Files",
+  "tags": ["intel", "secret", "dangerous", "leverage"],
+  "attrs": {
+    "kind": "intelligence",
+    "owner": "agent.zara",
+    "location": "locale.port_nexus",
+    "value": 0.95
+  },
+  "ai": {
+    "persona": "A data crystal containing authenticated Hegemony communications proving Admiral Chen directly ordered the massacre at Gamma Station—including the deliberate targeting of civilian areas to ensure no witnesses. In the wrong hands, this information could end Chen's career, possibly his life. In the right hands, it could change the course of the war. Zara has held onto it for years, knowing it's too dangerous to sell but too valuable to destroy. It's her ultimate insurance policy—and possibly her death warrant.",
+    "description": {
+      "physical": "Standard mil-spec data crystal, unremarkable appearance",
+      "storage": "Hidden in a location only Zara knows",
+      "authentication": "Multiple verification chains confirm authenticity"
+    },
+    "contents": {
+      "communications": ["Direct orders from Chen", "Casualty reports", "Cover-up instructions"],
+      "evidence_type": "war_crimes",
+      "corroborating_data": ["Sensor logs", "Witness testimony recordings", "After-action reports"]
+    },
+    "value_to_parties": {
+      "free_traders": "Propaganda gold, legal justification for resistance",
+      "hegemony_rivals": "Political ammunition against Chen faction",
+      "captain_reva": "Proof of who killed her crew",
+      "admiral_chen": "Would kill to destroy it",
+      "independent_media": "Story of the decade"
+    },
+    "risks": {
+      "possession": "Hegemony will kill to suppress",
+      "release": "Could trigger escalation or crackdown",
+      "authentication_challenge": "Hegemony will claim forgery"
+    },
+    "plot_hooks": [
+      "Someone discovers Zara has it",
+      "Reva learns it exists and wants it",
+      "Chen discovers the leak and hunts the source",
+      "A journalist offers a fortune for it",
+      "The data crystal is stolen"
+    ]
+  }
+}

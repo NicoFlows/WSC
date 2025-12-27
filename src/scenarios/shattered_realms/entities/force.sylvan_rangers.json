@@ -1,0 +1,34 @@
+{
+  "id": "force.sylvan_rangers",
+  "type": "force",
+  "name": "The Sylvan Rangers",
+  "tags": ["archers", "guerrilla", "magical", "elven"],
+  "attrs": {
+    "affiliation": "polity.silverwood",
+    "strength": 0.5,
+    "morale": 0.85,
+    "quality": 0.9,
+    "location": "region.silverwood",
+    "commander": null,
+    "composition": ["elven_archers", "mage_warriors", "treant_allies", "beast_companions"]
+  },
+  "ai": {
+    "persona": "The Sylvan Rangers are less an army than a force of nature. Each ranger is a centuries-trained warrior, one with the forest itself. They do not fight in formation—they appear from shadow, strike with impossible precision, and vanish before retaliation. The trees themselves aid them, paths closing behind them, branches deflecting arrows. No army has ever successfully invaded the Silverwood.",
+    "doctrine": {
+      "preferred_terrain": ["forest", "ambush"],
+      "tactics": ["guerrilla_warfare", "hit_and_run", "forest_magic", "beast_coordination"],
+      "weaknesses": ["open_terrain", "siege_situations", "fire"]
+    },
+    "voice": {
+      "tone": "silent_deadly",
+      "speech_patterns": "Rangers rarely speak in combat. Communication is through bird calls, hand signs, and shared intuition."
+    },
+    "current_orders": "border_patrol",
+    "recent_battles": [],
+    "notable_units": [
+      {"name": "The Starlight Sentinels", "specialty": "arcane_archery", "morale": 0.95},
+      {"name": "The Thornguard", "specialty": "border_defense", "morale": 0.9},
+      {"name": "The Wild Hunt", "specialty": "pursuit", "morale": 0.85}
+    ]
+  }
+}

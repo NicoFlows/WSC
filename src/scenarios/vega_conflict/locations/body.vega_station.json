@@ -1,0 +1,126 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.body.vega_station",
+  "name": "Port Nexus Station",
+  "type": "orbital_station",
+  "scale": "body",
+  "tags": ["station", "trading_hub", "mixed_control", "docking", "populated"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.system.vega",
+      "anchor": {"orbit": 3, "body_type": "station", "orbits": "vega_prime"},
+      "entity_id": "region.vega"
+    },
+    "children": [
+      {
+        "location_id": "location.locale.port_nexus",
+        "anchor": {"section": "main_habitat"},
+        "entity_id": "locale.port_nexus"
+      }
+    ]
+  },
+
+  "entity_id": "locale.port_nexus",
+
+  "bounds": {
+    "width": 2.5,
+    "height": 2.5,
+    "depth": 0.8,
+    "units": "km"
+  },
+
+  "geometry": {
+    "format": "graph",
+    "source": "wsc-manual-v1",
+    "data": {
+      "nodes": [
+        {
+          "id": "central_hub",
+          "name": "Central Hub",
+          "type": "section",
+          "properties": {"function": "administration", "gravity": 0.3, "pressurized": true}
+        },
+        {
+          "id": "docking_ring",
+          "name": "Docking Ring",
+          "type": "section",
+          "properties": {"function": "docking", "bays": 24, "gravity": 0.1, "pressurized": true}
+        },
+        {
+          "id": "habitat_alpha",
+          "name": "Habitat Alpha",
+          "type": "section",
+          "properties": {"function": "residential", "population": 15000, "gravity": 0.8, "pressurized": true}
+        },
+        {
+          "id": "habitat_beta",
+          "name": "Habitat Beta",
+          "type": "section",
+          "properties": {"function": "commercial", "shops": 200, "gravity": 0.8, "pressurized": true}
+        },
+        {
+          "id": "industrial_arm",
+          "name": "Industrial Arm",
+          "type": "section",
+          "properties": {"function": "manufacturing", "gravity": 0.2, "pressurized": true}
+        },
+        {
+          "id": "power_core",
+          "name": "Power Core",
+          "type": "section",
+          "properties": {"function": "power_generation", "reactor_type": "fusion", "restricted": true}
+        }
+      ],
+      "edges": [
+        {"id": "hub_dock", "from": "central_hub", "to": "docking_ring", "type": "transit_tube"},
+        {"id": "hub_hab_a", "from": "central_hub", "to": "habitat_alpha", "type": "transit_tube"},
+        {"id": "hub_hab_b", "from": "central_hub", "to": "habitat_beta", "type": "transit_tube"},
+        {"id": "hub_ind", "from": "central_hub", "to": "industrial_arm", "type": "transit_tube"},
+        {"id": "hub_power", "from": "central_hub", "to": "power_core", "type": "restricted_access"},
+        {"id": "dock_hab_b", "from": "docking_ring", "to": "habitat_beta", "type": "pedestrian"}
+      ]
+    }
+  },
+
+  "features": [
+    {
+      "id": "main_antenna",
+      "name": "Comms Array",
+      "type": "infrastructure",
+      "position": {"section": "central_hub", "external": true},
+      "properties": {"range": "system_wide"}
+    },
+    {
+      "id": "defense_turrets",
+      "name": "Point Defense Grid",
+      "type": "defense",
+      "position": {"section": "docking_ring", "external": true},
+      "properties": {"coverage": "360_degree", "count": 12}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "dock_external",
+      "from": "docking_ring",
+      "to": "external_space",
+      "type": "docking_bay",
+      "properties": {"capacity": "medium_ships", "bays": 24}
+    }
+  ],
+
+  "terrain": {
+    "default": "artificial_structure",
+    "atmosphere": "controlled",
+    "temperature": "comfortable",
+    "hazards": ["vacuum_exposure_risk", "radiation_near_core"]
+  },
+
+  "metadata": {
+    "created": "2025-01-15T00:00:00Z",
+    "generator": "manual",
+    "notes": "Main civilian station in Vega orbit. Officially neutral but Hegemony-leaning. Key location for the scenario.",
+    "suitable_agents": ["city-builder", "party-rpg", "action-sim"]
+  }
+}

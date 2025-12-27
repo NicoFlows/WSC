@@ -1,0 +1,43 @@
+{
+  "id": "locale.last_light",
+  "type": "locale",
+  "name": "Last Light - The Final Fortress",
+  "tags": ["fortress_monastery", "sacred", "military", "border"],
+  "attrs": {
+    "region": "region.duskwall",
+    "affiliation": "polity.duskwatch",
+    "population": 0.3,
+    "wealth": 0.3,
+    "services": ["warden_training", "void_research", "sacred_armory", "healing_halls"],
+    "defenses": 0.98
+  },
+  "ai": {
+    "persona": "Last Light is the greatest of the Duskwatch fortress-monasteries, built where the Hollow Wastes first broke through into the world. Its walls are inscribed with prayers that glow at night, its foundations sunk into bedrock blessed by forgotten gods. Every Warden trains here. Every High Warden has stood upon its walls. It is said that Last Light will be the final bastion if all else falls—and that it will never fall from without.",
+    "atmosphere": {
+      "mood": "grim_sacred",
+      "visual": "Fortress of pale stone glowing with warding runes, eternal flames on battlements, scarred earth beyond",
+      "sounds": ["prayer chants", "training weapons", "warning bells", "wind from the Wastes"]
+    },
+    "districts": [
+      {"name": "The Vigil", "type": "military", "description": "Walls, towers, defensive positions"},
+      {"name": "The Sanctum", "type": "religious", "description": "Temples, prayer halls, sacred armories"},
+      {"name": "The Halls of Healing", "type": "medical", "description": "Treating physical and spiritual wounds"},
+      {"name": "The Training Grounds", "type": "military", "description": "Where new Wardens are forged"}
+    ],
+    "notable_locations": [
+      {"name": "The First Wall", "type": "fortification"},
+      {"name": "The Shard Reliquary", "type": "sacred"},
+      {"name": "The Hall of Names", "type": "memorial"},
+      {"name": "The High Warden's Tower", "type": "command"}
+    ],
+    "current_events": [
+      "Void incursions intensifying",
+      "Supplies running low",
+      "Strange lights in the Wastes"
+    ],
+    "voice": {
+      "tone": "ritualistic_determined",
+      "speech_patterns": "All speech includes prayers and oaths. The fallen are invoked by name. Hope is spoken of as duty."
+    }
+  }
+}

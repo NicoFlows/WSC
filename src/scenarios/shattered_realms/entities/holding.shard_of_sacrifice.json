@@ -1,0 +1,32 @@
+{
+  "id": "holding.shard_of_sacrifice",
+  "type": "holding",
+  "name": "The Shard of Sacrifice",
+  "tags": ["divine_fragment", "artifact", "protection", "cost"],
+  "attrs": {
+    "owner": "polity.duskwatch",
+    "holder": "agent.high_warden_sera",
+    "location": "locale.last_light",
+    "kind": "divine_artifact",
+    "value": 0.95,
+    "condition": "bound"
+  },
+  "ai": {
+    "persona": "The Shard of Sacrifice is a white crystal shot through with veins of black—the only shard to bear marks of the Void. It was found in the hands of a dying god's avatar at the Shattering, and it demands a terrible price for its power. The Shard can seal void rifts, banish corrupted beings, and shield the innocent—but every use costs the bearer something: years of life, cherished memories, physical wholeness.",
+    "powers": [
+      {"name": "Void Banishment", "effect": "Can seal rifts and banish void creatures"},
+      {"name": "Sacred Shield", "effect": "Protect others from corruption at personal cost"},
+      {"name": "Martyr's Strength", "effect": "Power scales with sacrifice made"},
+      {"name": "The Price", "effect": "Every use demands something precious from the bearer"}
+    ],
+    "history": [
+      "Taken from the corpse of the Last Guardian",
+      "Has passed through dozens of High Wardens, each dying young",
+      "Sera has borne it for fifteen years—longer than any predecessor"
+    ],
+    "voice": {
+      "tone": "sorrowful_grateful",
+      "speech_patterns": "The Shard communicates in feelings of debt, worth, and the weight of things given up."
+    }
+  }
+}

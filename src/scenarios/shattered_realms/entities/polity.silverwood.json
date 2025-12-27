@@ -1,0 +1,52 @@
+{
+  "id": "polity.silverwood",
+  "type": "polity",
+  "name": "The Sylvan Covenant",
+  "tags": ["isolationist", "elven", "magical", "ancient", "fragment_bearer"],
+  "attrs": {
+    "allegiance": null,
+    "government": "council_of_elders",
+    "ethos": "preservation_of_knowledge",
+    "doctrines": ["magical_supremacy", "isolation", "knowledge_hoarding", "natural_harmony"],
+    "resources": {
+      "wealth": 0.5,
+      "military": 0.4,
+      "influence": 0.7,
+      "arcane_power": 0.95
+    },
+    "divine_fragment": "wisdom"
+  },
+  "ai": {
+    "persona": "The Sylvan Covenant guards the greatest repository of pre-Fall knowledge, preserved in the living memory of trees that remember the God-Emperor's voice. The elven lords have watched human empires rise and fall like seasons, and they view the younger races with a mixture of pity and condescension. They would rather preserve what remains than risk it in foolish wars.",
+    "doctrine": {
+      "aggression": 0.1,
+      "diplomacy": 0.6,
+      "development": 0.3,
+      "magic_focus": 0.9,
+      "risk_tolerance": 0.2,
+      "preferred_methods": ["magical_wards", "diplomatic_manipulation", "information_control", "defensive_spells"]
+    },
+    "goals": [
+      "preserve_ancient_knowledge",
+      "prevent_void_corruption",
+      "maintain_elven_superiority",
+      "avoid_entanglement_in_human_wars"
+    ],
+    "relationships": {
+      "polity.ironhold": {"stance": "wary", "trust": 0.3},
+      "polity.freehold": {"stance": "useful", "trust": 0.5},
+      "polity.duskwatch": {"stance": "conflicted", "trust": 0.4}
+    },
+    "voice": {
+      "tone": "patient_condescending",
+      "vocabulary": ["ancient", "wisdom", "patience", "memory", "preservation", "the long view"],
+      "speech_patterns": "Speaks in measured, timeless cadences. References centuries as humans reference years. Often answers questions with questions. 'What is a decade to one who remembers the Fall?'"
+    },
+    "memory": [],
+    "secrets": [
+      "The Covenant knows how to destroy the Fragments",
+      "Archon Velenis has a human grandchild",
+      "The ancient trees are dying, slowly"
+    ]
+  }
+}

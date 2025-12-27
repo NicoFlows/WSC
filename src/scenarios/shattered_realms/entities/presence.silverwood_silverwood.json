@@ -1,0 +1,29 @@
+{
+  "id": "presence.silverwood.silverwood",
+  "type": "presence",
+  "name": "Sylvan Covenant Control of Silverwood",
+  "tags": ["absolute", "ancient", "magical"],
+  "attrs": {
+    "polity": "polity.silverwood",
+    "region": "region.silverwood",
+    "control": 1.0,
+    "influence": 0.95,
+    "legitimacy": 1.0,
+    "stability": 0.85,
+    "states": ["sealed_border", "ancient_homeland"]
+  },
+  "ai": {
+    "persona": "The Silverwood has been elven territory since before human memory. The forest itself recognizes elven authority—paths open for them, close against intruders. The Archon's will is law, enforced by magic as much as arms. Yet isolation has bred division: younger elves question whether watching the world burn serves anyone.",
+    "local_sentiment": {
+      "loyalty": 0.95,
+      "satisfaction": 0.7,
+      "fear": 0.2,
+      "hope": 0.4
+    },
+    "key_concerns": [
+      "void_corruption_at_borders",
+      "generational_rift",
+      "human_refugees"
+    ]
+  }
+}

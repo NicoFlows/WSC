@@ -1,0 +1,32 @@
+{
+  "id": "holding.shard_of_wisdom",
+  "type": "holding",
+  "name": "The Shard of Wisdom",
+  "tags": ["divine_fragment", "artifact", "magical", "knowledge"],
+  "attrs": {
+    "owner": "polity.silverwood",
+    "holder": "agent.archon_velenis",
+    "location": "locale.starfall",
+    "kind": "divine_artifact",
+    "value": 0.95,
+    "condition": "bound"
+  },
+  "ai": {
+    "persona": "The Shard of Wisdom is a sapphire crystal that contains within it a library of light—countless motes that are memories, spells, and secrets from before the Shattering. The Archon has been its keeper for eight centuries, his mind expanded by its knowledge but perhaps warped by its perspective. The Shard sees patterns across centuries; it cares nothing for individual lives.",
+    "powers": [
+      {"name": "Memory Repository", "effect": "Access to ancient knowledge and spells"},
+      {"name": "Pattern Sight", "effect": "See connections and consequences others miss"},
+      {"name": "Temporal Perspective", "effect": "Perceive time differently, resist aging"},
+      {"name": "Cold Calculation", "effect": "Emotions become muted, logic enhanced"}
+    ],
+    "history": [
+      "Preserved by the elves during the Shattering",
+      "Bound to the Archon role, not individual",
+      "Contains memories of the world before the gods fell"
+    ],
+    "voice": {
+      "tone": "whispered_ancient",
+      "speech_patterns": "The Shard communicates in visions and memories, showing rather than telling."
+    }
+  }
+}

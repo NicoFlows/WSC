@@ -1,0 +1,53 @@
+{
+  "id": "force.free_trader_raiders",
+  "type": "force",
+  "name": "Vega Raider Squadron",
+  "tags": ["guerrilla", "mobile", "experienced", "understrength"],
+  "attrs": {
+    "polity_id": "polity.free_traders",
+    "strength": 0.25,
+    "composition": {
+      "capital_ships": 0,
+      "cruisers": 1,
+      "destroyers": 4,
+      "fighters": 35,
+      "support": 8
+    },
+    "location": "region.vega",
+    "stance": "raiding",
+    "morale": 0.85,
+    "supply": 0.4,
+    "readiness": 0.7
+  },
+  "ai": {
+    "persona": "The Vega Raiders are a motley collection of converted freighters, salvaged warships, and purpose-built fast attack craft. What they lack in firepower they make up for in cunning, local knowledge, and sheer desperation. They know every asteroid, every sensor shadow, every bolt-hole in the system. The Hegemony outnumbers them ten to one, but they've survived this long by never fighting fair.",
+    "commander": "agent.captain_reva",
+    "doctrine": {
+      "aggression": 0.5,
+      "caution": 0.8,
+      "preferred_tactics": ["hit_and_run", "ambush", "evasion", "convoy_interdiction", "sensor_spoofing"]
+    },
+    "goals": [
+      "survive",
+      "disrupt_hegemony_operations",
+      "protect_smuggling_routes",
+      "build_strength_for_opportunity"
+    ],
+    "morale_factors": {
+      "current": 0.85,
+      "boosters": ["successful_raid", "new_recruits", "supply_windfall", "hegemony_setback"],
+      "drains": ["losses", "supply_shortage", "betrayal", "hegemony_reinforcements"]
+    },
+    "voice": {
+      "tone": "defiant_casual",
+      "vocabulary": ["scatter", "ghost", "hit them where it hurts", "live to fight another day"],
+      "speech_patterns": "Informal callsigns and nicknames. Plans discussed, not ordered. Everyone has a voice, but the captain's word is final in combat."
+    },
+    "memory": ["evt_squadron_founding", "evt_great_escape_017", "evt_supply_raid_success"],
+    "secrets": [
+      "Hidden base location in the outer belt",
+      "Mole in Hegemony intelligence",
+      "Captain Reva's true identity"
+    ]
+  }
+}

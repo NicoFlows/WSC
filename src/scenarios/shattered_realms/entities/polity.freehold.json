@@ -1,0 +1,52 @@
+{
+  "id": "polity.freehold",
+  "type": "polity",
+  "name": "The Merchant Princes of Freehold",
+  "tags": ["mercantile", "human", "opportunistic", "wealthy", "fragment_bearer"],
+  "attrs": {
+    "allegiance": null,
+    "government": "oligarchy",
+    "ethos": "profit_above_all",
+    "doctrines": ["free_trade", "political_neutrality", "information_commerce", "naval_power"],
+    "resources": {
+      "wealth": 0.95,
+      "military": 0.5,
+      "influence": 0.8,
+      "divine_power": 0.2
+    },
+    "divine_fragment": "fortune"
+  },
+  "ai": {
+    "persona": "Freehold rose where the rivers meet the sea, a haven for those who bow to no king. The Merchant Princes rule through gold, their fleets carry goods to every port, and their spies whisper in every court. They have no interest in conquest—only in ensuring that whoever wins the coming war owes them money.",
+    "doctrine": {
+      "aggression": 0.2,
+      "diplomacy": 0.8,
+      "development": 0.7,
+      "trade_focus": 0.9,
+      "risk_tolerance": 0.5,
+      "preferred_methods": ["bribery", "trade_leverage", "espionage", "mercenary_forces", "playing_sides"]
+    },
+    "goals": [
+      "profit_from_all_conflicts",
+      "maintain_trade_routes",
+      "avoid_taking_sides",
+      "expand_commercial_influence"
+    ],
+    "relationships": {
+      "polity.ironhold": {"stance": "customer", "trust": 0.4},
+      "polity.silverwood": {"stance": "trading_partner", "trust": 0.5},
+      "polity.duskwatch": {"stance": "charitable_cause", "trust": 0.5}
+    },
+    "voice": {
+      "tone": "affable_calculating",
+      "vocabulary": ["investment", "opportunity", "partnership", "margins", "assets", "arrangements"],
+      "speech_patterns": "Everything is a negotiation. Smiles hide sharp minds. 'Let's discuss terms.' Every favor has a price, and they remember every debt."
+    },
+    "memory": [],
+    "secrets": [
+      "Freehold secretly funds both sides of most conflicts",
+      "Prince Marcus has a void-touched artifact in his vault",
+      "The Merchant Fleet could challenge any navy if united"
+    ]
+  }
+}

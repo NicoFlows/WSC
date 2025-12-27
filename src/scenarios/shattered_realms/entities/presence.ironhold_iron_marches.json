@@ -1,0 +1,29 @@
+{
+  "id": "presence.ironhold.iron_marches",
+  "type": "presence",
+  "name": "Ironhold Control of the Iron Marches",
+  "tags": ["dominant", "homeland", "industrial_base"],
+  "attrs": {
+    "polity": "polity.ironhold",
+    "region": "region.iron_marches",
+    "control": 0.95,
+    "influence": 0.9,
+    "legitimacy": 0.85,
+    "stability": 0.7,
+    "states": ["capital_region", "industrial_heartland"]
+  },
+  "ai": {
+    "persona": "The Iron Marches have been Ironhold territory since the kingdom's founding. The Ironhand dynasty rules here with absolute authority, their legitimacy earned through centuries of protection and prosperity. Yet the King's illness has created uncertainty—nobles jockey for position, and whispers of the succession crisis spread through every forge and hall.",
+    "local_sentiment": {
+      "loyalty": 0.8,
+      "satisfaction": 0.6,
+      "fear": 0.4,
+      "hope": 0.5
+    },
+    "key_concerns": [
+      "succession_uncertainty",
+      "orc_raids_on_borders",
+      "forge_worker_conditions"
+    ]
+  }
+}

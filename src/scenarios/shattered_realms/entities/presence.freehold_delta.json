@@ -1,0 +1,29 @@
+{
+  "id": "presence.freehold.delta",
+  "type": "presence",
+  "name": "Freehold Merchant Republic in the Delta",
+  "tags": ["commercial", "loose", "wealthy"],
+  "attrs": {
+    "polity": "polity.freehold",
+    "region": "region.delta",
+    "control": 0.7,
+    "influence": 0.9,
+    "legitimacy": 0.6,
+    "stability": 0.65,
+    "states": ["trade_hub", "contested_influence"]
+  },
+  "ai": {
+    "persona": "The Freehold controls the Delta through commerce rather than conquest. The Merchant Council's authority extends as far as coin flows—absolute in the trading houses, tenuous in the back alleys. Every major power has agents here, every criminal organization pays tribute. It's less a government than a negotiated peace between wealthy interests.",
+    "local_sentiment": {
+      "loyalty": 0.4,
+      "satisfaction": 0.6,
+      "fear": 0.3,
+      "hope": 0.7
+    },
+    "key_concerns": [
+      "guild_wars",
+      "pirate_resurgence",
+      "foreign_influence"
+    ]
+  }
+}

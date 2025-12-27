@@ -1,0 +1,38 @@
+{
+  "id": "feature.outer_belt",
+  "type": "feature",
+  "name": "The Outer Belt",
+  "tags": ["asteroid_field", "dangerous", "uncharted", "hideout"],
+  "attrs": {
+    "region_id": "region.vega",
+    "kind": "asteroid_belt",
+    "properties": {
+      "biome": "vacuum",
+      "resources": ["ice", "rare_minerals", "salvage"],
+      "hazards": ["navigation_hazard", "sensor_interference", "unstable_rocks", "radiation_pockets"]
+    }
+  },
+  "ai": {
+    "persona": "The Outer Belt is Vega's wild frontier—a vast field of tumbling rock, ancient ice, and the occasional wreck from forgotten battles. Official charts mark it as 'navigation hazard, avoid,' which is exactly why the Free Traders love it. Among these countless asteroids hide fuel caches, listening posts, and the Raiders' primary base. The Hegemony has tried to sweep it clean a dozen times; the belt always wins.",
+    "atmosphere": {
+      "mood": "mysterious_dangerous",
+      "visual": "Endless field of tumbling rocks, distant glints of ice, absolute darkness between",
+      "sounds": ["radar pings", "hull creaks", "the silence of space"]
+    },
+    "points_of_interest": [
+      {"name": "The Graveyard", "type": "debris_field", "status": "salvage_zone"},
+      {"name": "Ice Station Zebra", "type": "hidden_base", "status": "free_trader_secret"},
+      {"name": "Anomaly 7", "type": "unknown", "status": "unexplored"},
+      {"name": "The Maze", "type": "dense_cluster", "status": "navigation_nightmare"}
+    ],
+    "voice": {
+      "tone": "ominous",
+      "speech_patterns": "Pilots speak of the belt with respect. Every rock has a story. Every shadow could hide salvation or death."
+    },
+    "navigation": {
+      "difficulty": 0.8,
+      "sensor_effectiveness": 0.3,
+      "hidden_paths": true
+    }
+  }
+}

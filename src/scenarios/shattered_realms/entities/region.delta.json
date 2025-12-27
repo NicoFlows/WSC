@@ -1,0 +1,37 @@
+{
+  "id": "region.delta",
+  "type": "region",
+  "name": "The Delta",
+  "tags": ["coastal", "mercantile", "diverse", "wealthy"],
+  "attrs": {
+    "coords": {"x": 60, "y": 55},
+    "security": 0.5,
+    "economy": 0.9,
+    "population": 0.8,
+    "hazards": ["pirates", "smugglers", "political_intrigue", "flooding"],
+    "terrain": "river_delta"
+  },
+  "ai": {
+    "persona": "The Delta is where three great rivers meet the sea, creating a maze of waterways, islands, and opportunity. The Freehold has made this watery crossroads the richest region on the continent—and the most dangerous. Every faction has agents here; every warehouse holds secrets. The merchant princes play a game more complex than any war, where a signature can be deadlier than a sword.",
+    "atmosphere": {
+      "mood": "bustling_dangerous",
+      "visual": "Canal-crossed cities, towering warehouses, ships of every nation",
+      "sounds": ["market haggling", "ship bells", "coins changing hands", "whispered deals"]
+    },
+    "active_tensions": [
+      "trade_war_with_hegemony",
+      "guild_power_struggles",
+      "pirate_fleet_organizing",
+      "void_cult_infiltration"
+    ],
+    "rumors": [
+      "The Merchant Council has a fragment shard in their vault",
+      "Someone is buying up all the iron",
+      "A pirate queen is uniting the free captains"
+    ],
+    "voice": {
+      "tone": "smooth_calculating",
+      "speech_patterns": "Everything is negotiable. Locals speak multiple languages, switch between them mid-sentence. Conversations have layers."
+    }
+  }
+}

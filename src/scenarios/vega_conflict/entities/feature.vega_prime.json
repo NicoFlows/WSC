@@ -1,0 +1,35 @@
+{
+  "id": "feature.vega_prime",
+  "type": "feature",
+  "name": "Vega Prime",
+  "tags": ["habitable", "industrial", "populated", "war_scarred"],
+  "attrs": {
+    "region_id": "region.vega",
+    "kind": "planet",
+    "properties": {
+      "biome": "temperate",
+      "gravity": 1.1,
+      "atmosphere": "breathable",
+      "resources": ["rare_metals", "agricultural", "water"],
+      "hazards": ["industrial_pollution", "war_damage", "unstable_regions"]
+    }
+  },
+  "ai": {
+    "persona": "Vega Prime was once a garden world, its temperate valleys and mineral-rich mountains drawing colonists from across human space. Decades of conflict have left scars—bombed-out cities, poisoned rivers, populations displaced. But life persists. The planet remains the system's most valuable prize, its factories still churning out the materials both sides need to continue fighting.",
+    "atmosphere": {
+      "mood": "resilient_suffering",
+      "visual": "Green valleys scarred by craters, smoke from factories, fortified cities",
+      "sounds": ["distant artillery", "factory machinery", "wind through ruins"]
+    },
+    "points_of_interest": [
+      {"name": "New Geneva", "type": "city", "status": "hegemony_controlled"},
+      {"name": "The Scar", "type": "wasteland", "status": "no_mans_land"},
+      {"name": "Liberation Falls", "type": "settlement", "status": "free_trader_sympathetic"},
+      {"name": "Titan Foundries", "type": "industrial", "status": "hegemony_controlled"}
+    ],
+    "voice": {
+      "tone": "weary_hopeful",
+      "speech_patterns": "Locals speak of 'before the war' with nostalgia. They've learned to keep their heads down but haven't forgotten how to dream."
+    }
+  }
+}

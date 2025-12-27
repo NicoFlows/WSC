@@ -1,0 +1,34 @@
+{
+  "id": "force.iron_legions",
+  "type": "force",
+  "name": "The Iron Legions",
+  "tags": ["heavy_infantry", "professional", "disciplined", "royal_army"],
+  "attrs": {
+    "affiliation": "polity.ironhold",
+    "strength": 0.85,
+    "morale": 0.7,
+    "quality": 0.8,
+    "location": "region.iron_marches",
+    "commander": "agent.prince_marcus",
+    "composition": ["heavy_infantry", "siege_engineers", "cavalry", "archers"]
+  },
+  "ai": {
+    "persona": "The Iron Legions are the backbone of Ironhold's military might. Equipped with the finest steel from the mountain forges, drilled to perfection, they have crushed every enemy that has marched against them. They fight in disciplined formations, their shield walls impenetrable, their siege engines unstoppable. But their current commander, Prince Marcus, pushes them toward conquest rather than defense, and veterans whisper that the old king's ways were better.",
+    "doctrine": {
+      "preferred_terrain": ["open_field", "siege"],
+      "tactics": ["shield_wall", "hammer_and_anvil", "siege_warfare"],
+      "weaknesses": ["guerrilla_warfare", "magic", "forest_combat"]
+    },
+    "voice": {
+      "tone": "martial_proud",
+      "speech_patterns": "Legion speak is clipped, efficient. Ranks and honors matter. Soldiers refer to themselves by legion number and company."
+    },
+    "current_orders": "garrison_defense",
+    "recent_battles": [],
+    "notable_units": [
+      {"name": "First Legion - The Ironbreakers", "specialty": "siege", "morale": 0.9},
+      {"name": "Third Legion - The Mountain Guard", "specialty": "defense", "morale": 0.8},
+      {"name": "Seventh Legion - The Crown's Fist", "specialty": "assault", "morale": 0.75}
+    ]
+  }
+}

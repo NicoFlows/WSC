@@ -1,0 +1,51 @@
+{
+  "id": "holding.wandering_star",
+  "type": "holding",
+  "name": "The Wandering Star",
+  "tags": ["ship", "modified_freighter", "raider_flagship", "legendary"],
+  "attrs": {
+    "kind": "starship",
+    "owner": "agent.captain_reva",
+    "location": "locale.port_nexus",
+    "value": 0.8
+  },
+  "ai": {
+    "persona": "The Wandering Star is a heavily modified Constellation-class freighter, rebuilt so many times that little of the original ship remains. She's ugly, patched, and looks like she should have been scrapped decades ago—which is exactly how Captain Reva likes it. Beneath the battered exterior is a vessel that can outrun most military craft, carries hidden weapon mounts, and has enough secret compartments to make a customs inspector weep. She's become something of a legend among Free Traders: the ship that can't be caught, can't be killed, and always comes home.",
+    "description": {
+      "visual": "Asymmetric hull, mismatched armor plates, scorch marks that never quite buff out",
+      "distinctive_features": ["The 'scar' from a near-miss torpedo", "Hand-painted lucky symbols", "Modified engine pods"],
+      "interior": "Cramped, functional, covered in personal touches from the crew"
+    },
+    "capabilities": {
+      "speed": 0.85,
+      "armor": 0.4,
+      "stealth": 0.7,
+      "cargo": 0.6,
+      "weapons": 0.5,
+      "sensors": 0.65,
+      "special": ["hidden_compartments", "signal_spoofing", "emergency_boost"]
+    },
+    "crew_capacity": {
+      "minimum": 4,
+      "optimal": 12,
+      "maximum": 20
+    },
+    "history": [
+      "Originally the merchant vessel 'Steady Profit'",
+      "Captured by pirates, modified for raiding",
+      "Won by Reva in a card game (or so she claims)",
+      "Survived 47 documented engagements",
+      "Declared destroyed by Hegemony three times"
+    ],
+    "secrets": [
+      "Has a hidden compartment even the crew doesn't know about",
+      "The nav computer contains pre-Collapse star charts",
+      "One of the modifications is Hegemony military-grade (stolen)",
+      "There's a dead man's switch tied to the reactor"
+    ],
+    "voice": {
+      "tone": "ship_has_personality",
+      "speech_patterns": "The crew talks about the Star like she's alive. 'She doesn't like the cold.' 'She's telling us something's wrong.' The ship's quirks are legendary."
+    }
+  }
+}

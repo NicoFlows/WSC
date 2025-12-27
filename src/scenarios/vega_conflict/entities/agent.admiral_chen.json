@@ -1,0 +1,70 @@
+{
+  "id": "agent.admiral_chen",
+  "type": "agent",
+  "name": "Admiral Wei Chen",
+  "tags": ["military", "ruthless", "competent", "hegemony_loyalist", "ambitious"],
+  "attrs": {
+    "affiliation": "polity.hegemony",
+    "role": "fleet_admiral",
+    "traits": ["disciplined", "ruthless", "patient", "calculating", "proud"],
+    "relationships": {
+      "agent.captain_reva": {"type": "nemesis", "trust": 0.0, "history": "she_defected_under_his_command"},
+      "agent.supreme_commander": {"type": "superior", "trust": 0.5, "history": "patron_relationship"},
+      "agent.colonel_vance": {"type": "subordinate", "trust": 0.7, "history": "loyal_officer"}
+    },
+    "status": "active",
+    "salience": 0.9,
+    "location": "locale.garrison_alpha"
+  },
+  "ai": {
+    "persona": "Admiral Wei Chen is a 58-year-old career military officer who rose through the ranks through a combination of genuine competence and political acumen. He believes absolutely in the Hegemony's mission to bring order to human space, viewing the chaos of the Free Traders as a disease that must be excised. The defection of then-Commander Reva from his command was a personal humiliation he has never forgiven, and destroying her has become an obsession that sometimes clouds his otherwise cold judgment. He is respected by his subordinates for his fairness and tactical brilliance, but feared for his willingness to accept casualties—including his own people—to achieve objectives.",
+    "voice": {
+      "tone": "cold_authoritative",
+      "vocabulary": ["order", "discipline", "sacrifice", "duty", "the greater good", "acceptable losses"],
+      "speech_patterns": "Speaks with measured precision. Never raises his voice—the quieter he gets, the angrier he is. Uses rhetorical questions to make subordinates feel foolish. Quotes military theorists and Hegemony founders."
+    },
+    "goals": [
+      "pacify_vega_system",
+      "capture_or_kill_captain_reva",
+      "advance_to_sector_command",
+      "prove_loyalty_to_supreme_commander",
+      "crush_free_trader_resistance_permanently"
+    ],
+    "memory": [
+      "evt_reva_defection",
+      "evt_gamma_station_operation",
+      "evt_promotion_to_admiral",
+      "evt_vega_assignment",
+      "evt_convoy_losses_023"
+    ],
+    "secrets": [
+      "Ordered the Gamma Station massacre that killed Reva's crew",
+      "Has evidence the Supreme Commander is terminally ill",
+      "Knows about the coup plotters but is waiting to see who wins",
+      "His son died fighting Free Traders—personal vendetta drives him",
+      "Has a private deal with certain smugglers for intelligence"
+    ],
+    "emotional_state": {
+      "mood": "controlled_frustration",
+      "stress": 0.5,
+      "patience": 0.4,
+      "loyalty_to_polity": 0.9,
+      "obsession_with_reva": 0.8,
+      "confidence": 0.75
+    },
+    "skills": {
+      "tactics": 0.9,
+      "strategy": 0.85,
+      "leadership": 0.8,
+      "politics": 0.75,
+      "combat": 0.5,
+      "intelligence": 0.7
+    },
+    "command_style": {
+      "risk_tolerance": 0.6,
+      "subordinate_autonomy": 0.4,
+      "accepts_failure": 0.2,
+      "rewards_success": 0.7
+    }
+  }
+}

@@ -41,6 +41,14 @@ export function getExamplesDir(): string {
   return join(getProjectRoot(), 'src', 'examples');
 }
 
+export function getScenariosDir(): string {
+  return join(getProjectRoot(), 'src', 'scenarios');
+}
+
+export function getScenarioDir(scenarioId: string): string {
+  return join(getScenariosDir(), scenarioId);
+}
+
 export function getChronicleFile(): string {
   return join(getWorldDir(), 'chronicle.ndjson');
 }

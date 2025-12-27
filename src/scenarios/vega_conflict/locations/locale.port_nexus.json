@@ -1,0 +1,221 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.locale.port_nexus",
+  "name": "Port Nexus",
+  "type": "space_station_interior",
+  "scale": "locale",
+  "tags": ["station", "urban", "commercial", "multicultural", "busy"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.body.vega_station",
+      "anchor": {"section": "main_habitat"},
+      "entity_id": "locale.port_nexus"
+    },
+    "children": [
+      {
+        "location_id": "location.district.docking_bay_7",
+        "anchor": {"district": "docking_ring", "coords": {"x": 7, "y": 0}},
+        "entity_id": "site.docking_bay_7"
+      },
+      {
+        "location_id": "location.district.commercial_sector",
+        "anchor": {"district": "habitat_beta", "coords": {"x": 0, "y": 0}},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.command_sector",
+        "anchor": {"district": "central_hub", "coords": {"x": 0, "y": 0}},
+        "entity_id": "site.command_center"
+      }
+    ]
+  },
+
+  "entity_id": "locale.port_nexus",
+
+  "bounds": {
+    "width": 800,
+    "height": 600,
+    "depth": 50,
+    "units": "m"
+  },
+
+  "geometry": {
+    "format": "geojson",
+    "source": "wsc-manual-v1",
+    "data": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "id": "docking_ring",
+          "properties": {
+            "name": "Docking Ring",
+            "type": "district",
+            "function": "docking",
+            "level": 0
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[0, 0], [800, 0], [800, 100], [0, 100], [0, 0]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "commercial_promenade",
+          "properties": {
+            "name": "Commercial Promenade",
+            "type": "district",
+            "function": "commercial",
+            "level": 1
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[100, 100], [700, 100], [700, 250], [100, 250], [100, 100]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "central_plaza",
+          "properties": {
+            "name": "Central Plaza",
+            "type": "district",
+            "function": "public",
+            "level": 1
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[300, 250], [500, 250], [500, 350], [300, 350], [300, 250]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "residential_sector",
+          "properties": {
+            "name": "Residential Sector",
+            "type": "district",
+            "function": "residential",
+            "level": 2
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[50, 350], [350, 350], [350, 550], [50, 550], [50, 350]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "command_sector",
+          "properties": {
+            "name": "Command Sector",
+            "type": "district",
+            "function": "administrative",
+            "restricted": true,
+            "level": 2
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[450, 350], [750, 350], [750, 500], [450, 500], [450, 350]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "maintenance_tunnels",
+          "properties": {
+            "name": "Maintenance Tunnels",
+            "type": "infrastructure",
+            "function": "maintenance",
+            "restricted": true,
+            "level": -1
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [[0, 300], [400, 300], [400, 500], [800, 500]]
+          }
+        }
+      ]
+    }
+  },
+
+  "features": [
+    {
+      "id": "bay_7",
+      "name": "Docking Bay 7",
+      "type": "docking_bay",
+      "position": {"x": 175, "y": 50},
+      "properties": {"capacity": "small_medium", "current_ships": ["holding.wandering_star"]}
+    },
+    {
+      "id": "zaras_shop",
+      "name": "Zara's Curiosity Shop",
+      "type": "shop",
+      "position": {"x": 180, "y": 150},
+      "properties": {"owner": "agent.zara", "type": "information_broker"}
+    },
+    {
+      "id": "commanders_office",
+      "name": "Station Commander's Office",
+      "type": "office",
+      "position": {"x": 600, "y": 400},
+      "properties": {"occupant": "station_commander", "security": "high"}
+    },
+    {
+      "id": "main_reactor_access",
+      "name": "Reactor Access Point",
+      "type": "infrastructure",
+      "position": {"x": 400, "y": 550},
+      "properties": {"restricted": true, "security": "maximum"}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "main_corridor_1",
+      "from": "docking_ring",
+      "to": "commercial_promenade",
+      "type": "corridor",
+      "properties": {"width": "wide", "traffic": "heavy"}
+    },
+    {
+      "id": "main_corridor_2",
+      "from": "commercial_promenade",
+      "to": "central_plaza",
+      "type": "corridor",
+      "properties": {"width": "wide", "traffic": "heavy"}
+    },
+    {
+      "id": "lift_residential",
+      "from": "central_plaza",
+      "to": "residential_sector",
+      "type": "lift",
+      "properties": {"capacity": 20}
+    },
+    {
+      "id": "secure_corridor",
+      "from": "central_plaza",
+      "to": "command_sector",
+      "type": "secured_corridor",
+      "properties": {"security_checkpoint": true, "clearance": "station_personnel"}
+    },
+    {
+      "id": "maintenance_access_1",
+      "from": "docking_ring",
+      "to": "maintenance_tunnels",
+      "type": "hatch",
+      "properties": {"restricted": true, "hidden": false}
+    }
+  ],
+
+  "terrain": {
+    "default": "station_interior",
+    "atmosphere": "standard",
+    "temperature": "controlled",
+    "hazards": ["vacuum_breach_risk", "crowd_crush", "criminal_activity"]
+  },
+
+  "metadata": {
+    "created": "2025-01-15T00:00:00Z",
+    "generator": "manual",
+    "notes": "Main interior layout of Port Nexus station. Key locations include Docking Bay 7 (where the Wandering Star docks) and Zara's shop.",
+    "suitable_agents": ["city-builder", "party-rpg"]
+  }
+}

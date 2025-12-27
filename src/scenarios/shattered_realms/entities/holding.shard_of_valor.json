@@ -1,0 +1,32 @@
+{
+  "id": "holding.shard_of_valor",
+  "type": "holding",
+  "name": "The Shard of Valor",
+  "tags": ["divine_fragment", "artifact", "military", "blessing"],
+  "attrs": {
+    "owner": "polity.ironhold",
+    "holder": "agent.king_aldric",
+    "location": "locale.thornhold",
+    "kind": "divine_artifact",
+    "value": 0.95,
+    "condition": "bound"
+  },
+  "ai": {
+    "persona": "The Shard of Valor is a crimson crystal the size of a fist, warm to the touch and pulsing with inner light. It was claimed by the first Ironhand king after the Shattering, and has been bound to the royal bloodline ever since. The Shard grants its bearer unshakeable courage and inspires those who follow them—but it demands valor in return. A coward cannot wield it; a tyrant will be consumed by it.",
+    "powers": [
+      {"name": "Inspiring Presence", "effect": "Allies gain +0.2 morale within sight"},
+      {"name": "Courage Absolute", "effect": "Bearer immune to fear effects"},
+      {"name": "Bloodline Binding", "effect": "Can only be wielded by Ironhand blood"},
+      {"name": "Valor's Judgment", "effect": "Dishonorable acts damage the bearer"}
+    ],
+    "history": [
+      "Claimed by Aldric I after the Battle of Shattering Pass",
+      "Used to break the Orc Horde at Blackpass",
+      "Current bearer is King Aldric, whose illness may be related to void interference"
+    ],
+    "voice": {
+      "tone": "resonant_martial",
+      "speech_patterns": "The Shard communicates in feelings, not words—surges of courage, warnings of dishonor."
+    }
+  }
+}

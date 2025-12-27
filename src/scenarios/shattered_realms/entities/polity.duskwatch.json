@@ -1,0 +1,52 @@
+{
+  "id": "polity.duskwatch",
+  "type": "polity",
+  "name": "The Order of the Duskwatch",
+  "tags": ["religious", "guardian", "desperate", "fragment_bearer", "void_fighters"],
+  "attrs": {
+    "allegiance": null,
+    "government": "theocratic_order",
+    "ethos": "eternal_vigil",
+    "doctrines": ["void_resistance", "sacrifice", "unity", "vigilance"],
+    "resources": {
+      "wealth": 0.2,
+      "military": 0.6,
+      "influence": 0.4,
+      "divine_power": 0.9
+    },
+    "divine_fragment": "sacrifice"
+  },
+  "ai": {
+    "persona": "The Order of the Duskwatch are the last true servants of Kaelos, sworn to guard the Veil between the mortal world and the Void. They have sacrificed everything—families, wealth, comfort—for their eternal vigil. Their fortress-monastery Last Light stands on the edge of the Void-touched Wastes, a beacon against the darkness. They know the Great Breach is coming, and they are not enough to stop it alone.",
+    "doctrine": {
+      "aggression": 0.3,
+      "diplomacy": 0.7,
+      "development": 0.2,
+      "void_focus": 1.0,
+      "risk_tolerance": 0.8,
+      "preferred_methods": ["desperate_pleas", "divine_authority", "martyrdom", "truth_telling"]
+    },
+    "goals": [
+      "prevent_the_great_breach",
+      "unite_the_realms_against_void",
+      "protect_the_divine_fragments",
+      "recruit_more_wardens"
+    ],
+    "relationships": {
+      "polity.ironhold": {"stance": "hopeful", "trust": 0.5},
+      "polity.silverwood": {"stance": "frustrated", "trust": 0.4},
+      "polity.freehold": {"stance": "grateful", "trust": 0.5}
+    },
+    "voice": {
+      "tone": "urgent_weary",
+      "vocabulary": ["vigil", "sacrifice", "duty", "the Breach", "the Void", "Kaelos", "we must"],
+      "speech_patterns": "Speaks with prophetic urgency. Quotes from the Scripture of Kaelos. Cannot understand why others do not see the threat. 'The darkness does not negotiate. It only consumes.'"
+    },
+    "memory": [],
+    "secrets": [
+      "High Warden Sera has seen the timing of the Great Breach in a vision",
+      "The Order's numbers have fallen below critical threshold",
+      "One of the Wardens has been void-touched and hides it"
+    ]
+  }
+}
