@@ -1,0 +1,201 @@
+{
+  "lens": "party-rpg",
+  "name": "Character Scene Rules",
+  "description": "Baldur's Gate 3 / Divinity style RPG mechanics",
+
+  "timescale": {
+    "tick_represents": "~10 minutes of scene time",
+    "typical_scene": "3-20 ticks",
+    "combat_round": "~6 seconds (1 round = 0.01 ticks)"
+  },
+
+  "skills": {
+    "description": "Character capabilities rated 0.0 to 1.0",
+    "categories": {
+      "combat": ["melee", "ranged", "tactics", "defense"],
+      "social": ["persuasion", "intimidation", "deception", "insight"],
+      "technical": ["piloting", "hacking", "engineering", "medicine"],
+      "knowledge": ["history", "politics", "streetwise", "science"]
+    },
+    "check_resolution": {
+      "method": "Roll d20 + (skill * 10) vs DC",
+      "dc_scale": {
+        "trivial": 5,
+        "easy": 10,
+        "moderate": 15,
+        "hard": 20,
+        "very_hard": 25,
+        "legendary": 30
+      },
+      "critical": {
+        "success": "natural 20 or beat DC by 10+",
+        "failure": "natural 1 or miss DC by 10+"
+      }
+    }
+  },
+
+  "dialogue": {
+    "description": "Branching conversation mechanics",
+    "approach_types": ["friendly", "professional", "aggressive", "deceptive", "emotional"],
+    "skill_checks": {
+      "persuasion": "Convince through reason or charm",
+      "intimidation": "Threaten or pressure",
+      "deception": "Lie convincingly",
+      "insight": "Detect lies or hidden motives"
+    },
+    "modifiers": {
+      "relationship_bonus": "trust * 5 to roll",
+      "reputation_bonus": "salience * 3 to roll",
+      "emotional_state": {
+        "angry": "-3 to persuasion, +2 to intimidation",
+        "fearful": "+3 to intimidation, -2 to insight",
+        "trusting": "+5 to persuasion, -3 to insight"
+      }
+    },
+    "outcomes": {
+      "critical_success": "Best possible outcome + bonus information/trust",
+      "success": "Achieve goal",
+      "partial_success": "Achieve goal with complication or cost",
+      "failure": "Don't achieve goal",
+      "critical_failure": "Goal fails + negative consequence"
+    },
+    "event_type": "dialogue.occurred"
+  },
+
+  "relationships": {
+    "description": "Trust and approval between characters",
+    "trust_range": "-1.0 (enemy) to 1.0 (devoted)",
+    "changes": {
+      "helped_in_danger": "+0.2",
+      "shared_secret": "+0.15",
+      "gift_or_favor": "+0.1",
+      "aligned_values": "+0.1",
+      "opposed_values": "-0.1",
+      "betrayal": "-0.4",
+      "lie_discovered": "-0.25"
+    },
+    "thresholds": {
+      "devoted": 0.9,
+      "trusted": 0.6,
+      "friendly": 0.3,
+      "neutral": 0,
+      "wary": -0.3,
+      "hostile": -0.6,
+      "enemy": -0.9
+    }
+  },
+
+  "combat_tactical": {
+    "description": "Turn-based tactical combat",
+    "initiative": "d20 + (tactics * 5)",
+    "actions_per_turn": {
+      "action": 1,
+      "bonus_action": 1,
+      "movement": "based on mobility",
+      "reaction": 1
+    },
+    "attack_resolution": {
+      "to_hit": "d20 + (relevant_combat_skill * 10) vs target_defense",
+      "damage": "weapon_base + (strength_or_skill * 5)",
+      "critical_hit": "natural 20 = double damage"
+    },
+    "health": {
+      "base_hp": 20,
+      "scaling": "+ (combat_defense * 30)",
+      "wounded_threshold": 0.5,
+      "critical_threshold": 0.2,
+      "death_threshold": 0
+    },
+    "cover_and_position": {
+      "half_cover": "+2 defense",
+      "full_cover": "+5 defense",
+      "high_ground": "+2 to hit",
+      "flanking": "+2 to hit"
+    },
+    "event_type": "combat.round"
+  },
+
+  "scene_structure": {
+    "phases": [
+      {
+        "name": "setup",
+        "description": "Establish location, participants, initial stakes"
+      },
+      {
+        "name": "interaction",
+        "description": "Dialogue, skill checks, discoveries"
+      },
+      {
+        "name": "escalation",
+        "description": "Stakes rise, conflict emerges or deepens"
+      },
+      {
+        "name": "resolution",
+        "description": "Outcome determined, consequences established"
+      },
+      {
+        "name": "aftermath",
+        "description": "Relationship changes, event emission, handoff"
+      }
+    ]
+  },
+
+  "secrets_and_information": {
+    "discovery_methods": ["insight_check", "investigation", "informant", "overheard", "found_evidence"],
+    "knowledge_states": ["unknown", "suspected", "confirmed", "proven"],
+    "sharing": {
+      "voluntary": "Trust > 0.5 typically required",
+      "coerced": "Intimidation check",
+      "traded": "Exchange of equivalent value"
+    },
+    "event_type": "secret.revealed"
+  },
+
+  "emotional_state": {
+    "description": "Character mental/emotional condition",
+    "states": {
+      "mood": ["neutral", "happy", "angry", "sad", "fearful", "determined", "hopeful", "despairing"],
+      "stress": "0.0 (relaxed) to 1.0 (breaking)",
+      "trauma": "Accumulated psychological damage"
+    },
+    "stress_effects": {
+      "0.0-0.3": "Normal function",
+      "0.3-0.6": "-1 to social checks, more emotional responses",
+      "0.6-0.8": "-2 to all checks, may refuse dangerous actions",
+      "0.8-1.0": "Risk of breakdown, irrational behavior"
+    },
+    "recovery": {
+      "rest": "-0.1 stress per scene",
+      "support_from_ally": "-0.15 stress",
+      "victory": "-0.1 stress",
+      "defeat": "+0.15 stress"
+    }
+  },
+
+  "opportunities": {
+    "description": "Triggers for zoom changes",
+    "drill_to_action": {
+      "condition": "Combat becomes real-time (vehicle combat, chase, firefight)",
+      "handoff": "Pass combatants, equipment, terrain to action-sim"
+    },
+    "summarize_to_4x": {
+      "condition": "Scene resolves with strategic implications",
+      "handoff": "Emit events affecting influence, trust, intel"
+    }
+  },
+
+  "event_types": [
+    "dialogue.occurred",
+    "skill_check.attempted",
+    "secret.revealed",
+    "relationship.changed",
+    "combat.started",
+    "combat.round",
+    "combat.ended",
+    "agent.wounded",
+    "agent.killed",
+    "item.acquired",
+    "item.used",
+    "scene.completed"
+  ]
+}

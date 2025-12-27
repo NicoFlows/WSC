@@ -1,0 +1,126 @@
+{
+  "id": "vega_conflict",
+  "name": "The Vega Conflict",
+  "version": "1.0.0",
+
+  "setting": {
+    "genre": "sci-fi",
+    "era": "Post-Collapse (Year 2847)",
+    "theme": "Cold war between authoritarian empire and scrappy independents, turning hot",
+    "tone": "Gritty space opera with moral ambiguity. No clear heroes.",
+    "inspirations": ["Battlestar Galactica", "The Expanse", "Firefly", "Babylon 5"]
+  },
+
+  "lore_summary": "Fifty years after the Collapse Wars shattered the old Earth Federation, two powers contest the resource-rich Vega System. The Terran Hegemony—a militaristic successor state—seeks to reunify humanity under its iron grip. The Free Traders Confederacy—a loose alliance of independent captains, stations, and frontier worlds—fights for autonomy and survival. The conflict has simmered for years, but recent events are pushing both sides toward open war.",
+
+  "starting_state": {
+    "tick": 1040,
+    "tick_unit": "day",
+    "calendar_reference": "Day 1040 = Year 2847, Month 9, Day 15",
+    "situation": "The Hegemony has been building forces at the jump point. Free Trader raids have intensified. War seems inevitable."
+  },
+
+  "factions": {
+    "polity.hegemony": {
+      "role": "antagonist_empire",
+      "starting_regions": ["region.nexus_prime"],
+      "contested_regions": ["region.vega"],
+      "objectives": ["Control Vega", "Destroy Free Trader leadership", "Secure trade routes"]
+    },
+    "polity.free_traders": {
+      "role": "protagonist_underdogs",
+      "starting_regions": [],
+      "contested_regions": ["region.vega"],
+      "objectives": ["Survive", "Deny Hegemony control", "Build alliances"]
+    }
+  },
+
+  "key_characters": {
+    "agent.captain_reva": {
+      "role": "protagonist",
+      "arc": "Haunted veteran seeking redemption while protecting her crew",
+      "narrative_weight": 1.0
+    },
+    "agent.admiral_chen": {
+      "role": "antagonist",
+      "arc": "Ruthless commander with hidden vulnerabilities",
+      "narrative_weight": 0.9
+    },
+    "agent.kai_chen": {
+      "role": "wildcard",
+      "arc": "Young pilot with secret connection to both sides",
+      "narrative_weight": 0.8
+    },
+    "agent.zara": {
+      "role": "neutral",
+      "arc": "Information broker playing all sides",
+      "narrative_weight": 0.6
+    }
+  },
+
+  "victory_conditions": {
+    "hegemony_victory": {
+      "description": "Total control of Vega System",
+      "condition": "presence.hegemony.vega.influence >= 0.9 AND presence.hegemony.vega.control == true for 30 ticks"
+    },
+    "free_trader_victory": {
+      "description": "Break the Hegemony's grip",
+      "condition": "presence.hegemony.vega.influence < 0.3 AND force.hegemony_7th_fleet.strength < 0.3"
+    },
+    "stalemate": {
+      "description": "Prolonged conflict with no resolution",
+      "condition": "tick > 1500 AND neither victory achieved"
+    }
+  },
+
+  "narrative_hooks": [
+    {
+      "id": "chens_secret",
+      "description": "Kai Chen is Admiral Chen's estranged child",
+      "known_to": [],
+      "reveal_conditions": ["High-stakes scene between Kai and Hegemony forces"]
+    },
+    {
+      "id": "revas_cache",
+      "description": "Reva knows the location of a hidden Hegemony weapons cache",
+      "known_to": ["agent.captain_reva"],
+      "reveal_conditions": ["Desperate situation requiring game-changing resources"]
+    },
+    {
+      "id": "hegemony_coup",
+      "description": "Elements within Hegemony are planning a coup against the Supreme Commander",
+      "known_to": [],
+      "reveal_conditions": ["Extended conflict weakens central authority"]
+    }
+  ],
+
+  "suggested_drilldowns": [
+    {
+      "type": "party-rpg",
+      "description": "Reva briefs her crew before a dangerous raid",
+      "participants": ["agent.captain_reva", "agent.kai_chen"],
+      "location": "holding.wandering_star"
+    },
+    {
+      "type": "action-sim",
+      "description": "Raider ambush on a Hegemony supply convoy",
+      "participants": ["force.free_trader_raiders", "force.hegemony_7th_fleet"],
+      "location": "feature.outer_belt"
+    },
+    {
+      "type": "party-rpg",
+      "description": "Negotiating with Zara for critical intelligence",
+      "participants": ["agent.captain_reva", "agent.zara"],
+      "location": "locale.port_nexus"
+    }
+  ],
+
+  "entities": {
+    "polities": ["polity.hegemony", "polity.free_traders"],
+    "regions": ["region.vega", "region.nexus_prime"],
+    "forces": ["force.hegemony_7th_fleet", "force.free_trader_raiders"],
+    "locales": ["locale.port_nexus", "locale.garrison_alpha"],
+    "agents": ["agent.captain_reva", "agent.admiral_chen", "agent.kai_chen", "agent.zara"],
+    "holdings": ["holding.wandering_star", "holding.chen_evidence"]
+  }
+}

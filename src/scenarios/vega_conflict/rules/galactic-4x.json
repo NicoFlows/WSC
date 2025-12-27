@@ -1,0 +1,168 @@
+{
+  "lens": "galactic-4x",
+  "name": "Grand Strategy Rules",
+  "description": "Stellaris/Sins of a Solar Empire style 4X mechanics",
+
+  "timescale": {
+    "tick_represents": "1 day",
+    "strategic_turn": "7 ticks (1 week)",
+    "typical_session": "30-90 ticks"
+  },
+
+  "influence": {
+    "description": "Measure of a polity's control over a region (0.0 to 1.0)",
+    "mechanics": {
+      "base_decay_per_tick": 0.005,
+      "fleet_presence_bonus": 0.02,
+      "station_control_bonus": 0.03,
+      "development_investment": 0.01,
+      "propaganda_campaign": 0.015,
+      "espionage_penalty": -0.02
+    },
+    "control_thresholds": {
+      "dominant": 0.7,
+      "contested": 0.3,
+      "negligible": 0.1
+    },
+    "control_flip": {
+      "threshold": "challenger.influence > controller.influence + 0.15",
+      "event_type": "control.changed"
+    }
+  },
+
+  "combat": {
+    "description": "Fleet vs fleet engagement resolution",
+    "engagement_check": {
+      "condition": "hostile fleets in same region",
+      "patrol_intercept_chance": 0.4,
+      "ambush_bonus": 0.2
+    },
+    "resolution": {
+      "method": "Compare effective_strength = strength * random(0.7, 1.3) * modifiers",
+      "modifiers": {
+        "terrain_advantage": 1.2,
+        "ambush": 1.3,
+        "superior_tech": 1.15,
+        "demoralized": 0.8
+      }
+    },
+    "casualties": {
+      "winner_losses": "0.1 to 0.25 of engaged strength",
+      "loser_losses": "0.3 to 0.5 of engaged strength",
+      "rout_threshold": 0.3,
+      "pursuit_damage": 0.1
+    },
+    "outcomes": ["decisive_victory", "tactical_victory", "pyrrhic_victory", "draw", "tactical_defeat", "rout"],
+    "event_type": "battle.resolved"
+  },
+
+  "movement": {
+    "description": "Fleet travel between regions",
+    "base_ticks_per_link": 5,
+    "modifiers": {
+      "fast_fleet": 0.7,
+      "damaged_fleet": 1.5,
+      "hostile_territory": 1.3,
+      "secured_lane": 0.8
+    },
+    "interception": {
+      "patrol_detection_range": 1,
+      "intercept_chance": "patrol_strength / (patrol_strength + moving_strength)"
+    },
+    "event_type": "fleet.moved"
+  },
+
+  "resources": {
+    "types": {
+      "wealth": "Economic power - funds fleets, stations, operations",
+      "military": "War-making capacity - recruitment, equipment, readiness",
+      "influence": "Soft power - diplomacy, propaganda, espionage",
+      "technology": "Research progress - unlocks capabilities"
+    },
+    "income": {
+      "per_controlled_region": { "wealth": 0.05, "military": 0.02 },
+      "per_station": { "wealth": 0.03 },
+      "trade_route": { "wealth": 0.04 }
+    },
+    "costs": {
+      "fleet_maintenance": "0.02 per 0.1 strength",
+      "offensive_operation": "0.1 wealth + 0.05 military",
+      "development_project": "0.15 wealth"
+    }
+  },
+
+  "diplomacy": {
+    "stances": ["allied", "friendly", "neutral", "wary", "hostile", "at_war"],
+    "actions": {
+      "propose_treaty": { "cost": "0.05 influence", "cooldown": 30 },
+      "declare_war": { "cost": "0.1 influence", "event_type": "conflict.started" },
+      "sue_for_peace": { "cost": "0.15 influence", "event_type": "conflict.ended" },
+      "trade_agreement": { "benefit": "0.02 wealth/tick", "trust_required": 0.4 }
+    },
+    "trust": {
+      "range": "0.0 to 1.0",
+      "treaty_honored": "+0.1",
+      "treaty_broken": "-0.3",
+      "military_action": "-0.2",
+      "aid_provided": "+0.15"
+    }
+  },
+
+  "opportunities": {
+    "description": "Events that can trigger drill-downs to lower lenses",
+    "triggers": {
+      "battle_with_named_commanders": {
+        "condition": "battle involves agent with salience > 0.5",
+        "drill_to": "action-sim",
+        "importance_boost": 0.2
+      },
+      "diplomatic_crisis": {
+        "condition": "trust changes by > 0.2 in single event",
+        "drill_to": "party-rpg",
+        "importance_boost": 0.15
+      },
+      "station_siege": {
+        "condition": "locale under attack for > 10 ticks",
+        "drill_to": "city-builder",
+        "importance_boost": 0.1
+      }
+    }
+  },
+
+  "ai_decision_weights": {
+    "description": "How polity AI doctrine values translate to action preferences",
+    "aggression": {
+      "high": "Prefer offensive operations, quick strikes, risk-taking",
+      "low": "Prefer defensive posture, consolidation, caution"
+    },
+    "diplomacy": {
+      "high": "Seek treaties, avoid war, build coalitions",
+      "low": "Ignore diplomacy, prefer military solutions"
+    },
+    "expansion": {
+      "high": "Prioritize claiming new regions, spread thin",
+      "low": "Consolidate core, deep control over few regions"
+    },
+    "economic_focus": {
+      "high": "Invest in development, trade, infrastructure",
+      "low": "Sacrifice economy for military"
+    }
+  },
+
+  "event_types": [
+    "influence.changed",
+    "control.changed",
+    "fleet.moved",
+    "fleet.engaged",
+    "battle.resolved",
+    "treaty.proposed",
+    "treaty.signed",
+    "treaty.broken",
+    "conflict.started",
+    "conflict.ended",
+    "resource.shortage",
+    "colony.established",
+    "station.constructed",
+    "opportunity.created"
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "lens": "city-builder",
+  "name": "Settlement Management Rules",
+  "description": "Cities: Skylines / SimCity style urban/station management",
+
+  "timescale": {
+    "tick_represents": "1 week",
+    "budget_cycle": "4 ticks (1 month)",
+    "typical_session": "12-52 ticks (3 months to 1 year)"
+  },
+
+  "settlement_types": {
+    "space_station": {
+      "description": "Orbital habitat or trading post",
+      "constraints": ["power_critical", "life_support_critical", "expansion_costly"],
+      "advantages": ["trade_hub", "defensible", "zero_maintenance_decay"]
+    },
+    "colony": {
+      "description": "Planetary or moon surface settlement",
+      "constraints": ["weather", "terrain", "gravity"],
+      "advantages": ["expansion_space", "resource_extraction", "population_growth"]
+    },
+    "outpost": {
+      "description": "Small specialized facility",
+      "constraints": ["limited_population", "single_purpose"],
+      "advantages": ["low_cost", "fast_construction", "relocatable"]
+    }
+  },
+
+  "districts": {
+    "description": "Functional zones within a settlement",
+    "types": {
+      "residential": {
+        "provides": "housing_capacity",
+        "demands": ["power", "water", "life_support", "services"],
+        "generates": "population_growth"
+      },
+      "commercial": {
+        "provides": "trade_capacity, entertainment",
+        "demands": ["power", "workers", "customers"],
+        "generates": "wealth"
+      },
+      "industrial": {
+        "provides": "production, jobs",
+        "demands": ["power", "workers", "raw_materials"],
+        "generates": "goods, pollution"
+      },
+      "administrative": {
+        "provides": "governance, security",
+        "demands": ["power", "staff"],
+        "generates": "stability, law_enforcement"
+      },
+      "military": {
+        "provides": "defense, garrison",
+        "demands": ["power", "personnel", "maintenance"],
+        "generates": "security, tension"
+      },
+      "docking": {
+        "provides": "ship_berths, cargo_handling",
+        "demands": ["power", "workers"],
+        "generates": "trade_income, visitors"
+      }
+    }
+  },
+
+  "resources": {
+    "power": {
+      "description": "Energy for all systems",
+      "sources": ["reactor", "solar", "fusion"],
+      "shortage_effect": "Rolling blackouts, system failures"
+    },
+    "water_life_support": {
+      "description": "Breathable air, water recycling",
+      "sources": ["recyclers", "ice_mining", "imports"],
+      "shortage_effect": "Health crisis, population decline"
+    },
+    "food": {
+      "description": "Sustenance for population",
+      "sources": ["hydroponics", "imports", "synthesis"],
+      "shortage_effect": "Unrest, health decline, emigration"
+    },
+    "credits": {
+      "description": "Economic currency",
+      "sources": ["trade", "taxes", "industry"],
+      "shortage_effect": "Service cuts, decay, unrest"
+    },
+    "materials": {
+      "description": "Construction and maintenance supplies",
+      "sources": ["mining", "imports", "recycling"],
+      "shortage_effect": "No construction, decay accelerates"
+    }
+  },
+
+  "population": {
+    "needs": {
+      "basic": ["housing", "food", "life_support", "safety"],
+      "comfort": ["entertainment", "healthcare", "education"],
+      "prosperity": ["jobs", "goods", "opportunity"]
+    },
+    "satisfaction": {
+      "range": "0.0 (miserable) to 1.0 (thriving)",
+      "calculation": "(basic_met * 0.5) + (comfort_met * 0.3) + (prosperity_met * 0.2)"
+    },
+    "growth": {
+      "positive": "satisfaction > 0.6 AND housing_available",
+      "rate": "(satisfaction - 0.5) * 0.02 per tick",
+      "negative": "satisfaction < 0.4 OR crisis",
+      "emigration_rate": "(0.4 - satisfaction) * 0.03 per tick"
+    },
+    "classes": {
+      "workers": "60% - Labor, services, basic jobs",
+      "skilled": "30% - Technical, professional roles",
+      "elite": "10% - Management, wealthy, influential"
+    }
+  },
+
+  "unrest": {
+    "description": "Civil instability",
+    "range": "0.0 (peaceful) to 1.0 (revolt)",
+    "causes": {
+      "shortage": "+0.1 per tick of critical shortage",
+      "oppression": "+0.05 per tick if security > population wants",
+      "inequality": "+0.03 per tick if wealth disparity high",
+      "war_losses": "+0.15 per casualty event"
+    },
+    "reduction": {
+      "needs_met": "-0.05 per tick if satisfaction > 0.7",
+      "propaganda": "-0.03 per tick if running",
+      "concessions": "-0.1 one-time for reform"
+    },
+    "thresholds": {
+      "0.0-0.2": "Peaceful - Normal operations",
+      "0.2-0.4": "Grumbling - Protests, complaints",
+      "0.4-0.6": "Unrest - Strikes, civil disobedience",
+      "0.6-0.8": "Riots - Property damage, violence",
+      "0.8-1.0": "Revolt - Armed uprising, potential overthrow"
+    },
+    "event_type": "unrest.spike"
+  },
+
+  "infrastructure": {
+    "construction": {
+      "cost": "materials + credits + time",
+      "time": "Base ticks modified by complexity",
+      "workforce": "Requires available workers"
+    },
+    "maintenance": {
+      "ongoing_cost": "10% of construction cost per 52 ticks",
+      "neglect": "+decay if not paid"
+    },
+    "decay": {
+      "rate": "0.01 per tick if unmaintained",
+      "effect": "Capacity reduction, eventual failure",
+      "repair": "50% of construction cost"
+    },
+    "upgrades": {
+      "efficiency": "Same capacity, lower operating cost",
+      "capacity": "More output, same footprint",
+      "resilience": "Slower decay, disaster resistance"
+    },
+    "event_type": "infrastructure.completed"
+  },
+
+  "crises": {
+    "types": {
+      "power_failure": {
+        "trigger": "power_supply < power_demand",
+        "effect": "Rolling blackouts, system failures",
+        "resolution": "Restore power, emergency generators"
+      },
+      "life_support_failure": {
+        "trigger": "life_support < population_needs",
+        "effect": "Health crisis, panic, potential deaths",
+        "resolution": "Repair systems, evacuate sections"
+      },
+      "epidemic": {
+        "trigger": "Random, higher chance if healthcare low",
+        "effect": "Population health decline, fear",
+        "resolution": "Quarantine, medical response"
+      },
+      "attack": {
+        "trigger": "External military action",
+        "effect": "Damage, casualties, disruption",
+        "resolution": "Defense, repair, evacuation"
+      },
+      "refugee_wave": {
+        "trigger": "External conflict drives people to settlement",
+        "effect": "Population spike, resource strain",
+        "resolution": "Integration, camps, turning away"
+      }
+    }
+  },
+
+  "governance": {
+    "styles": {
+      "authoritarian": {
+        "bonuses": "+security, +efficiency",
+        "penalties": "-satisfaction, +unrest_potential"
+      },
+      "democratic": {
+        "bonuses": "+satisfaction, -unrest_potential",
+        "penalties": "-efficiency, slower_decisions"
+      },
+      "corporate": {
+        "bonuses": "+wealth, +trade",
+        "penalties": "-equality, +exploitation"
+      },
+      "community": {
+        "bonuses": "+resilience, +cooperation",
+        "penalties": "-growth, -external_trade"
+      }
+    },
+    "decisions": {
+      "budget_allocation": "How to spend credits",
+      "development_priority": "What to build next",
+      "crisis_response": "How to handle emergencies",
+      "faction_relations": "Align with Hegemony, Free Traders, or neutral"
+    }
+  },
+
+  "handoffs": {
+    "from_galactic_4x": {
+      "trigger": "Station siege, blockade, development focus",
+      "receives": "Settlement state, external pressures, resources"
+    },
+    "to_galactic_4x": {
+      "trigger": "Crisis resolved, development complete",
+      "passes": "Production changes, population, strategic assets"
+    },
+    "to_party_rpg": {
+      "trigger": "Key NPC negotiation, unrest leader emerges",
+      "passes": "Scene setup, stakeholders, stakes"
+    }
+  },
+
+  "event_types": [
+    "infrastructure.completed",
+    "infrastructure.damaged",
+    "infrastructure.destroyed",
+    "population.changed",
+    "unrest.spike",
+    "crisis.started",
+    "crisis.resolved",
+    "shortage.started",
+    "shortage.ended",
+    "budget.allocated",
+    "policy.changed",
+    "district.zoned",
+    "settlement.expanded"
+  ]
+}

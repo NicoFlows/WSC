@@ -1,0 +1,202 @@
+{
+  "lens": "action-sim",
+  "name": "Real-Time Action Rules",
+  "description": "Elite Dangerous / Star Citizen style action mechanics",
+
+  "timescale": {
+    "tick_represents": "~1 second of real-time action",
+    "typical_encounter": "60-300 ticks (1-5 minutes)",
+    "narration_pace": "Cinematic beats every 10-30 ticks"
+  },
+
+  "encounter_types": {
+    "dogfight": {
+      "description": "Ship-to-ship space combat",
+      "terrain": "Open space, asteroid field, debris, near station",
+      "key_stats": ["piloting", "gunnery", "ship_handling", "shields"]
+    },
+    "firefight": {
+      "description": "FPS ground or station combat",
+      "terrain": "Corridors, open area, cover-rich, zero-g",
+      "key_stats": ["ranged", "tactics", "mobility", "armor"]
+    },
+    "chase": {
+      "description": "Vehicle pursuit",
+      "terrain": "Lanes, obstacles, shortcuts, hazards",
+      "key_stats": ["piloting", "reflexes", "vehicle_knowledge"]
+    },
+    "boarding": {
+      "description": "Ship-to-ship infiltration",
+      "phases": ["approach", "breach", "combat", "objective", "extraction"],
+      "key_stats": ["stealth", "hacking", "combat", "coordination"]
+    },
+    "stealth": {
+      "description": "Infiltration without detection",
+      "states": ["undetected", "suspicious", "searching", "combat"],
+      "key_stats": ["stealth", "hacking", "observation", "timing"]
+    }
+  },
+
+  "vehicles": {
+    "stats": {
+      "hull": "Structural integrity (0-100%)",
+      "shields": "Energy barrier (0-100%, regenerates)",
+      "speed": "Maximum velocity",
+      "maneuver": "Turn rate, acceleration",
+      "weapons": "Damage output capacity",
+      "signature": "Detectability (lower = stealthier)"
+    },
+    "ship_classes": {
+      "fighter": { "hull": 30, "shields": 20, "speed": 10, "maneuver": 10, "weapons": 3 },
+      "corvette": { "hull": 60, "shields": 40, "speed": 7, "maneuver": 6, "weapons": 6 },
+      "frigate": { "hull": 100, "shields": 80, "speed": 5, "maneuver": 4, "weapons": 10 },
+      "cruiser": { "hull": 200, "shields": 150, "speed": 3, "maneuver": 2, "weapons": 20 }
+    },
+    "damage": {
+      "shields_first": true,
+      "shield_regen": "5% per 10 ticks when not hit",
+      "hull_damage": "Permanent until repaired",
+      "critical_systems": ["engines", "weapons", "sensors", "life_support"],
+      "critical_threshold": 25
+    }
+  },
+
+  "combat_resolution": {
+    "attack_roll": {
+      "base": "d20 + (skill * 10)",
+      "vs": "target evasion (maneuver * 2) + cover",
+      "modifiers": {
+        "target_speed": "-1 per speed point above 5",
+        "range_close": "+3",
+        "range_long": "-3",
+        "locked_on": "+5"
+      }
+    },
+    "damage": {
+      "base": "weapon_rating * (1 + random(0, 0.5))",
+      "critical": "natural 20 = 1.5x damage + system damage",
+      "shield_bypass": "Some weapons ignore shields"
+    },
+    "evasion": {
+      "description": "Defensive maneuvers",
+      "cost": "Uses maneuver action",
+      "bonus": "+maneuver rating to defense for 10 ticks"
+    }
+  },
+
+  "piloting_maneuvers": {
+    "basic": {
+      "attack_run": "Close distance, +2 to hit, -2 defense",
+      "evasive": "-3 to hit, +4 defense",
+      "pursuit": "Match target movement, +3 to hit if faster"
+    },
+    "advanced": {
+      "barrel_roll": "Avoid missile, piloting DC 15",
+      "cobra": "Sudden brake + turn, piloting DC 18, +5 to hit rear target",
+      "asteroid_threading": "Lose pursuer, piloting DC 20"
+    }
+  },
+
+  "fps_combat": {
+    "cover": {
+      "none": "+0 defense",
+      "light": "+2 defense, 25% block",
+      "heavy": "+5 defense, 50% block",
+      "full": "Can't be hit, can't attack"
+    },
+    "movement": {
+      "walk": "Quiet, accurate",
+      "run": "-2 to hit, +2 to be hit, faster",
+      "sprint": "Can't attack, +4 to be hit, fastest"
+    },
+    "stances": {
+      "aggressive": "+2 to hit, -2 defense",
+      "defensive": "-2 to hit, +2 defense",
+      "suppressive": "Pin enemies, no damage, force cover"
+    }
+  },
+
+  "tension_and_pacing": {
+    "description": "Narrative escalation in action scenes",
+    "tension_levels": {
+      "approach": "Setup, positioning, quiet before storm",
+      "contact": "First shots, initial exchanges",
+      "engaged": "Full combat, multiple exchanges",
+      "desperate": "Low resources, high stakes",
+      "climax": "Final push, all-or-nothing",
+      "resolution": "Winner determined, aftermath"
+    },
+    "beat_timing": {
+      "every_10_ticks": "Minor beat - status update, tactical shift",
+      "every_30_ticks": "Major beat - escalation, complication, or turning point",
+      "random": "Critical hit, system failure, reinforcements"
+    }
+  },
+
+  "ammunition_and_resources": {
+    "weapons": {
+      "unlimited": "Basic lasers, punches",
+      "limited": "Missiles (count), special weapons (charges)",
+      "heat": "Sustained fire builds heat, overheating = cooldown"
+    },
+    "consumables": {
+      "shield_boost": "Instant +30 shields",
+      "repair_nanites": "Restore 20 hull over 30 ticks",
+      "chaff": "Break missile lock",
+      "stim": "+2 to all rolls for 30 ticks, then -2 for 30 ticks"
+    }
+  },
+
+  "outcomes": {
+    "victory_conditions": {
+      "elimination": "All hostiles destroyed/incapacitated",
+      "objective": "Goal achieved (hack terminal, reach escape, capture target)",
+      "escape": "Successfully disengage and flee",
+      "surrender": "Enemy surrenders"
+    },
+    "defeat_conditions": {
+      "destroyed": "Hull/HP reaches 0",
+      "captured": "Incapacitated and enemy takes prisoner",
+      "failed_objective": "Time runs out or objective becomes impossible"
+    },
+    "aftermath": {
+      "damage_persists": "Hull damage, injuries carry forward",
+      "resources_spent": "Ammo, consumables depleted",
+      "morale_effects": "Victory = -stress, defeat = +stress"
+    }
+  },
+
+  "handoffs": {
+    "from_party_rpg": {
+      "trigger": "Negotiations fail, ambush sprung, chase begins",
+      "receives": "Participants, equipment, terrain, stakes"
+    },
+    "to_party_rpg": {
+      "trigger": "Combat ends, prisoner taken, survivor rescued",
+      "passes": "Outcome, casualties, captured items/intel"
+    },
+    "from_galactic_4x": {
+      "trigger": "Fleet battle with named commanders",
+      "receives": "Force compositions, commander stats, terrain"
+    },
+    "to_galactic_4x": {
+      "trigger": "Battle resolves",
+      "passes": "Casualties, victor, strategic effects"
+    }
+  },
+
+  "event_types": [
+    "encounter.started",
+    "attack.attempted",
+    "damage.dealt",
+    "system.damaged",
+    "ship.destroyed",
+    "agent.wounded",
+    "agent.killed",
+    "maneuver.attempted",
+    "position.changed",
+    "reinforcements.arrived",
+    "objective.achieved",
+    "encounter.ended"
+  ]
+}

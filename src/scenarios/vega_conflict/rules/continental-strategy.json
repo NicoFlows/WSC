@@ -1,0 +1,110 @@
+{
+  "lens": "continental-strategy",
+  "name": "National Strategy Rules",
+  "description": "Civilization / Humankind style grand strategy mechanics",
+  "note": "Not primary lens for Vega Conflict (space-based), but available for planetary campaigns",
+
+  "timescale": {
+    "tick_represents": "1 season (3 months)",
+    "year": "4 ticks",
+    "era": "~20-50 ticks"
+  },
+
+  "terrain": {
+    "types": {
+      "plains": { "movement": 1, "defense": 0, "food": 2, "production": 1 },
+      "forest": { "movement": 2, "defense": 2, "food": 1, "production": 2 },
+      "hills": { "movement": 2, "defense": 3, "food": 1, "production": 2 },
+      "mountains": { "movement": 4, "defense": 5, "food": 0, "production": 1 },
+      "desert": { "movement": 1, "defense": 0, "food": 0, "production": 1 },
+      "coast": { "movement": 1, "defense": 1, "food": 3, "production": 1 },
+      "river": { "movement": 0.5, "defense": 1, "food": 2, "production": 1 }
+    }
+  },
+
+  "resources": {
+    "food": "Population growth and army maintenance",
+    "production": "Building and unit construction",
+    "gold": "Universal currency, trade",
+    "science": "Technology advancement",
+    "culture": "Border expansion, policies",
+    "faith": "Religion spread, special units"
+  },
+
+  "military": {
+    "unit_types": {
+      "infantry": { "strength": 20, "movement": 2, "cost": 50 },
+      "cavalry": { "strength": 25, "movement": 4, "cost": 75 },
+      "siege": { "strength": 15, "movement": 1, "cost": 100, "bonus_vs_city": 10 },
+      "ranged": { "strength": 15, "movement": 2, "cost": 60, "range": 2 }
+    },
+    "combat": {
+      "resolution": "strength * terrain * health * random(0.8, 1.2)",
+      "damage": "(attacker_roll - defender_roll) / 10 as health loss",
+      "flanking": "+25% strength",
+      "fortified": "+50% defense"
+    },
+    "supply": {
+      "range": 3,
+      "attrition": "5% strength loss per tick outside supply"
+    }
+  },
+
+  "cities": {
+    "founding": {
+      "settler_cost": 80,
+      "minimum_distance": 4
+    },
+    "growth": {
+      "food_needed": "current_pop * 10",
+      "excess_food": "Stored toward next pop"
+    },
+    "production_queue": ["units", "buildings", "wonders"],
+    "happiness": {
+      "base": 5,
+      "per_population": -1,
+      "from_buildings": "varies",
+      "effect": "Unhappy cities have reduced production and may rebel"
+    }
+  },
+
+  "diplomacy": {
+    "agreements": {
+      "open_borders": "Allow unit passage",
+      "trade_route": "+2 gold each",
+      "defensive_pact": "Join wars when ally attacked",
+      "alliance": "Full military cooperation"
+    },
+    "war": {
+      "declaration_penalty": "World opinion -10",
+      "war_weariness": "+1 per tick at war",
+      "peace_treaty_minimum": "10 ticks"
+    }
+  },
+
+  "technology": {
+    "research_rate": "science_per_tick / tech_cost",
+    "eras": ["Ancient", "Classical", "Medieval", "Renaissance", "Industrial", "Modern"],
+    "unlocks": ["units", "buildings", "abilities", "resources"]
+  },
+
+  "victory_conditions": {
+    "domination": "Control 60% of territory",
+    "science": "Complete final technology",
+    "culture": "Achieve cultural hegemony",
+    "diplomatic": "Win world congress vote"
+  },
+
+  "event_types": [
+    "territory.claimed",
+    "city.founded",
+    "city.captured",
+    "battle.resolved",
+    "treaty.signed",
+    "war.declared",
+    "peace.signed",
+    "technology.researched",
+    "wonder.completed",
+    "era.advanced"
+  ]
+}
