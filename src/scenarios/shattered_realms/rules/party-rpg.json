@@ -1,0 +1,365 @@
+{
+  "name": "Shattered Realms - Party RPG Rules",
+  "genre": "high-fantasy",
+  "description": "Classic fantasy RPG mechanics with divine fragments, void corruption, and medieval intrigue",
+  "version": "1.0.0",
+
+  "character_system": {
+    "attributes": {
+      "strength": "Physical power, melee damage, carrying capacity",
+      "dexterity": "Agility, ranged accuracy, initiative",
+      "constitution": "Health, stamina, poison resistance",
+      "intelligence": "Arcane magic, knowledge, puzzle-solving",
+      "wisdom": "Divine magic, perception, willpower",
+      "charisma": "Leadership, persuasion, intimidation"
+    },
+    "attribute_scale": {
+      "minimum": 3,
+      "average": 10,
+      "maximum": 20,
+      "legendary": 25
+    },
+    "derived_stats": {
+      "hit_points": "constitution * 5 + level * constitution_modifier",
+      "mana": "(intelligence + wisdom) * 2",
+      "stamina": "constitution * 3",
+      "initiative": "dexterity_modifier + level / 2",
+      "armor_class": "10 + dexterity_modifier + armor_bonus",
+      "void_resistance": "wisdom_modifier + divine_blessing_bonus"
+    }
+  },
+
+  "skills": {
+    "combat": {
+      "melee": { "attribute": "strength", "description": "Sword, axe, mace fighting" },
+      "ranged": { "attribute": "dexterity", "description": "Bow, crossbow, thrown weapons" },
+      "defense": { "attribute": "constitution", "description": "Blocking, parrying, armor use" },
+      "tactics": { "attribute": "intelligence", "description": "Battlefield awareness, flanking" }
+    },
+    "magic": {
+      "arcane": { "attribute": "intelligence", "description": "Wizard spells, enchantments" },
+      "divine": { "attribute": "wisdom", "description": "Cleric spells, blessings, healing" },
+      "ritual": { "attribute": "intelligence", "description": "Complex magical workings" },
+      "void_lore": { "attribute": "wisdom", "description": "Understanding the Void (dangerous)" }
+    },
+    "social": {
+      "persuasion": { "attribute": "charisma", "description": "Convincing others" },
+      "intimidation": { "attribute": "charisma", "description": "Threatening, commanding" },
+      "deception": { "attribute": "charisma", "description": "Lying, misdirection" },
+      "insight": { "attribute": "wisdom", "description": "Reading people, detecting lies" },
+      "etiquette": { "attribute": "charisma", "description": "Noble courts, formal situations" }
+    },
+    "physical": {
+      "athletics": { "attribute": "strength", "description": "Climbing, swimming, jumping" },
+      "stealth": { "attribute": "dexterity", "description": "Hiding, sneaking, shadowing" },
+      "perception": { "attribute": "wisdom", "description": "Noticing, searching, tracking" },
+      "endurance": { "attribute": "constitution", "description": "Forced march, resisting fatigue" }
+    },
+    "knowledge": {
+      "history": { "attribute": "intelligence", "description": "Past events, noble lineages" },
+      "religion": { "attribute": "wisdom", "description": "Gods, divine fragments, theology" },
+      "nature": { "attribute": "wisdom", "description": "Flora, fauna, weather, terrain" },
+      "arcana": { "attribute": "intelligence", "description": "Magic theory, artifacts, wards" }
+    },
+    "craft": {
+      "smithing": { "attribute": "strength", "description": "Weapons, armor, metal items" },
+      "alchemy": { "attribute": "intelligence", "description": "Potions, poisons, compounds" },
+      "medicine": { "attribute": "wisdom", "description": "Healing, surgery, herbal remedies" }
+    }
+  },
+
+  "skill_checks": {
+    "formula": "d20 + attribute_modifier + skill_ranks + circumstance_modifiers",
+    "difficulty_classes": {
+      "trivial": 5,
+      "easy": 10,
+      "moderate": 15,
+      "hard": 20,
+      "very_hard": 25,
+      "legendary": 30,
+      "divine": 35
+    },
+    "critical_success": "Natural 20, or exceed DC by 10+",
+    "critical_failure": "Natural 1, or fail DC by 10+",
+    "assistance": "+2 per helper with relevant skill (max +6)"
+  },
+
+  "combat": {
+    "initiative": "d20 + dexterity_modifier + initiative_bonus",
+    "turn_actions": {
+      "move": "Speed in feet (typically 30)",
+      "action": "Attack, cast spell, use ability",
+      "bonus_action": "Quick actions, off-hand attack",
+      "reaction": "Opportunity attack, counterspell, etc."
+    },
+    "attack_roll": "d20 + attribute_modifier + proficiency + weapon_bonus vs AC",
+    "damage": "weapon_dice + attribute_modifier + magic_bonus",
+    "critical_hit": "Natural 20: double damage dice",
+    "death_and_dying": {
+      "unconscious_at": 0,
+      "death_at": "negative_constitution",
+      "death_saves": "3 successes = stabilized, 3 failures = death"
+    }
+  },
+
+  "magic": {
+    "arcane": {
+      "source": "Learned knowledge, force of will",
+      "resource": "Mana (spell_level * 2 per cast)",
+      "recovery": "Long rest restores all, short rest restores intelligence_modifier",
+      "schools": {
+        "evocation": "Direct damage spells (fireball, lightning)",
+        "abjuration": "Protection spells (shield, ward)",
+        "transmutation": "Transformation (polymorph, haste)",
+        "divination": "Information (detect, scry)",
+        "enchantment": "Mind effects (charm, dominate)",
+        "illusion": "Deception (invisibility, phantasm)",
+        "necromancy": "Death magic (animate, drain life)",
+        "conjuration": "Summoning (summon, teleport)"
+      },
+      "corruption_risk": "casting_level * 0.02 per spell in void-touched areas"
+    },
+    "divine": {
+      "source": "Faith, connection to divine fragments",
+      "resource": "Divine favor (refreshes at dawn prayer)",
+      "recovery": "Prayer and meditation",
+      "domains": {
+        "valor": { "spells": ["bless_weapon", "heroism", "smite"], "fragment": "valor" },
+        "wisdom": { "spells": ["guidance", "true_seeing", "legend_lore"], "fragment": "wisdom" },
+        "fortune": { "spells": ["lucky", "bane_curse", "probability_shift"], "fragment": "fortune" },
+        "sacrifice": { "spells": ["healing", "protection_from_void", "martyrdom"], "fragment": "sacrifice" }
+      },
+      "void_resistance": "Divine magic grants advantage on void saves"
+    },
+    "void": {
+      "source": "The darkness beyond the Veil",
+      "resource": "None (always available)",
+      "cost": "Corruption points (permanent)",
+      "powers": {
+        "whispers": { "corruption": 1, "effect": "Read surface thoughts" },
+        "shadow_step": { "corruption": 2, "effect": "Teleport through shadows" },
+        "life_drain": { "corruption": 3, "effect": "Steal hit points" },
+        "summon_hollow": { "corruption": 5, "effect": "Call Hollow One servant" },
+        "void_blast": { "corruption": 4, "effect": "Devastating dark energy" }
+      },
+      "corruption_effects": {
+        "1-5": "Strange dreams, sensitivity to light",
+        "6-10": "Visible marks, NPCs sense wrongness",
+        "11-15": "Whispers of the Void, occasional loss of control",
+        "16-20": "Physical transformation begins, hunted by Duskwatch",
+        "21+": "Becoming Hollow One (character loss)"
+      }
+    }
+  },
+
+  "social_encounters": {
+    "attitude_levels": {
+      "hostile": { "dc_modifier": 10, "violence_likely": true },
+      "unfriendly": { "dc_modifier": 5, "limited_cooperation": true },
+      "neutral": { "dc_modifier": 0, "transactional": true },
+      "friendly": { "dc_modifier": -5, "helpful": true },
+      "loyal": { "dc_modifier": -10, "dedicated": true }
+    },
+    "influence_mechanics": {
+      "first_impression": "Charisma check vs target's wisdom",
+      "persuasion": "Logical argument, takes time, lasting effect",
+      "intimidation": "Quick but creates resentment, temporary",
+      "deception": "Risk of discovery, severe consequences if caught",
+      "bribery": "Gold-based, depends on target's values"
+    },
+    "faction_modifiers": {
+      "same_faction": -5,
+      "allied_faction": -2,
+      "neutral_faction": 0,
+      "rival_faction": 5,
+      "enemy_faction": 10,
+      "void_corrupted": 15
+    },
+    "noble_court_rules": {
+      "etiquette_required": true,
+      "insult_consequences": "Challenge to duel or loss of standing",
+      "favor_economy": "Nobles trade favors as currency",
+      "scandal_risk": "Failed social checks may become public"
+    }
+  },
+
+  "exploration": {
+    "travel": {
+      "pace": {
+        "fast": { "miles_per_day": 30, "stealth": "impossible", "perception": -5 },
+        "normal": { "miles_per_day": 24, "stealth": "disadvantage", "perception": 0 },
+        "slow": { "miles_per_day": 18, "stealth": "possible", "perception": 5 }
+      },
+      "terrain_modifiers": {
+        "road": 1.0,
+        "plains": 1.0,
+        "forest": 0.7,
+        "ancient_forest": 0.5,
+        "hills": 0.8,
+        "mountains": 0.3,
+        "marsh": 0.5,
+        "void_touched": 0.6
+      },
+      "exhaustion": "Forced march beyond pace causes constitution saves"
+    },
+    "dungeon_crawl": {
+      "light": {
+        "bright": "Normal vision",
+        "dim": "Disadvantage on perception, +2 stealth",
+        "darkness": "Blind without darkvision or light source"
+      },
+      "hazards": {
+        "traps": "Perception to detect, dexterity save to avoid",
+        "poison_gas": "Constitution save, ongoing damage",
+        "collapsing": "Dexterity save, crushing damage",
+        "magical": "Intelligence/wisdom save, varied effects"
+      },
+      "resting": {
+        "short_rest": "1 hour, spend hit dice to heal, recover some abilities",
+        "long_rest": "8 hours, full recovery, but encounter checks"
+      }
+    }
+  },
+
+  "divine_fragments": {
+    "description": "Shards of the God-Emperor's power, central to the setting",
+    "interaction": {
+      "sensing": "Wisdom check DC 15 to feel fragment's presence within 1 mile",
+      "attuning": "Extended ritual, DC 25 religion check, risk of corruption",
+      "wielding": "Grants domain abilities but attracts attention"
+    },
+    "fragment_powers": {
+      "valor": {
+        "passive": "+2 to attack rolls, advantage on fear saves",
+        "active": "Once per day: allies within 30ft gain +2 AC for 1 minute",
+        "cost": "Bearer becomes target of all martial challenges"
+      },
+      "wisdom": {
+        "passive": "+2 to intelligence and wisdom checks",
+        "active": "Once per day: ask one question, receive truthful answer",
+        "cost": "Bearer haunted by visions of possible futures"
+      },
+      "fortune": {
+        "passive": "Reroll one d20 per day",
+        "active": "Once per day: reverse one random event affecting bearer",
+        "cost": "Attracts thieves, schemers, and the desperate"
+      },
+      "sacrifice": {
+        "passive": "+2 to divine magic, immune to fear",
+        "active": "Once per day: take damage meant for ally within 30ft",
+        "cost": "Cannot flee from Void threats, compelled to protect"
+      }
+    }
+  },
+
+  "void_mechanics": {
+    "exposure": {
+      "triggers": [
+        "Entering void-touched areas",
+        "Fighting Hollow Ones",
+        "Using void magic",
+        "Touching void artifacts",
+        "Witnessing major void events"
+      ],
+      "save": "Wisdom save, DC varies by exposure",
+      "failure": "Gain corruption points"
+    },
+    "hollow_ones": {
+      "description": "Void-corrupted mortals, husks of hunger",
+      "abilities": ["fear_aura", "corruption_touch", "void_whispers"],
+      "weakness": "Divine magic deals double damage",
+      "drops": "Void essence (valuable to dark mages, dangerous)"
+    },
+    "cleansing": {
+      "divine_ritual": "Remove 1 corruption per point of divine power spent",
+      "fragment_blessing": "Fragment bearer can cleanse 1d6 corruption per day",
+      "sacrifice": "Willing sacrifice of hit points (permanent) removes corruption 1:5"
+    }
+  },
+
+  "equipment": {
+    "weapons": {
+      "simple": {
+        "dagger": { "damage": "1d4 piercing", "properties": ["finesse", "thrown"] },
+        "quarterstaff": { "damage": "1d6 bludgeoning", "properties": ["versatile"] },
+        "shortbow": { "damage": "1d6 piercing", "properties": ["ranged", "80/320"] }
+      },
+      "martial": {
+        "longsword": { "damage": "1d8 slashing", "properties": ["versatile"] },
+        "battleaxe": { "damage": "1d8 slashing", "properties": ["versatile"] },
+        "longbow": { "damage": "1d8 piercing", "properties": ["ranged", "150/600", "heavy"] },
+        "greatsword": { "damage": "2d6 slashing", "properties": ["heavy", "two-handed"] }
+      },
+      "special": {
+        "void_touched_blade": { "damage": "1d8 + 1d4 void", "properties": ["corruption_1_per_kill"] },
+        "blessed_weapon": { "damage": "1d8 + 1d6 vs void", "properties": ["requires_divine_favor"] }
+      }
+    },
+    "armor": {
+      "light": {
+        "leather": { "ac": 11, "dex_bonus": "full", "stealth": "normal" },
+        "studded": { "ac": 12, "dex_bonus": "full", "stealth": "normal" }
+      },
+      "medium": {
+        "chain_shirt": { "ac": 13, "dex_bonus": "max_2", "stealth": "normal" },
+        "breastplate": { "ac": 14, "dex_bonus": "max_2", "stealth": "normal" }
+      },
+      "heavy": {
+        "chain_mail": { "ac": 16, "dex_bonus": "none", "stealth": "disadvantage" },
+        "plate": { "ac": 18, "dex_bonus": "none", "stealth": "disadvantage", "str_required": 15 }
+      }
+    },
+    "magical_items": {
+      "potions": {
+        "healing": "2d4+2 HP",
+        "greater_healing": "4d4+4 HP",
+        "void_resistance": "Advantage on void saves for 1 hour",
+        "mana_restoration": "Restore 2d6 mana"
+      },
+      "scrolls": "Single-use spell, must meet casting requirements",
+      "artifacts": "Unique items with powerful effects and drawbacks"
+    }
+  },
+
+  "character_archetypes": {
+    "iron_knight": {
+      "faction": "ironhold",
+      "strengths": ["heavy_armor", "melee_combat", "tactics"],
+      "weaknesses": ["magic", "stealth", "diplomacy"],
+      "starting_equipment": "Plate armor, longsword, shield"
+    },
+    "sylvan_mage": {
+      "faction": "silverwood",
+      "strengths": ["arcane_magic", "knowledge", "perception"],
+      "weaknesses": ["melee_combat", "armor", "human_etiquette"],
+      "starting_equipment": "Staff, spellbook, component pouch"
+    },
+    "freehold_rogue": {
+      "faction": "freehold",
+      "strengths": ["stealth", "deception", "ranged_combat"],
+      "weaknesses": ["heavy_armor", "divine_magic", "direct_confrontation"],
+      "starting_equipment": "Leather armor, daggers, thieves' tools"
+    },
+    "duskwatch_cleric": {
+      "faction": "duskwatch",
+      "strengths": ["divine_magic", "void_resistance", "religion"],
+      "weaknesses": ["arcane_magic", "deception", "wealth"],
+      "starting_equipment": "Chain mail, mace, holy symbol"
+    }
+  },
+
+  "encounter_balance": {
+    "difficulty": {
+      "easy": "Party resources barely taxed",
+      "medium": "Noticeable resource expenditure",
+      "hard": "Risk of character death",
+      "deadly": "TPK possible without tactics"
+    },
+    "party_size_adjustment": {
+      "3_players": "Reduce enemy HP by 25%",
+      "4_players": "Standard",
+      "5_players": "Add one enemy or increase HP by 25%",
+      "6_players": "Add two enemies or increase HP by 50%"
+    }
+  }
+}

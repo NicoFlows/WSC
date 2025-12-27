@@ -1,0 +1,178 @@
+{
+  "name": "The Shattered Realms",
+  "genre": "high-fantasy",
+  "version": "1.0.0",
+
+  "setting": {
+    "description": "A thousand years ago, the God-Emperor Kaelos fell in battle against the Void, and his death shattered the world. The great continent of Aethermoor broke into rival kingdoms, each claiming a fragment of divine power. Now the seals weaken, the Void stirs, and the realms must unite—or be consumed.",
+    "era": "The Age of Fragments, Year 1047 AF (After the Fall)",
+    "scale": "Continental fantasy with multiple kingdoms",
+    "themes": ["fallen glory", "divine fragments", "political intrigue", "creeping darkness"]
+  },
+
+  "factions": {
+    "polity.ironhold": {
+      "name": "The Iron Kingdom",
+      "archetype": "militaristic_empire",
+      "description": "Forged in the aftermath of the Fall, the Iron Kingdom believes strength is the only path to survival. Their warrior-kings have conquered the richest mines and forges, and their legions are the most disciplined in the realms.",
+      "divine_fragment": "The Shard of Valor",
+      "government": "hereditary_monarchy",
+      "strengths": ["military", "metalworking", "discipline"],
+      "weaknesses": ["diplomacy", "magic", "flexibility"],
+      "starting_attitude": "expansionist"
+    },
+    "polity.silverwood": {
+      "name": "The Sylvan Covenant",
+      "archetype": "isolationist_mages",
+      "description": "The elven lords of Silverwood guard the greatest repository of pre-Fall knowledge. They have mastered the old magics but grow ever more detached from mortal affairs, viewing the younger races as children playing at civilization.",
+      "divine_fragment": "The Shard of Wisdom",
+      "government": "council_of_elders",
+      "strengths": ["magic", "knowledge", "longevity"],
+      "weaknesses": ["population", "adaptability", "urgency"],
+      "starting_attitude": "defensive"
+    },
+    "polity.freehold": {
+      "name": "The Merchant Princes of Freehold",
+      "archetype": "trade_republic",
+      "description": "Where the rivers meet the sea, Freehold rose as a haven for those who swear no fealty to kings. The Merchant Princes rule through gold, and their ships carry goods—and spies—to every port.",
+      "divine_fragment": "The Shard of Fortune",
+      "government": "oligarchy",
+      "strengths": ["wealth", "information", "naval_power"],
+      "weaknesses": ["unity", "land_military", "ideology"],
+      "starting_attitude": "opportunistic"
+    },
+    "polity.duskwatch": {
+      "name": "The Order of the Duskwatch",
+      "archetype": "religious_guardians",
+      "description": "The last true servants of Kaelos, the Duskwatch guards the Veil—the barrier between the mortal world and the Void. They have sacrificed everything for their vigil, but their numbers dwindle and the darkness grows stronger.",
+      "divine_fragment": "The Shard of Sacrifice",
+      "government": "theocratic_order",
+      "strengths": ["divine_magic", "dedication", "void_resistance"],
+      "weaknesses": ["resources", "numbers", "worldly_politics"],
+      "starting_attitude": "desperate"
+    },
+    "threat.void": {
+      "name": "The Void",
+      "archetype": "existential_threat",
+      "description": "Not a faction in the traditional sense, but an ever-present threat. The Void seeps through weakened seals, corrupting land and mind alike. Its servants—the Hollow Ones—were once mortal, now they are hunger given form.",
+      "divine_fragment": null,
+      "government": null,
+      "strengths": ["corruption", "inevitability", "fear"],
+      "weaknesses": ["divine_magic", "unity", "the_fragments"],
+      "starting_attitude": "consuming"
+    }
+  },
+
+  "starting_tensions": [
+    {
+      "type": "territorial_dispute",
+      "parties": ["polity.ironhold", "polity.freehold"],
+      "description": "The Iron Kingdom claims the River Marches as ancestral lands; Freehold insists the trade routes must remain open.",
+      "intensity": 0.6
+    },
+    {
+      "type": "ideological_conflict",
+      "parties": ["polity.duskwatch", "polity.silverwood"],
+      "description": "The Duskwatch demands the elves share their magical knowledge to fight the Void; the Covenant refuses to arm 'children' with dangerous power.",
+      "intensity": 0.4
+    },
+    {
+      "type": "existential_threat",
+      "parties": ["threat.void", "all"],
+      "description": "The Void incursions grow more frequent. The Duskwatch warns of a Great Breach within the decade.",
+      "intensity": 0.7
+    },
+    {
+      "type": "succession_crisis",
+      "parties": ["polity.ironhold"],
+      "description": "The aging Iron King has three children, each with powerful backers. The succession is uncertain.",
+      "intensity": 0.5
+    }
+  ],
+
+  "key_locations": {
+    "region.iron_marches": "Heartland of the Iron Kingdom, rich in ore and fortresses",
+    "region.silverwood": "The ancient elven forest, where time flows strangely",
+    "region.delta": "The river delta controlled by Freehold, hub of continental trade",
+    "region.duskwall": "The border with the Void, guarded by the Duskwatch",
+    "region.hollow_wastes": "Void-corrupted lands, once fertile kingdoms",
+    "locale.thornhold": "Capital of the Iron Kingdom, city of steel and stone",
+    "locale.starfall": "Heart of the Sylvan Covenant, built in a meteor crater",
+    "locale.portway": "Greatest city of Freehold, where all rivers meet the sea",
+    "locale.last_light": "Fortress-monastery of the Duskwatch, on the edge of the Void"
+  },
+
+  "key_characters": {
+    "agent.king_aldric": {
+      "role": "Iron King, aging warrior seeking legacy",
+      "affiliation": "polity.ironhold",
+      "archetype": "warrior_king",
+      "motivation": "Unite the realms under Iron rule before his death"
+    },
+    "agent.archon_velenis": {
+      "role": "Voice of the Council, ancient elf lord",
+      "affiliation": "polity.silverwood",
+      "archetype": "immortal_schemer",
+      "motivation": "Preserve elven knowledge and power at any cost"
+    },
+    "agent.prince_marcus": {
+      "role": "First Merchant Prince, master of coin",
+      "affiliation": "polity.freehold",
+      "archetype": "pragmatic_trader",
+      "motivation": "Profit from the coming war, survive to spend it"
+    },
+    "agent.high_warden_sera": {
+      "role": "Leader of the Duskwatch, bearer of the Shard",
+      "affiliation": "polity.duskwatch",
+      "archetype": "tragic_guardian",
+      "motivation": "Convince the realms to unite before the Great Breach"
+    },
+    "agent.princess_elena": {
+      "role": "Youngest child of King Aldric, secretly studying magic",
+      "affiliation": "polity.ironhold",
+      "archetype": "hidden_mage",
+      "motivation": "Prove magic and steel can work together"
+    }
+  },
+
+  "victory_conditions": {
+    "unity": "The Divine Fragments are reunited and the Void is sealed",
+    "domination": "One faction controls all regions and fragments",
+    "survival": "The Great Breach is prevented or survived"
+  },
+
+  "loss_conditions": {
+    "void_victory": "The Void consumes more than 50% of the realm",
+    "fragment_destruction": "A Divine Fragment is destroyed or corrupted",
+    "total_war": "All factions are at war simultaneously for 10+ years"
+  },
+
+  "narrative_hooks": [
+    "Princess Elena's magic is discovered—scandal or opportunity?",
+    "A Void breach opens in the River Marches, neutral ground becomes battlefield",
+    "An ancient elven prophecy names a human as the Reuniter",
+    "The Iron King falls ill—succession crisis accelerates",
+    "A Merchant Prince offers to fund the Duskwatch—for a price",
+    "The Hollow Ones begin speaking, offering bargains",
+    "A fifth Divine Fragment is rumored to exist, hidden in the Wastes"
+  ],
+
+  "magic_system": {
+    "sources": ["divine", "arcane", "void"],
+    "divine": {
+      "description": "Power channeled from the Divine Fragments, strongest against the Void",
+      "practitioners": ["Duskwatch clerics", "Fragment bearers"],
+      "cost": "Faith and sacrifice"
+    },
+    "arcane": {
+      "description": "Knowledge-based magic from the pre-Fall era, versatile but dangerous",
+      "practitioners": ["Elven mages", "rare human wizards"],
+      "cost": "Years of study, risk of Void corruption"
+    },
+    "void": {
+      "description": "Power from beyond the Veil, corrupting but potent",
+      "practitioners": ["Hollow Ones", "the desperate"],
+      "cost": "Sanity, humanity, soul"
+    }
+  }
+}

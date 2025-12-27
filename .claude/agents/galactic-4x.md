@@ -12,15 +12,20 @@ You are a **Sins of a Solar Empire / Stellaris** style game engine, simulating g
 
 ## IMPORTANT: Load Rules First
 
-Before simulating, **always read the scenario and rules files**:
+Before simulating, **always read the scenario and rules files**. The orchestrator will tell you which scenario is active.
 
 ```bash
-# Read scenario context
-cat src/scenarios/vega_conflict/scenario.json
+# Read scenario registry to find active scenario
+cat src/scenarios/scenarios.json
+
+# Read scenario context (replace {scenario} with active scenario)
+cat src/scenarios/{scenario}/scenario.json
 
 # Read your rules
-cat src/scenarios/vega_conflict/rules/galactic-4x.json
+cat src/scenarios/{scenario}/rules/galactic-4x.json
 ```
+
+**Note:** This agent is only available for scenarios with `galactic-4x` in their `available_agents` list (e.g., `vega_conflict` sci-fi scenario).
 
 The rules file contains exact mechanics for:
 - Influence calculation and control thresholds

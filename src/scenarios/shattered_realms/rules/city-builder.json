@@ -1,0 +1,416 @@
+{
+  "name": "Shattered Realms - City Builder Rules",
+  "genre": "high-fantasy",
+  "description": "Medieval fantasy city management with guilds, temples, and magical infrastructure",
+  "version": "1.0.0",
+
+  "districts": {
+    "types": {
+      "residential": {
+        "description": "Housing for citizens",
+        "provides": { "population_capacity": 1000, "happiness": 0.1 },
+        "requires": { "water": 1, "food": 1 },
+        "cost": 50,
+        "upkeep": 2
+      },
+      "noble_quarter": {
+        "description": "Estates for the wealthy",
+        "provides": { "population_capacity": 200, "happiness": 0.2, "gold": 5 },
+        "requires": { "water": 2, "security": 1 },
+        "cost": 200,
+        "upkeep": 10
+      },
+      "market": {
+        "description": "Commercial district",
+        "provides": { "gold": 10, "jobs": 500, "happiness": 0.1 },
+        "requires": { "roads": 2, "population": 1000 },
+        "cost": 100,
+        "upkeep": 5
+      },
+      "guild_quarter": {
+        "description": "Craftsman workshops",
+        "provides": { "production": 5, "jobs": 300, "gold": 3 },
+        "requires": { "roads": 1, "water": 1 },
+        "cost": 150,
+        "upkeep": 8
+      },
+      "temple_district": {
+        "description": "Religious buildings",
+        "provides": { "divine_power": 2, "happiness": 0.2, "void_resistance": 0.1 },
+        "requires": { "population": 500 },
+        "cost": 200,
+        "upkeep": 10
+      },
+      "arcane_quarter": {
+        "description": "Mage towers and libraries",
+        "provides": { "arcane_power": 2, "research": 3 },
+        "requires": { "population": 1000, "arcane_tradition": true },
+        "cost": 300,
+        "upkeep": 20
+      },
+      "military_district": {
+        "description": "Barracks and training grounds",
+        "provides": { "military_production": 3, "security": 2 },
+        "requires": { "roads": 1, "production": 2 },
+        "cost": 180,
+        "upkeep": 15
+      },
+      "slums": {
+        "description": "Overcrowded poor housing",
+        "provides": { "population_capacity": 2000 },
+        "requires": {},
+        "cost": 20,
+        "upkeep": 1,
+        "penalties": { "happiness": -0.2, "crime": 0.3, "disease": 0.2 }
+      },
+      "harbor": {
+        "description": "Port facilities",
+        "provides": { "trade_bonus": 0.3, "jobs": 400, "naval_capacity": 5 },
+        "requires": { "coast": true, "roads": 1 },
+        "cost": 250,
+        "upkeep": 15
+      },
+      "farmland": {
+        "description": "Agricultural district",
+        "provides": { "food": 5, "jobs": 200 },
+        "requires": { "water": 1, "outside_walls": true },
+        "cost": 80,
+        "upkeep": 3
+      }
+    }
+  },
+
+  "resources": {
+    "gold": {
+      "description": "Currency for all transactions",
+      "sources": ["taxes", "trade", "markets", "mines"],
+      "uses": ["construction", "upkeep", "military", "diplomacy"]
+    },
+    "food": {
+      "description": "Required to feed population",
+      "sources": ["farms", "fishing", "trade"],
+      "consumption": "population / 100 per turn",
+      "shortage_effects": { "happiness": -0.3, "population_loss": 0.05 }
+    },
+    "production": {
+      "description": "Crafted goods and materials",
+      "sources": ["guild_quarters", "workshops"],
+      "uses": ["construction", "military_equipment", "trade"]
+    },
+    "water": {
+      "description": "Clean water supply",
+      "sources": ["wells", "aqueducts", "rivers"],
+      "shortage_effects": { "disease": 0.3, "fire_risk": 0.2 }
+    },
+    "divine_power": {
+      "description": "Spiritual energy for blessings and wards",
+      "sources": ["temples", "shrines", "divine_fragments"],
+      "uses": ["void_resistance", "healing", "blessings"]
+    },
+    "arcane_power": {
+      "description": "Magical energy for spells and enchantments",
+      "sources": ["mage_towers", "ley_lines", "artifacts"],
+      "uses": ["enchantments", "magical_defense", "research"],
+      "corruption_risk": 0.05
+    }
+  },
+
+  "services": {
+    "types": {
+      "watch": {
+        "description": "City guard and peacekeeping",
+        "coverage_per_building": 2000,
+        "cost": 50,
+        "upkeep": 5,
+        "effects": { "crime": -0.2 }
+      },
+      "fire_brigade": {
+        "description": "Fire prevention and fighting",
+        "coverage_per_building": 1500,
+        "cost": 40,
+        "upkeep": 3,
+        "effects": { "fire_risk": -0.3 }
+      },
+      "healers": {
+        "description": "Medical care (mundane and magical)",
+        "coverage_per_building": 1000,
+        "cost": 80,
+        "upkeep": 8,
+        "effects": { "disease": -0.2, "population_growth": 0.05 }
+      },
+      "shrine": {
+        "description": "Local religious services",
+        "coverage_per_building": 800,
+        "cost": 60,
+        "upkeep": 4,
+        "effects": { "happiness": 0.1, "void_resistance": 0.05 }
+      },
+      "school": {
+        "description": "Basic education",
+        "coverage_per_building": 1200,
+        "cost": 70,
+        "upkeep": 6,
+        "effects": { "skilled_workers": 0.1, "research": 1 }
+      },
+      "tavern": {
+        "description": "Entertainment and gathering",
+        "coverage_per_building": 500,
+        "cost": 30,
+        "upkeep": 2,
+        "effects": { "happiness": 0.15, "information": 0.1, "crime": 0.05 }
+      }
+    }
+  },
+
+  "population": {
+    "classes": {
+      "peasants": {
+        "percentage": 0.6,
+        "tax_rate": 0.5,
+        "happiness_weight": 1.0,
+        "needs": ["food", "housing", "security"]
+      },
+      "craftsmen": {
+        "percentage": 0.25,
+        "tax_rate": 1.0,
+        "happiness_weight": 1.5,
+        "needs": ["food", "housing", "security", "guild_access"]
+      },
+      "merchants": {
+        "percentage": 0.1,
+        "tax_rate": 2.0,
+        "happiness_weight": 2.0,
+        "needs": ["food", "housing", "security", "market_access", "roads"]
+      },
+      "nobles": {
+        "percentage": 0.05,
+        "tax_rate": 3.0,
+        "happiness_weight": 3.0,
+        "needs": ["food", "housing", "security", "entertainment", "status"]
+      }
+    },
+    "growth": {
+      "base_rate": 0.02,
+      "happiness_modifier": "happiness * 0.05",
+      "food_requirement": "surplus > 0",
+      "housing_requirement": "capacity > population"
+    },
+    "migration": {
+      "push_factors": ["unhappiness", "famine", "war", "void_corruption"],
+      "pull_factors": ["prosperity", "safety", "opportunity", "religious_freedom"]
+    }
+  },
+
+  "problems": {
+    "crime": {
+      "causes": ["slums", "unemployment", "low_watch_coverage"],
+      "effects": { "gold_loss": 0.1, "happiness": -0.1 },
+      "severity_thresholds": {
+        "minor": 0.2,
+        "moderate": 0.4,
+        "serious": 0.6,
+        "critical": 0.8
+      }
+    },
+    "disease": {
+      "causes": ["overcrowding", "no_water", "no_healers", "slums"],
+      "effects": { "population_loss": 0.02, "happiness": -0.2 },
+      "severity_thresholds": {
+        "minor": 0.2,
+        "moderate": 0.4,
+        "serious": 0.6,
+        "plague": 0.8
+      }
+    },
+    "fire": {
+      "causes": ["no_fire_brigade", "dry_season", "density"],
+      "effects": { "building_damage": 0.1, "population_loss": 0.01 },
+      "event_chance": "fire_risk * 0.1 per turn"
+    },
+    "unrest": {
+      "causes": ["low_happiness", "high_taxes", "food_shortage", "religious_conflict"],
+      "effects": { "productivity": -0.2, "riot_chance": "unrest * 0.2" },
+      "severity_thresholds": {
+        "grumbling": 0.2,
+        "protests": 0.4,
+        "riots": 0.6,
+        "revolt": 0.8
+      }
+    },
+    "void_corruption": {
+      "causes": ["nearby_void_lands", "void_magic_use", "hollow_one_presence"],
+      "effects": { "population_loss": 0.01, "madness": 0.1, "happiness": -0.2 },
+      "severity_thresholds": {
+        "whispers": 0.1,
+        "nightmares": 0.3,
+        "manifestations": 0.5,
+        "breach": 0.7
+      }
+    }
+  },
+
+  "guilds": {
+    "types": {
+      "smiths": {
+        "production_bonus": 0.2,
+        "military_quality": 0.1,
+        "requires": { "guild_quarter": true, "forge": true }
+      },
+      "merchants": {
+        "trade_bonus": 0.2,
+        "gold_bonus": 0.1,
+        "requires": { "market": true }
+      },
+      "masons": {
+        "construction_speed": 0.2,
+        "wall_quality": 0.1,
+        "requires": { "guild_quarter": true, "quarry_access": true }
+      },
+      "thieves": {
+        "information": 0.3,
+        "crime": 0.1,
+        "hidden": true,
+        "requires": { "slums": true }
+      },
+      "mages": {
+        "arcane_power_bonus": 0.3,
+        "research_bonus": 0.2,
+        "requires": { "arcane_quarter": true, "arcane_tradition": true }
+      }
+    },
+    "influence": {
+      "description": "Guilds gain influence based on their economic power",
+      "political_effects": "High influence guilds can demand policy changes"
+    }
+  },
+
+  "events": {
+    "types": {
+      "festival": {
+        "chance": 0.1,
+        "effects": { "happiness": 0.2, "gold": -20 },
+        "duration": 1
+      },
+      "plague": {
+        "chance": "disease * 0.2",
+        "effects": { "population_loss": 0.1, "happiness": -0.3 },
+        "duration": 3
+      },
+      "fire": {
+        "chance": "fire_risk * 0.1",
+        "effects": { "building_destroyed": 1, "population_loss": 0.02 },
+        "duration": 1
+      },
+      "trade_caravan": {
+        "chance": 0.15,
+        "effects": { "gold": 50, "exotic_goods": true },
+        "duration": 1
+      },
+      "void_incursion": {
+        "chance": "void_corruption * 0.3",
+        "effects": { "hollow_ones_spawn": true, "panic": 0.3 },
+        "duration": "until_resolved"
+      },
+      "noble_scandal": {
+        "chance": 0.05,
+        "effects": { "noble_happiness": -0.3, "commoner_happiness": 0.1 },
+        "duration": 2
+      },
+      "guild_conflict": {
+        "chance": 0.08,
+        "effects": { "production": -0.2, "unrest": 0.2 },
+        "duration": 2
+      },
+      "religious_revival": {
+        "chance": 0.05,
+        "effects": { "divine_power": 2, "happiness": 0.1, "void_resistance": 0.1 },
+        "duration": 3
+      }
+    }
+  },
+
+  "construction": {
+    "base_time": {
+      "small_building": 1,
+      "medium_building": 2,
+      "large_building": 4,
+      "district": 6,
+      "walls": 8,
+      "wonder": 20
+    },
+    "modifiers": {
+      "masons_guild": -0.2,
+      "resource_shortage": 0.5,
+      "war_time": 0.3
+    },
+    "workers_required": "cost / 10"
+  },
+
+  "walls_and_defense": {
+    "levels": {
+      "none": { "defense": 0, "siege_time": 0 },
+      "palisade": { "defense": 0.1, "siege_time": 2, "cost": 100 },
+      "stone_walls": { "defense": 0.3, "siege_time": 5, "cost": 300 },
+      "fortress_walls": { "defense": 0.5, "siege_time": 10, "cost": 600 },
+      "citadel": { "defense": 0.7, "siege_time": 20, "cost": 1000 }
+    },
+    "garrison": {
+      "base_capacity": 500,
+      "per_barracks": 200,
+      "citizen_militia": "population * 0.1"
+    }
+  },
+
+  "special_buildings": {
+    "cathedral": {
+      "description": "Grand religious edifice",
+      "cost": 500,
+      "upkeep": 30,
+      "effects": { "divine_power": 5, "happiness": 0.3, "void_resistance": 0.2 },
+      "limit": 1
+    },
+    "mage_academy": {
+      "description": "Center of arcane learning",
+      "cost": 600,
+      "upkeep": 40,
+      "effects": { "arcane_power": 5, "research": 10 },
+      "limit": 1,
+      "requires": "arcane_tradition"
+    },
+    "void_ward": {
+      "description": "Magical barrier against corruption",
+      "cost": 400,
+      "upkeep": 25,
+      "effects": { "void_resistance": 0.5 },
+      "requires": "divine_power >= 3"
+    },
+    "royal_palace": {
+      "description": "Seat of government",
+      "cost": 800,
+      "upkeep": 50,
+      "effects": { "happiness": 0.2, "diplomacy": 0.2, "prestige": 5 },
+      "limit": 1
+    },
+    "great_library": {
+      "description": "Repository of knowledge",
+      "cost": 400,
+      "upkeep": 20,
+      "effects": { "research": 8, "arcane_power": 2 },
+      "limit": 1
+    }
+  },
+
+  "turn_structure": {
+    "phases": [
+      { "name": "income", "description": "Collect taxes and resource production" },
+      { "name": "consumption", "description": "Population consumes food and resources" },
+      { "name": "upkeep", "description": "Pay building and service costs" },
+      { "name": "construction", "description": "Progress on building projects" },
+      { "name": "population", "description": "Growth, migration, class changes" },
+      { "name": "problems", "description": "Process crime, disease, unrest" },
+      { "name": "events", "description": "Random events and incidents" },
+      { "name": "void", "description": "Process void corruption if applicable" }
+    ],
+    "turn_length": "One month"
+  }
+}

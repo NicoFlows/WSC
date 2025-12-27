@@ -1,0 +1,470 @@
+{
+  "name": "Shattered Realms - Action Sim Rules",
+  "genre": "high-fantasy",
+  "description": "Real-time action mechanics for fantasy combat, chases, sieges, and monster encounters",
+  "version": "1.0.0",
+
+  "combat_modes": {
+    "skirmish": {
+      "description": "Small-scale fights (1-10 combatants per side)",
+      "time_scale": "Seconds",
+      "resolution": "Individual actions"
+    },
+    "battle": {
+      "description": "Medium engagements (10-100 combatants)",
+      "time_scale": "Minutes",
+      "resolution": "Squad actions with hero spotlight"
+    },
+    "siege": {
+      "description": "Assault on fortifications",
+      "time_scale": "Hours to days",
+      "resolution": "Phase-based with action beats"
+    },
+    "monster_hunt": {
+      "description": "Party vs single powerful creature",
+      "time_scale": "Minutes",
+      "resolution": "Boss-fight phases"
+    },
+    "chase": {
+      "description": "Pursuit on foot, horse, or other",
+      "time_scale": "Minutes",
+      "resolution": "Distance tracking with obstacles"
+    }
+  },
+
+  "melee_combat": {
+    "attack_types": {
+      "quick_attack": {
+        "speed": "fast",
+        "damage": 0.8,
+        "recovery": "short",
+        "description": "Jab, quick slash"
+      },
+      "heavy_attack": {
+        "speed": "slow",
+        "damage": 1.5,
+        "recovery": "long",
+        "description": "Overhead chop, full swing"
+      },
+      "thrust": {
+        "speed": "medium",
+        "damage": 1.2,
+        "recovery": "medium",
+        "description": "Penetrating stab, good vs armor"
+      },
+      "combo": {
+        "speed": "variable",
+        "damage": "stacking",
+        "recovery": "long",
+        "description": "Chain attacks, momentum-based"
+      }
+    },
+    "defensive_actions": {
+      "block": {
+        "stamina_cost": 5,
+        "damage_reduction": 0.8,
+        "timing": "reactive",
+        "description": "Absorb blow with shield/weapon"
+      },
+      "parry": {
+        "stamina_cost": 3,
+        "damage_reduction": 1.0,
+        "timing": "precise",
+        "description": "Deflect and create opening",
+        "success_bonus": "free_counter_attack"
+      },
+      "dodge": {
+        "stamina_cost": 8,
+        "damage_reduction": 1.0,
+        "timing": "anticipate",
+        "description": "Roll or sidestep",
+        "movement": "reposition_5ft"
+      }
+    },
+    "stamina": {
+      "base": 100,
+      "recovery_rate": 5,
+      "exhausted_penalty": "Cannot attack, half movement, no dodge"
+    }
+  },
+
+  "ranged_combat": {
+    "weapon_types": {
+      "shortbow": {
+        "range": 80,
+        "damage": "1d6",
+        "draw_time": 1,
+        "description": "Quick, low power"
+      },
+      "longbow": {
+        "range": 150,
+        "damage": "1d8",
+        "draw_time": 2,
+        "description": "Powerful but slow"
+      },
+      "crossbow": {
+        "range": 100,
+        "damage": "1d10",
+        "draw_time": 4,
+        "description": "Armor-piercing, slow reload"
+      },
+      "thrown": {
+        "range": 30,
+        "damage": "1d4",
+        "draw_time": 0,
+        "description": "Quick, limited ammunition"
+      }
+    },
+    "mechanics": {
+      "aim_bonus": "+1 per second aiming, max +3",
+      "moving_target": "-2 per 10 feet of target movement",
+      "cover": {
+        "half": "-2 to hit",
+        "three_quarters": "-5 to hit",
+        "full": "Cannot target"
+      },
+      "wind": {
+        "none": 0,
+        "light": "-1 beyond 60ft",
+        "strong": "-2 beyond 30ft, arrows may deflect"
+      }
+    }
+  },
+
+  "magic_combat": {
+    "casting_time": {
+      "instant": "No delay, reaction possible",
+      "quick": "1 second, interruptible",
+      "standard": "3 seconds, requires concentration",
+      "ritual": "1 minute+, environmental effects"
+    },
+    "spell_effects": {
+      "bolt": {
+        "type": "single_target",
+        "damage": "spell_level * d6",
+        "range": 60,
+        "save": "dexterity_half"
+      },
+      "blast": {
+        "type": "area",
+        "damage": "spell_level * d4",
+        "radius": 15,
+        "save": "dexterity_half"
+      },
+      "ray": {
+        "type": "line",
+        "damage": "spell_level * d8",
+        "length": 30,
+        "save": "dexterity_negates"
+      },
+      "aura": {
+        "type": "emanation",
+        "effect": "buff_or_debuff",
+        "radius": 10,
+        "duration": "concentration"
+      }
+    },
+    "counterspell": {
+      "trigger": "Enemy begins casting",
+      "check": "Caster intelligence vs enemy intelligence",
+      "cost": "Mana equal to enemy spell level"
+    },
+    "void_magic": {
+      "corruption_per_cast": "spell_level",
+      "visual_effects": "Dark tendrils, cold aura, screaming shadows",
+      "divine_counter": "Divine magic can dispel at -2 difficulty"
+    }
+  },
+
+  "mounted_combat": {
+    "mount_types": {
+      "riding_horse": {
+        "speed": 60,
+        "stamina": 80,
+        "charge_damage": "+1d6",
+        "armor": 0
+      },
+      "warhorse": {
+        "speed": 50,
+        "stamina": 120,
+        "charge_damage": "+2d6",
+        "armor": 2
+      },
+      "dire_wolf": {
+        "speed": 50,
+        "stamina": 100,
+        "charge_damage": "+1d8",
+        "armor": 1,
+        "special": "bite_attack"
+      },
+      "griffin": {
+        "speed": 80,
+        "stamina": 100,
+        "charge_damage": "+2d8",
+        "armor": 2,
+        "special": "flight",
+        "rarity": "legendary"
+      }
+    },
+    "mounted_actions": {
+      "charge": {
+        "requirement": "20ft+ movement in straight line",
+        "bonus": "charge_damage + advantage on attack",
+        "risk": "If miss, momentum carries past target"
+      },
+      "trample": {
+        "requirement": "Move through enemy space",
+        "effect": "Mount strength vs enemy dexterity, 1d8 damage",
+        "risk": "Enemy may attempt to unhorse"
+      },
+      "mounted_archery": {
+        "penalty": "-2 to hit while moving",
+        "technique": "Skilled riders can negate penalty"
+      }
+    },
+    "dismounting": {
+      "voluntary": "Half movement action",
+      "forced": "Strength vs strength, fall prone, 1d6 damage",
+      "horse_killed": "Dexterity save or fall, 2d6 damage"
+    }
+  },
+
+  "siege_warfare": {
+    "fortification_levels": {
+      "camp": { "hp": 50, "defense": 0, "garrison_bonus": 0 },
+      "palisade": { "hp": 100, "defense": 2, "garrison_bonus": 1 },
+      "stone_walls": { "hp": 300, "defense": 5, "garrison_bonus": 2 },
+      "fortress": { "hp": 500, "defense": 8, "garrison_bonus": 3 },
+      "citadel": { "hp": 800, "defense": 12, "garrison_bonus": 5 }
+    },
+    "siege_equipment": {
+      "ladders": {
+        "cost": "low",
+        "speed": "fast",
+        "casualties": "high",
+        "description": "Direct assault, requires numbers"
+      },
+      "battering_ram": {
+        "cost": "medium",
+        "speed": "slow",
+        "gate_damage": 20,
+        "description": "Break through gates"
+      },
+      "siege_tower": {
+        "cost": "high",
+        "speed": "very_slow",
+        "casualties": "low",
+        "description": "Protected approach to walls"
+      },
+      "catapult": {
+        "cost": "high",
+        "range": 200,
+        "wall_damage": 10,
+        "description": "Ranged wall destruction"
+      },
+      "trebuchet": {
+        "cost": "very_high",
+        "range": 400,
+        "wall_damage": 25,
+        "description": "Heavy siege engine"
+      }
+    },
+    "siege_phases": {
+      "approach": "Move siege equipment into position, defender ranged attacks",
+      "bombardment": "Siege engines vs walls, sorties possible",
+      "breach": "Wall section destroyed, assault begins",
+      "assault": "Close combat at breach point",
+      "resolution": "Either attacker breaks through or withdraws"
+    },
+    "defender_actions": {
+      "boiling_oil": "2d6 damage, area effect at wall",
+      "arrow_volleys": "Massed ranged attack",
+      "sortie": "Counter-attack against siege equipment",
+      "magical_defense": "Wards, fireballs, etc."
+    }
+  },
+
+  "monster_encounters": {
+    "size_categories": {
+      "small": { "hp_mult": 0.5, "damage_mult": 0.5, "speed_mult": 1.2 },
+      "medium": { "hp_mult": 1.0, "damage_mult": 1.0, "speed_mult": 1.0 },
+      "large": { "hp_mult": 2.0, "damage_mult": 1.5, "speed_mult": 0.8 },
+      "huge": { "hp_mult": 4.0, "damage_mult": 2.0, "speed_mult": 0.6 },
+      "gargantuan": { "hp_mult": 8.0, "damage_mult": 3.0, "speed_mult": 0.4 }
+    },
+    "boss_mechanics": {
+      "phase_transitions": "At HP thresholds, behavior changes",
+      "legendary_actions": "Extra actions between player turns",
+      "lair_effects": "Environment changes during fight",
+      "minion_spawning": "Calls reinforcements"
+    },
+    "monster_types": {
+      "hollow_one": {
+        "description": "Void-corrupted humanoid",
+        "abilities": ["fear_aura", "corruption_touch"],
+        "weakness": "Divine magic"
+      },
+      "void_beast": {
+        "description": "Corrupted animal, twisted form",
+        "abilities": ["pack_tactics", "void_howl"],
+        "weakness": "Fire, silver"
+      },
+      "dragon": {
+        "description": "Ancient scaled terror",
+        "abilities": ["flight", "breath_weapon", "fear_aura", "tail_sweep"],
+        "weakness": "Varies by type"
+      },
+      "troll": {
+        "description": "Regenerating brute",
+        "abilities": ["regeneration_5_per_round", "multiattack"],
+        "weakness": "Fire, acid stop regeneration"
+      },
+      "wraith": {
+        "description": "Incorporeal undead",
+        "abilities": ["incorporeal", "life_drain", "create_spawn"],
+        "weakness": "Divine magic, sunlight"
+      }
+    }
+  },
+
+  "chase_mechanics": {
+    "distance_tracking": {
+      "units": "Abstract zones (close, near, far, distant)",
+      "catching": "Close + successful opposed check",
+      "escape": "Reach distant + break line of sight"
+    },
+    "chase_actions": {
+      "dash": {
+        "effect": "Gain one zone",
+        "stamina_cost": 10,
+        "description": "Sprint forward"
+      },
+      "obstacle": {
+        "effect": "Pursuer must check or lose zone",
+        "examples": "Knock over cart, slam door, jump gap",
+        "skill": "Dexterity or intelligence"
+      },
+      "shortcut": {
+        "effect": "Gain one zone if check succeeds",
+        "risk": "Lose zone if fail",
+        "skill": "Perception or local knowledge"
+      },
+      "hide": {
+        "requirement": "Must have cover",
+        "effect": "Stealth vs perception to end chase",
+        "risk": "If found, pursuer gains one zone"
+      }
+    },
+    "terrain_effects": {
+      "crowd": "Advantage on hide, checks required to dash",
+      "rooftops": "High risk/reward shortcuts available",
+      "forest": "Easy to hide, difficult to dash",
+      "open_ground": "Dash easy, hide nearly impossible"
+    },
+    "mounted_chases": {
+      "speed_difference": "Faster mount gains zones automatically",
+      "terrain": "Some terrain negates mount advantage",
+      "stamina": "Mounts tire over long chases"
+    }
+  },
+
+  "environmental_hazards": {
+    "fire": {
+      "damage": "1d6 per round in flames",
+      "spreading": "Dry conditions: spreads each round",
+      "smoke": "Constitution save or choke, disadvantage"
+    },
+    "water": {
+      "swimming": "Athletics check each round",
+      "drowning": "Constitution modifier rounds before unconscious",
+      "armor_penalty": "Heavy armor: disadvantage, risk of sinking"
+    },
+    "heights": {
+      "falling_damage": "1d6 per 10 feet",
+      "maximum": "20d6 at 200+ feet",
+      "dexterity_save": "Halve damage if grab ledge"
+    },
+    "magical_terrain": {
+      "void_touched": "Corruption exposure each minute",
+      "ley_line": "Magic enhanced, +2 spell damage",
+      "sacred_ground": "Divine magic enhanced, void suppressed",
+      "wild_magic_zone": "Random magical effects"
+    }
+  },
+
+  "tension_and_pacing": {
+    "tension_levels": {
+      "calm": "Exploration, roleplay, no immediate threat",
+      "alert": "Potential danger, stealth possible",
+      "engaged": "Combat or active chase",
+      "desperate": "Overwhelmed, survival mode"
+    },
+    "beat_timing": {
+      "action_beat": "Major combat moment every 2-3 rounds",
+      "reversal": "Situation changes dramatically",
+      "escalation": "Threat increases (reinforcements, new phase)",
+      "relief": "Brief respite before next intensity spike"
+    },
+    "dramatic_moments": {
+      "last_stand": "Outnumbered but holding the line",
+      "cavalry_arrives": "Reinforcements turn the tide",
+      "duel": "Champions fight while armies watch",
+      "sacrifice": "Character gives life for victory"
+    }
+  },
+
+  "conditions": {
+    "bleeding": {
+      "effect": "1d4 damage per round",
+      "cure": "Medicine check DC 12 or healing magic"
+    },
+    "burning": {
+      "effect": "1d6 fire damage per round",
+      "cure": "Action to extinguish, or water"
+    },
+    "blinded": {
+      "effect": "Disadvantage on attacks, advantage against",
+      "duration": "Until cured or wears off"
+    },
+    "frightened": {
+      "effect": "Cannot approach fear source, disadvantage",
+      "cure": "Wisdom save each round or remove source"
+    },
+    "poisoned": {
+      "effect": "Disadvantage on attacks and checks",
+      "duration": "Varies by poison type"
+    },
+    "corrupted": {
+      "effect": "Void damage ignores resistance",
+      "cure": "Divine magic or purification ritual"
+    },
+    "prone": {
+      "effect": "Melee attacks have advantage, ranged disadvantage",
+      "cure": "Half movement to stand"
+    },
+    "stunned": {
+      "effect": "Cannot act, auto-fail dexterity saves",
+      "duration": "Usually 1 round"
+    }
+  },
+
+  "loot_and_spoils": {
+    "battlefield_loot": {
+      "weapons_armor": "50% salvageable after battle",
+      "valuables": "Gold, gems, carried goods",
+      "intelligence": "Documents, maps, orders"
+    },
+    "monster_parts": {
+      "hollow_one_essence": "Valuable to dark mages, dangerous to carry",
+      "dragon_scales": "Armor material, highly valuable",
+      "troll_blood": "Alchemy ingredient, regeneration potions",
+      "griffin_feathers": "Enchanting material, flight magic"
+    },
+    "siege_spoils": {
+      "treasury": "Gold based on city wealth",
+      "armory": "Weapons and armor",
+      "hostages": "Nobles for ransom",
+      "artifacts": "Magical items if present"
+    }
+  }
+}

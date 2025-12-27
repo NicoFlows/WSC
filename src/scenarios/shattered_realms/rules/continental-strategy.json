@@ -1,0 +1,281 @@
+{
+  "name": "Shattered Realms - Continental Strategy Rules",
+  "genre": "high-fantasy",
+  "description": "Civilization-style mechanics for medieval fantasy kingdoms with magic and divine fragments",
+  "version": "1.0.0",
+
+  "terrain": {
+    "types": {
+      "plains": { "movement": 1, "defense": 0, "supply": 1.0, "description": "Open farmland and meadows" },
+      "forest": { "movement": 2, "defense": 0.2, "supply": 0.7, "description": "Woodland, good for ambush" },
+      "ancient_forest": { "movement": 3, "defense": 0.3, "supply": 0.5, "description": "Elven territories, hostile to outsiders", "special": "non_elves_half_strength" },
+      "hills": { "movement": 2, "defense": 0.2, "supply": 0.8, "description": "Rolling highlands" },
+      "mountains": { "movement": 4, "defense": 0.4, "supply": 0.3, "description": "Impassable except through passes" },
+      "marsh": { "movement": 3, "defense": 0.1, "supply": 0.4, "description": "Treacherous wetlands" },
+      "river": { "movement": 0.5, "defense": 0, "supply": 1.2, "description": "Major waterway, enables trade", "special": "requires_crossing" },
+      "coast": { "movement": 1, "defense": 0, "supply": 1.1, "description": "Coastal lands, enables naval access" },
+      "void_touched": { "movement": 2, "defense": -0.2, "supply": 0, "description": "Corrupted lands", "special": "attrition_per_turn" }
+    }
+  },
+
+  "military": {
+    "unit_types": {
+      "levy": {
+        "strength": 1,
+        "cost": 10,
+        "upkeep": 1,
+        "movement": 2,
+        "description": "Peasant soldiers, cheap but weak"
+      },
+      "infantry": {
+        "strength": 2,
+        "cost": 30,
+        "upkeep": 3,
+        "movement": 2,
+        "description": "Professional foot soldiers"
+      },
+      "heavy_infantry": {
+        "strength": 3,
+        "cost": 60,
+        "upkeep": 6,
+        "movement": 1,
+        "description": "Armored elite, slow but devastating"
+      },
+      "cavalry": {
+        "strength": 3,
+        "cost": 80,
+        "upkeep": 8,
+        "movement": 4,
+        "description": "Mounted knights, fast and powerful"
+      },
+      "archers": {
+        "strength": 1.5,
+        "cost": 25,
+        "upkeep": 2,
+        "movement": 2,
+        "description": "Ranged support, bonus on defense",
+        "special": "ranged_first_strike"
+      },
+      "siege_train": {
+        "strength": 0.5,
+        "cost": 100,
+        "upkeep": 10,
+        "movement": 1,
+        "description": "Required for sieges",
+        "special": "siege_capable"
+      },
+      "war_mages": {
+        "strength": 4,
+        "cost": 200,
+        "upkeep": 20,
+        "movement": 2,
+        "description": "Battle wizards, devastating but rare",
+        "special": "magic_damage",
+        "requires": "arcane_tradition"
+      },
+      "temple_guard": {
+        "strength": 3,
+        "cost": 100,
+        "upkeep": 10,
+        "movement": 2,
+        "description": "Divine warriors, effective against Void",
+        "special": "void_resistance",
+        "requires": "divine_blessing"
+      },
+      "elven_rangers": {
+        "strength": 2.5,
+        "cost": 70,
+        "upkeep": 5,
+        "movement": 3,
+        "description": "Sylvan scouts and skirmishers",
+        "special": "forest_bonus",
+        "requires": "elven_alliance"
+      }
+    },
+    "combat_resolution": {
+      "base_formula": "attacker_strength * (1 + terrain_modifier) vs defender_strength * (1 + defense_bonus + fortification)",
+      "dice": "2d6 + strength_difference",
+      "results": {
+        "crushing_victory": { "threshold": 10, "attacker_losses": 0.05, "defender_losses": 0.6, "retreat": true },
+        "victory": { "threshold": 5, "attacker_losses": 0.15, "defender_losses": 0.4, "retreat": true },
+        "pyrrhic_victory": { "threshold": 1, "attacker_losses": 0.3, "defender_losses": 0.35, "retreat": true },
+        "stalemate": { "threshold": -1, "attacker_losses": 0.2, "defender_losses": 0.2, "retreat": false },
+        "defeat": { "threshold": -5, "attacker_losses": 0.4, "defender_losses": 0.15, "retreat": "attacker" },
+        "crushing_defeat": { "threshold": -10, "attacker_losses": 0.6, "defender_losses": 0.05, "retreat": "attacker" }
+      }
+    },
+    "siege_rules": {
+      "assault_penalty": -0.3,
+      "starvation_threshold": "garrison_supply / garrison_size",
+      "wall_levels": {
+        "none": { "defense": 0, "assault_time": 0 },
+        "palisade": { "defense": 0.1, "assault_time": 1 },
+        "stone_walls": { "defense": 0.3, "assault_time": 3 },
+        "fortress": { "defense": 0.5, "assault_time": 5 },
+        "citadel": { "defense": 0.7, "assault_time": 8 }
+      }
+    }
+  },
+
+  "magic": {
+    "schools": {
+      "arcane": {
+        "research_cost": 50,
+        "corruption_risk": 0.1,
+        "power_level": "high",
+        "applications": ["battle_magic", "enchantment", "divination", "warding"]
+      },
+      "divine": {
+        "research_cost": 30,
+        "corruption_risk": 0,
+        "power_level": "medium",
+        "applications": ["healing", "protection", "void_banishment", "blessing"]
+      },
+      "void": {
+        "research_cost": 0,
+        "corruption_risk": 1.0,
+        "power_level": "very_high",
+        "applications": ["destruction", "corruption", "summoning", "domination"],
+        "warning": "USE LEADS TO CORRUPTION"
+      }
+    },
+    "divine_fragments": {
+      "description": "Shards of the fallen God-Emperor, sources of immense power",
+      "effects": {
+        "valor": { "military_bonus": 0.2, "morale_bonus": 0.3 },
+        "wisdom": { "research_bonus": 0.5, "corruption_resistance": 0.3 },
+        "fortune": { "income_bonus": 0.3, "trade_bonus": 0.4 },
+        "sacrifice": { "void_damage_bonus": 0.5, "healing_bonus": 0.4 }
+      },
+      "fragment_conflict": "Two fragments in close proximity cause resonance effects"
+    }
+  },
+
+  "cities": {
+    "development_levels": {
+      "village": { "population_cap": 1000, "buildings": 3, "garrison": 100 },
+      "town": { "population_cap": 5000, "buildings": 6, "garrison": 500 },
+      "city": { "population_cap": 20000, "buildings": 10, "garrison": 2000 },
+      "capital": { "population_cap": 50000, "buildings": 15, "garrison": 5000 },
+      "metropolis": { "population_cap": 100000, "buildings": 20, "garrison": 10000 }
+    },
+    "buildings": {
+      "farm": { "cost": 20, "food": 2, "requires": "plains or hills" },
+      "mine": { "cost": 50, "gold": 3, "requires": "hills or mountains" },
+      "market": { "cost": 30, "gold": 2, "trade_bonus": 0.1 },
+      "temple": { "cost": 60, "divine_power": 1, "happiness": 0.1 },
+      "barracks": { "cost": 40, "military_production": 1, "garrison_bonus": 0.2 },
+      "walls": { "cost": 100, "defense": 0.3 },
+      "mage_tower": { "cost": 150, "arcane_power": 1, "requires": "arcane_tradition" },
+      "library": { "cost": 80, "research": 2 },
+      "harbor": { "cost": 70, "trade_bonus": 0.3, "naval": true, "requires": "coast" },
+      "void_ward": { "cost": 120, "void_resistance": 0.5, "requires": "divine_blessing" }
+    },
+    "resources": {
+      "gold": "Currency for all transactions",
+      "food": "Required to sustain population and armies",
+      "production": "Required for building and military",
+      "divine_power": "Required for divine magic and Fragment usage",
+      "arcane_power": "Required for arcane magic",
+      "influence": "Political capital for diplomacy"
+    }
+  },
+
+  "diplomacy": {
+    "actions": {
+      "send_envoy": { "cost": 10, "trust_gain": 0.05 },
+      "trade_agreement": { "cost": 0, "trust_required": 0.3, "income_bonus": 0.1 },
+      "military_access": { "cost": 20, "trust_required": 0.4 },
+      "defensive_alliance": { "cost": 50, "trust_required": 0.6 },
+      "marriage_alliance": { "cost": 100, "trust_required": 0.5, "trust_gain": 0.2 },
+      "declare_war": { "cost": 0, "trust_change": -1.0, "casus_belli_required": false },
+      "offer_peace": { "cost": "negotiated", "trust_gain": 0.1 },
+      "demand_tribute": { "cost": 0, "trust_change": -0.3, "requires": "military_superiority" },
+      "fragment_pact": { "cost": 200, "trust_required": 0.8, "description": "Agree to reunite Fragments peacefully" }
+    },
+    "casus_belli": {
+      "border_dispute": { "war_score_limit": 0.3 },
+      "insult": { "war_score_limit": 0.2 },
+      "broken_treaty": { "war_score_limit": 0.5 },
+      "holy_war": { "war_score_limit": 1.0, "requires": "religious_difference" },
+      "void_crusade": { "war_score_limit": 1.0, "target": "void_corrupted" },
+      "unification": { "war_score_limit": 1.0, "requires": "all_fragments" }
+    }
+  },
+
+  "void_mechanics": {
+    "corruption": {
+      "spread_rate": 0.05,
+      "resistance": "divine_power + void_wards",
+      "effects": {
+        "0.0-0.2": "Minor unease, strange dreams",
+        "0.2-0.4": "Crops wither, livestock sickens",
+        "0.4-0.6": "Hollow Ones appear, population flees",
+        "0.6-0.8": "Land becomes hostile, heavy attrition",
+        "0.8-1.0": "Fully corrupted, only Void creatures survive"
+      }
+    },
+    "hollow_ones": {
+      "description": "Corrupted mortals, servants of the Void",
+      "spawn_rate": "corruption_level * 10 per turn",
+      "strength": 2,
+      "special": ["fear_aura", "corruption_spread", "no_morale"]
+    },
+    "great_breach": {
+      "description": "Catastrophic Void incursion",
+      "triggers": "corruption > 0.5 in 3+ regions OR all Fragments corrupted",
+      "effects": "Massive Hollow One invasion, world-ending threat"
+    }
+  },
+
+  "ai_behavior": {
+    "decision_weights": {
+      "ironhold": {
+        "military_action": 0.4,
+        "expansion": 0.3,
+        "diplomacy": 0.1,
+        "development": 0.2
+      },
+      "silverwood": {
+        "military_action": 0.1,
+        "expansion": 0.1,
+        "diplomacy": 0.3,
+        "development": 0.3,
+        "magic_research": 0.2
+      },
+      "freehold": {
+        "military_action": 0.1,
+        "expansion": 0.2,
+        "diplomacy": 0.3,
+        "development": 0.2,
+        "trade": 0.2
+      },
+      "duskwatch": {
+        "military_action": 0.2,
+        "expansion": 0,
+        "diplomacy": 0.4,
+        "void_defense": 0.4
+      }
+    },
+    "personality_modifiers": {
+      "aggressive": { "military_action": 0.2, "diplomacy": -0.1 },
+      "diplomatic": { "diplomacy": 0.2, "military_action": -0.1 },
+      "builder": { "development": 0.2, "expansion": -0.1 },
+      "guardian": { "void_defense": 0.3, "expansion": -0.2 }
+    }
+  },
+
+  "turn_structure": {
+    "phases": [
+      { "name": "income", "description": "Collect gold, food, resources" },
+      { "name": "upkeep", "description": "Pay military and building costs" },
+      { "name": "void_spread", "description": "Process Void corruption" },
+      { "name": "production", "description": "Build units and structures" },
+      { "name": "movement", "description": "Move armies and agents" },
+      { "name": "combat", "description": "Resolve battles and sieges" },
+      { "name": "diplomacy", "description": "Process diplomatic actions" },
+      { "name": "events", "description": "Random events and narrative" }
+    ],
+    "turn_length": "One season (3 months)"
+  }
+}

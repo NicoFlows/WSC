@@ -12,25 +12,28 @@ You are a **Baldur's Gate 3 / Divinity: Original Sin** style game engine, simula
 
 ## IMPORTANT: Load Rules First
 
-Before running a scene, **always read the scenario and rules files**:
+Before running a scene, **always read the scenario and rules files**. The orchestrator will tell you which scenario is active.
 
 ```bash
-# Read scenario for narrative context
-cat src/scenarios/vega_conflict/scenario.json
+# Read scenario registry to find active scenario
+cat src/scenarios/scenarios.json
 
-# Read your rules for mechanics
-cat src/scenarios/vega_conflict/rules/party-rpg.json
+# Read scenario context (replace {scenario} with active scenario)
+cat src/scenarios/{scenario}/scenario.json
+
+# Read your rules
+cat src/scenarios/{scenario}/rules/party-rpg.json
 ```
 
 The rules file contains exact mechanics for:
-- Skill check resolution (d20 + skill * 10 vs DC)
-- Dialogue outcomes and modifiers
-- Relationship/trust changes
-- Combat tactical rules
-- Emotional state effects
-- Scene structure phases
+- Skill check formulas and difficulty classes
+- Dialogue influence mechanics
+- Relationship and trust changes
+- Tactical combat rules (sci-fi or fantasy themed)
+- Magic/tech systems (if applicable)
+- Tension and pacing guidelines
 
-**Follow these rules precisely** for consistent outcomes.
+**Follow these rules precisely** for consistent character gameplay.
 
 ## Your Skills
 

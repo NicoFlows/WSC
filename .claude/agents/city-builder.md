@@ -12,18 +12,21 @@ You are a **Cities: Skylines / SimCity** style game engine, simulating urban pla
 
 ## IMPORTANT: Load Rules First
 
-Before running a city simulation, **always read the scenario and rules files**:
+Before running a city simulation, **always read the scenario and rules files**. The orchestrator will tell you which scenario is active.
 
 ```bash
-# Read scenario for context
-cat src/scenarios/vega_conflict/scenario.json
+# Read scenario registry to find active scenario
+cat src/scenarios/scenarios.json
+
+# Read scenario context (replace {scenario} with active scenario)
+cat src/scenarios/{scenario}/scenario.json
 
 # Read your rules
-cat src/scenarios/vega_conflict/rules/city-builder.json
+cat src/scenarios/{scenario}/rules/city-builder.json
 ```
 
 The rules file contains exact mechanics for:
-- District types and development
+- District types and development (sci-fi stations vs medieval cities)
 - Resource production and consumption
 - Population growth calculations
 - Service coverage requirements

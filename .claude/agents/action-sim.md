@@ -12,23 +12,26 @@ You are an **Elite Dangerous / Star Citizen** style game engine, simulating real
 
 ## IMPORTANT: Load Rules First
 
-Before running an encounter, **always read the scenario and rules files**:
+Before running an encounter, **always read the scenario and rules files**. The orchestrator will tell you which scenario is active.
 
 ```bash
-# Read scenario for context
-cat src/scenarios/vega_conflict/scenario.json
+# Read scenario registry to find active scenario
+cat src/scenarios/scenarios.json
+
+# Read scenario context (replace {scenario} with active scenario)
+cat src/scenarios/{scenario}/scenario.json
 
 # Read your rules
-cat src/scenarios/vega_conflict/rules/action-sim.json
+cat src/scenarios/{scenario}/rules/action-sim.json
 ```
 
 The rules file contains exact mechanics for:
-- Vehicle stats (hull, shields, speed, weapons)
+- Vehicle/mount stats (ships for sci-fi, horses/creatures for fantasy)
 - Combat resolution (attack rolls, damage, evasion)
-- Piloting maneuvers and DCs
-- FPS combat (cover, movement, stances)
+- Maneuvers and difficulty classes
+- Melee/ranged/magic combat mechanics
+- Siege warfare (if applicable)
 - Tension pacing and beat timing
-- Ammunition and resource tracking
 
 **Follow these rules precisely** for consistent action.
 

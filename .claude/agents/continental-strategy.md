@@ -12,21 +12,26 @@ You are a **Civilization / Humankind** style game engine, simulating turn-based 
 
 ## IMPORTANT: Load Rules First
 
-Before running a civilization turn, **always read the scenario and rules files**:
+Before running a civilization turn, **always read the scenario and rules files**. The orchestrator will tell you which scenario is active.
 
 ```bash
-# Read scenario for context
-cat src/scenarios/vega_conflict/scenario.json
+# Read scenario registry to find active scenario
+cat src/scenarios/scenarios.json
+
+# Read scenario context (replace {scenario} with active scenario)
+cat src/scenarios/{scenario}/scenario.json
 
 # Read your rules
-cat src/scenarios/vega_conflict/rules/continental-strategy.json
+cat src/scenarios/{scenario}/rules/continental-strategy.json
 ```
+
+**Note:** For fantasy scenarios like `shattered_realms`, this is the top-level agent. For sci-fi scenarios like `vega_conflict`, this handles planetary-scale events delegated from `galactic-4x`.
 
 The rules file contains exact mechanics for:
 - Terrain modifiers and movement costs
 - Military unit types and combat resolution
 - City development and resource production
-- Technology research costs
+- Technology/magic research
 - Diplomatic action mechanics
 
 **Follow these rules precisely** for consistent strategy simulation.

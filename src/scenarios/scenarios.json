@@ -1,0 +1,33 @@
+{
+  "active": "vega_conflict",
+  "scenarios": {
+    "vega_conflict": {
+      "name": "The Vega Conflict",
+      "genre": "sci-fi",
+      "description": "Space opera conflict between the authoritarian Terran Hegemony and the independent Free Traders Confederacy",
+      "path": "src/scenarios/vega_conflict",
+      "top_level_agent": "galactic-4x",
+      "available_agents": ["galactic-4x", "continental-strategy", "city-builder", "party-rpg", "action-sim"],
+      "theme": {
+        "aesthetic": "Elite Dangerous meets Dune",
+        "tone": "gritty realism with moments of wonder",
+        "technology": "FTL travel, energy weapons, AI assistance",
+        "magic": null
+      }
+    },
+    "shattered_realms": {
+      "name": "The Shattered Realms",
+      "genre": "high-fantasy",
+      "description": "Epic fantasy conflict as ancient empires clash over the remnants of a broken god's power",
+      "path": "src/scenarios/shattered_realms",
+      "top_level_agent": "continental-strategy",
+      "available_agents": ["continental-strategy", "city-builder", "party-rpg", "action-sim"],
+      "theme": {
+        "aesthetic": "Warhammer Fantasy meets Lord of the Rings",
+        "tone": "epic heroism with dark undercurrents",
+        "technology": "medieval with magical enhancements",
+        "magic": "divine and arcane, with costs and consequences"
+      }
+    }
+  }
+}
