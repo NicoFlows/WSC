@@ -1,0 +1,142 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.region.silverwood",
+  "name": "The Silverwood",
+  "type": "region",
+  "scale": "region",
+  "tags": ["ancient_forest", "magical", "elven", "isolated"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.world.shattered_realms",
+      "anchor": {"hex": "q3_r6", "coords": {"q": 3, "r": 6}},
+      "entity_id": null
+    },
+    "children": [
+      {
+        "location_id": "location.locale.starfall",
+        "anchor": {"hex": "q4_r4", "coords": {"q": 4, "r": 4}},
+        "entity_id": "locale.starfall"
+      }
+    ]
+  },
+
+  "entity_id": "region.silverwood",
+
+  "bounds": {
+    "width": 8,
+    "height": 8,
+    "depth": null,
+    "units": "hexes_20km"
+  },
+
+  "geometry": {
+    "format": "hex_grid",
+    "source": "claude_opus_4.5",
+    "data": {
+      "layout": "odd-q",
+      "hex_size": 20,
+      "hex_units": "km",
+      "hexes": {
+        "q0_r0": {"q": 0, "r": 0, "terrain": "coast"},
+        "q1_r0": {"q": 1, "r": 0, "terrain": "forest_edge"},
+        "q2_r0": {"q": 2, "r": 0, "terrain": "ancient_forest"},
+        "q3_r0": {"q": 3, "r": 0, "terrain": "ancient_forest"},
+
+        "q0_r1": {"q": 0, "r": 1, "terrain": "coast"},
+        "q1_r1": {"q": 1, "r": 1, "terrain": "ancient_forest"},
+        "q2_r1": {"q": 2, "r": 1, "terrain": "ancient_forest", "feature": "sacred_grove"},
+        "q3_r1": {"q": 3, "r": 1, "terrain": "ancient_forest"},
+        "q4_r1": {"q": 4, "r": 1, "terrain": "ancient_forest"},
+
+        "q0_r2": {"q": 0, "r": 2, "terrain": "coast"},
+        "q1_r2": {"q": 1, "r": 2, "terrain": "ancient_forest"},
+        "q2_r2": {"q": 2, "r": 2, "terrain": "ancient_forest", "feature": "memory_well"},
+        "q3_r2": {"q": 3, "r": 2, "terrain": "deep_forest"},
+        "q4_r2": {"q": 4, "r": 2, "terrain": "ancient_forest"},
+
+        "q0_r3": {"q": 0, "r": 3, "terrain": "coast"},
+        "q1_r3": {"q": 1, "r": 3, "terrain": "ancient_forest"},
+        "q2_r3": {"q": 2, "r": 3, "terrain": "deep_forest"},
+        "q3_r3": {"q": 3, "r": 3, "terrain": "deep_forest", "feature": "oldest_tree"},
+        "q4_r3": {"q": 4, "r": 3, "terrain": "ancient_forest"},
+        "q5_r3": {"q": 5, "r": 3, "terrain": "ancient_forest"},
+
+        "q1_r4": {"q": 1, "r": 4, "terrain": "ancient_forest"},
+        "q2_r4": {"q": 2, "r": 4, "terrain": "deep_forest"},
+        "q3_r4": {"q": 3, "r": 4, "terrain": "deep_forest"},
+        "q4_r4": {"q": 4, "r": 4, "terrain": "enchanted_clearing", "feature": "capital", "locale": "starfall"},
+        "q5_r4": {"q": 5, "r": 4, "terrain": "ancient_forest"},
+
+        "q1_r5": {"q": 1, "r": 5, "terrain": "ancient_forest"},
+        "q2_r5": {"q": 2, "r": 5, "terrain": "ancient_forest"},
+        "q3_r5": {"q": 3, "r": 5, "terrain": "ancient_forest"},
+        "q4_r5": {"q": 4, "r": 5, "terrain": "ancient_forest"},
+        "q5_r5": {"q": 5, "r": 5, "terrain": "forest_edge"},
+        "q6_r5": {"q": 6, "r": 5, "terrain": "forest_edge", "feature": "twilight_gate"}
+      }
+    }
+  },
+
+  "features": [
+    {
+      "id": "starfall_city",
+      "name": "Starfall",
+      "type": "city",
+      "position": {"q": 4, "r": 4},
+      "properties": {"entity_id": "locale.starfall", "population": "medium"}
+    },
+    {
+      "id": "oldest_tree",
+      "name": "The Eldest",
+      "type": "landmark",
+      "position": {"q": 3, "r": 3},
+      "properties": {"age": "pre_shattering", "magical": true}
+    },
+    {
+      "id": "memory_wells",
+      "name": "The Memory Wells",
+      "type": "magical",
+      "position": {"q": 2, "r": 2},
+      "properties": {"function": "store_memories", "entity_id": "holding.shard_of_wisdom"}
+    },
+    {
+      "id": "twilight_gate_east",
+      "name": "Eastern Twilight Gate",
+      "type": "portal",
+      "position": {"q": 6, "r": 5},
+      "properties": {"connects_to": "location.region.iron_marches"}
+    },
+    {
+      "id": "corrupted_border",
+      "name": "Void-Touched Eaves",
+      "type": "hazard",
+      "position": {"q": 5, "r": 5},
+      "properties": {"threat": "void_corruption", "spreading": true}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "conn_iron_marches",
+      "from": "twilight_gate_east",
+      "to": "location.region.iron_marches",
+      "type": "magical_path",
+      "properties": {"travel_time": "variable", "permission_required": true}
+    }
+  ],
+
+  "terrain": {
+    "default": "ancient_forest",
+    "atmosphere": "enchanted",
+    "temperature": "temperate_eternal",
+    "hazards": ["time_distortions", "territorial_spirits", "void_corruption_at_edges"]
+  },
+
+  "metadata": {
+    "created": "2025-12-27T00:00:00.000Z",
+    "generator": "claude_opus_4.5",
+    "notes": "Elven homeland - ancient magical forest",
+    "suitable_agents": ["continental-strategy", "party-rpg"]
+  }
+}

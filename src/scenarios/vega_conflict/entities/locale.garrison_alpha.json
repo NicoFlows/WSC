@@ -5,6 +5,11 @@
   "tags": ["military", "hegemony", "restricted", "fortified"],
   "attrs": {
     "region_id": "region.vega",
+    "map_position": {
+      "location_id": "location.system.vega",
+      "coords": {"orbit": 3, "body": "garrison_alpha_station"},
+      "feature": "military_station"
+    },
     "owner_polity_id": "polity.hegemony",
     "services": ["military_shipyard", "armory", "command_center", "detention"],
     "security_level": 0.95,

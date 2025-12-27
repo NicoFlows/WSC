@@ -1,0 +1,216 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.world.shattered_realms",
+  "name": "The Shattered Realms",
+  "type": "world",
+  "scale": "world",
+  "tags": ["continental", "fantasy", "fragmented"],
+
+  "hierarchy": {
+    "parent": null,
+    "children": [
+      {
+        "location_id": "location.region.iron_marches",
+        "anchor": {"hex": "q8_r4", "coords": {"q": 8, "r": 4}},
+        "entity_id": "region.iron_marches"
+      },
+      {
+        "location_id": "location.region.silverwood",
+        "anchor": {"hex": "q3_r6", "coords": {"q": 3, "r": 6}},
+        "entity_id": "region.silverwood"
+      },
+      {
+        "location_id": "location.region.delta",
+        "anchor": {"hex": "q10_r8", "coords": {"q": 10, "r": 8}},
+        "entity_id": "region.delta"
+      },
+      {
+        "location_id": "location.region.duskwall",
+        "anchor": {"hex": "q6_r10", "coords": {"q": 6, "r": 10}},
+        "entity_id": "region.duskwall"
+      },
+      {
+        "location_id": "location.region.hollow_wastes",
+        "anchor": {"hex": "q6_r13", "coords": {"q": 6, "r": 13}},
+        "entity_id": "region.hollow_wastes"
+      }
+    ]
+  },
+
+  "entity_id": null,
+
+  "bounds": {
+    "width": 15,
+    "height": 18,
+    "depth": null,
+    "units": "hexes_100km"
+  },
+
+  "geometry": {
+    "format": "hex_grid",
+    "source": "claude_opus_4.5",
+    "data": {
+      "layout": "odd-q",
+      "hex_size": 100,
+      "hex_units": "km",
+      "hexes": {
+        "q0_r0": {"q": 0, "r": 0, "terrain": "ocean", "name": "Western Sea"},
+        "q1_r0": {"q": 1, "r": 0, "terrain": "ocean"},
+        "q2_r0": {"q": 2, "r": 0, "terrain": "coast"},
+        "q3_r0": {"q": 3, "r": 0, "terrain": "hills"},
+        "q4_r0": {"q": 4, "r": 0, "terrain": "mountains"},
+        "q5_r0": {"q": 5, "r": 0, "terrain": "mountains", "name": "Northern Peaks"},
+        "q6_r0": {"q": 6, "r": 0, "terrain": "mountains"},
+        "q7_r0": {"q": 7, "r": 0, "terrain": "mountains"},
+        "q8_r0": {"q": 8, "r": 0, "terrain": "tundra"},
+        "q9_r0": {"q": 9, "r": 0, "terrain": "tundra"},
+
+        "q0_r2": {"q": 0, "r": 2, "terrain": "ocean"},
+        "q1_r2": {"q": 1, "r": 2, "terrain": "coast"},
+        "q2_r2": {"q": 2, "r": 2, "terrain": "forest"},
+        "q3_r2": {"q": 3, "r": 2, "terrain": "forest"},
+        "q4_r2": {"q": 4, "r": 2, "terrain": "hills"},
+        "q5_r2": {"q": 5, "r": 2, "terrain": "mountains"},
+        "q6_r2": {"q": 6, "r": 2, "terrain": "mountains"},
+        "q7_r2": {"q": 7, "r": 2, "terrain": "highlands", "name": "Iron Foothills"},
+        "q8_r2": {"q": 8, "r": 2, "terrain": "highlands"},
+        "q9_r2": {"q": 9, "r": 2, "terrain": "plains"},
+
+        "q0_r4": {"q": 0, "r": 4, "terrain": "ocean"},
+        "q1_r4": {"q": 1, "r": 4, "terrain": "coast"},
+        "q2_r4": {"q": 2, "r": 4, "terrain": "forest", "name": "Silverwood Edge"},
+        "q3_r4": {"q": 3, "r": 4, "terrain": "ancient_forest", "region": "silverwood"},
+        "q4_r4": {"q": 4, "r": 4, "terrain": "ancient_forest", "region": "silverwood"},
+        "q5_r4": {"q": 5, "r": 4, "terrain": "hills"},
+        "q6_r4": {"q": 6, "r": 4, "terrain": "mountains"},
+        "q7_r4": {"q": 7, "r": 4, "terrain": "mountains", "region": "iron_marches"},
+        "q8_r4": {"q": 8, "r": 4, "terrain": "highlands", "region": "iron_marches", "name": "Thornhold Region"},
+        "q9_r4": {"q": 9, "r": 4, "terrain": "highlands", "region": "iron_marches"},
+        "q10_r4": {"q": 10, "r": 4, "terrain": "plains"},
+
+        "q0_r6": {"q": 0, "r": 6, "terrain": "ocean"},
+        "q1_r6": {"q": 1, "r": 6, "terrain": "coast"},
+        "q2_r6": {"q": 2, "r": 6, "terrain": "ancient_forest", "region": "silverwood"},
+        "q3_r6": {"q": 3, "r": 6, "terrain": "ancient_forest", "region": "silverwood", "name": "Starfall Grove"},
+        "q4_r6": {"q": 4, "r": 6, "terrain": "ancient_forest", "region": "silverwood"},
+        "q5_r6": {"q": 5, "r": 6, "terrain": "forest"},
+        "q6_r6": {"q": 6, "r": 6, "terrain": "hills"},
+        "q7_r6": {"q": 7, "r": 6, "terrain": "mountains", "region": "iron_marches"},
+        "q8_r6": {"q": 8, "r": 6, "terrain": "highlands", "region": "iron_marches"},
+        "q9_r6": {"q": 9, "r": 6, "terrain": "plains"},
+        "q10_r6": {"q": 10, "r": 6, "terrain": "river_delta", "region": "delta"},
+        "q11_r6": {"q": 11, "r": 6, "terrain": "coast"},
+
+        "q0_r8": {"q": 0, "r": 8, "terrain": "ocean"},
+        "q1_r8": {"q": 1, "r": 8, "terrain": "ocean"},
+        "q2_r8": {"q": 2, "r": 8, "terrain": "coast"},
+        "q3_r8": {"q": 3, "r": 8, "terrain": "forest"},
+        "q4_r8": {"q": 4, "r": 8, "terrain": "plains"},
+        "q5_r8": {"q": 5, "r": 8, "terrain": "plains"},
+        "q6_r8": {"q": 6, "r": 8, "terrain": "hills"},
+        "q7_r8": {"q": 7, "r": 8, "terrain": "plains"},
+        "q8_r8": {"q": 8, "r": 8, "terrain": "river"},
+        "q9_r8": {"q": 9, "r": 8, "terrain": "river_delta", "region": "delta"},
+        "q10_r8": {"q": 10, "r": 8, "terrain": "river_delta", "region": "delta", "name": "Portway Harbor"},
+        "q11_r8": {"q": 11, "r": 8, "terrain": "coast"},
+        "q12_r8": {"q": 12, "r": 8, "terrain": "ocean"},
+
+        "q0_r10": {"q": 0, "r": 10, "terrain": "ocean"},
+        "q1_r10": {"q": 1, "r": 10, "terrain": "ocean"},
+        "q2_r10": {"q": 2, "r": 10, "terrain": "coast"},
+        "q3_r10": {"q": 3, "r": 10, "terrain": "plains"},
+        "q4_r10": {"q": 4, "r": 10, "terrain": "badlands", "region": "duskwall"},
+        "q5_r10": {"q": 5, "r": 10, "terrain": "badlands", "region": "duskwall"},
+        "q6_r10": {"q": 6, "r": 10, "terrain": "fortress_badlands", "region": "duskwall", "name": "Last Light Bastion"},
+        "q7_r10": {"q": 7, "r": 10, "terrain": "badlands", "region": "duskwall"},
+        "q8_r10": {"q": 8, "r": 10, "terrain": "badlands", "region": "duskwall"},
+        "q9_r10": {"q": 9, "r": 10, "terrain": "river_delta", "region": "delta"},
+        "q10_r10": {"q": 10, "r": 10, "terrain": "coast"},
+        "q11_r10": {"q": 11, "r": 10, "terrain": "ocean"},
+
+        "q3_r12": {"q": 3, "r": 12, "terrain": "corrupted", "region": "hollow_wastes"},
+        "q4_r12": {"q": 4, "r": 12, "terrain": "corrupted", "region": "hollow_wastes"},
+        "q5_r12": {"q": 5, "r": 12, "terrain": "corrupted", "region": "hollow_wastes"},
+        "q6_r12": {"q": 6, "r": 12, "terrain": "void_breach", "region": "hollow_wastes", "name": "The Breach"},
+        "q7_r12": {"q": 7, "r": 12, "terrain": "corrupted", "region": "hollow_wastes"},
+        "q8_r12": {"q": 8, "r": 12, "terrain": "corrupted", "region": "hollow_wastes"},
+        "q9_r12": {"q": 9, "r": 12, "terrain": "corrupted", "region": "hollow_wastes"},
+
+        "q4_r14": {"q": 4, "r": 14, "terrain": "void", "region": "hollow_wastes"},
+        "q5_r14": {"q": 5, "r": 14, "terrain": "void", "region": "hollow_wastes"},
+        "q6_r14": {"q": 6, "r": 14, "terrain": "void_core", "region": "hollow_wastes", "name": "The Hollow Heart"},
+        "q7_r14": {"q": 7, "r": 14, "terrain": "void", "region": "hollow_wastes"},
+        "q8_r14": {"q": 8, "r": 14, "terrain": "void", "region": "hollow_wastes"}
+      }
+    }
+  },
+
+  "features": [
+    {
+      "id": "iron_road",
+      "name": "The Iron Road",
+      "type": "trade_route",
+      "position": {"from": {"q": 8, "r": 4}, "to": {"q": 10, "r": 8}},
+      "properties": {"entity_id": "link.iron_marches.delta"}
+    },
+    {
+      "id": "twilight_path",
+      "name": "The Twilight Path",
+      "type": "magical_route",
+      "position": {"from": {"q": 3, "r": 6}, "to": {"q": 8, "r": 4}},
+      "properties": {"entity_id": "link.silverwood.iron_marches"}
+    },
+    {
+      "id": "breach_line",
+      "name": "The Breach Line",
+      "type": "fortification",
+      "position": {"from": {"q": 4, "r": 10}, "to": {"q": 8, "r": 10}},
+      "properties": {"entity_id": "link.duskwall.hollow_wastes"}
+    },
+    {
+      "id": "three_rivers",
+      "name": "The Three Rivers",
+      "type": "river_system",
+      "position": {"hexes": ["q8_r8", "q9_r8", "q10_r8"]},
+      "properties": {"description": "Rivers converging at the Delta"}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "conn_iron_delta",
+      "from": "location.region.iron_marches",
+      "to": "location.region.delta",
+      "type": "road",
+      "properties": {"name": "Iron Road", "travel_days": 14}
+    },
+    {
+      "id": "conn_silver_iron",
+      "from": "location.region.silverwood",
+      "to": "location.region.iron_marches",
+      "type": "magical_path",
+      "properties": {"name": "Twilight Path", "travel_days": "1-7"}
+    },
+    {
+      "id": "conn_dusk_hollow",
+      "from": "location.region.duskwall",
+      "to": "location.region.hollow_wastes",
+      "type": "fortified_border",
+      "properties": {"name": "Breach Line", "status": "sealed"}
+    }
+  ],
+
+  "terrain": {
+    "default": "plains",
+    "atmosphere": "standard",
+    "temperature": "temperate",
+    "hazards": ["void_corruption_south", "harsh_mountain_winters"]
+  },
+
+  "metadata": {
+    "created": "2025-12-27T00:00:00.000Z",
+    "generator": "claude_opus_4.5",
+    "notes": "Continental map for Shattered Realms fantasy scenario",
+    "suitable_agents": ["continental-strategy"]
+  }
+}

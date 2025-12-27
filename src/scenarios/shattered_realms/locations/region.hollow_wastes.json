@@ -1,0 +1,140 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.region.hollow_wastes",
+  "name": "The Hollow Wastes",
+  "type": "region",
+  "scale": "region",
+  "tags": ["void_corrupted", "dangerous", "mysterious", "forbidden"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.world.shattered_realms",
+      "anchor": {"hex": "q6_r13", "coords": {"q": 6, "r": 13}},
+      "entity_id": null
+    },
+    "children": []
+  },
+
+  "entity_id": "region.hollow_wastes",
+
+  "bounds": {
+    "width": 8,
+    "height": 8,
+    "depth": null,
+    "units": "hexes_unknown"
+  },
+
+  "geometry": {
+    "format": "hex_grid",
+    "source": "claude_opus_4.5",
+    "data": {
+      "layout": "odd-q",
+      "hex_size": "variable",
+      "hex_units": "unstable",
+      "hexes": {
+        "q0_r0": {"q": 0, "r": 0, "terrain": "corrupted", "stability": 0.4},
+        "q1_r0": {"q": 1, "r": 0, "terrain": "corrupted", "stability": 0.3},
+        "q2_r0": {"q": 2, "r": 0, "terrain": "corrupted", "stability": 0.3},
+        "q3_r0": {"q": 3, "r": 0, "terrain": "corrupted", "stability": 0.4},
+        "q4_r0": {"q": 4, "r": 0, "terrain": "corrupted", "stability": 0.3},
+        "q5_r0": {"q": 5, "r": 0, "terrain": "corrupted", "stability": 0.4},
+
+        "q0_r1": {"q": 0, "r": 1, "terrain": "corrupted", "stability": 0.3},
+        "q1_r1": {"q": 1, "r": 1, "terrain": "reality_tear", "stability": 0.1},
+        "q2_r1": {"q": 2, "r": 1, "terrain": "void_touched", "stability": 0.2},
+        "q3_r1": {"q": 3, "r": 1, "terrain": "void_touched", "stability": 0.2},
+        "q4_r1": {"q": 4, "r": 1, "terrain": "reality_tear", "stability": 0.1},
+        "q5_r1": {"q": 5, "r": 1, "terrain": "corrupted", "stability": 0.3},
+
+        "q0_r2": {"q": 0, "r": 2, "terrain": "corrupted", "stability": 0.3},
+        "q1_r2": {"q": 1, "r": 2, "terrain": "void_touched", "stability": 0.2},
+        "q2_r2": {"q": 2, "r": 2, "terrain": "void", "stability": 0.1, "feature": "wandering_ruins"},
+        "q3_r2": {"q": 3, "r": 2, "terrain": "void", "stability": 0.05},
+        "q4_r2": {"q": 4, "r": 2, "terrain": "void_touched", "stability": 0.2},
+        "q5_r2": {"q": 5, "r": 2, "terrain": "corrupted", "stability": 0.3},
+
+        "q0_r3": {"q": 0, "r": 3, "terrain": "void_touched", "stability": 0.2},
+        "q1_r3": {"q": 1, "r": 3, "terrain": "void", "stability": 0.1},
+        "q2_r3": {"q": 2, "r": 3, "terrain": "void_core", "stability": 0.0, "feature": "herald_throne"},
+        "q3_r3": {"q": 3, "r": 3, "terrain": "void_core", "stability": 0.0, "name": "The Hollow Heart"},
+        "q4_r3": {"q": 4, "r": 3, "terrain": "void", "stability": 0.1},
+        "q5_r3": {"q": 5, "r": 3, "terrain": "void_touched", "stability": 0.2},
+
+        "q0_r4": {"q": 0, "r": 4, "terrain": "corrupted", "stability": 0.3},
+        "q1_r4": {"q": 1, "r": 4, "terrain": "void_touched", "stability": 0.2},
+        "q2_r4": {"q": 2, "r": 4, "terrain": "void", "stability": 0.1},
+        "q3_r4": {"q": 3, "r": 4, "terrain": "void", "stability": 0.05},
+        "q4_r4": {"q": 4, "r": 4, "terrain": "void_touched", "stability": 0.2},
+        "q5_r4": {"q": 5, "r": 4, "terrain": "corrupted", "stability": 0.3},
+
+        "q1_r5": {"q": 1, "r": 5, "terrain": "corrupted", "stability": 0.4},
+        "q2_r5": {"q": 2, "r": 5, "terrain": "corrupted", "stability": 0.3},
+        "q3_r5": {"q": 3, "r": 5, "terrain": "corrupted", "stability": 0.3},
+        "q4_r5": {"q": 4, "r": 5, "terrain": "corrupted", "stability": 0.4}
+      }
+    }
+  },
+
+  "features": [
+    {
+      "id": "hollow_heart",
+      "name": "The Hollow Heart",
+      "type": "void_nexus",
+      "position": {"q": 3, "r": 3},
+      "properties": {"entity_id": "agent.void_herald", "danger": "extreme"}
+    },
+    {
+      "id": "herald_throne",
+      "name": "The Herald's Throne",
+      "type": "void_structure",
+      "position": {"q": 2, "r": 3},
+      "properties": {"function": "void_herald_seat", "reality_stable": false}
+    },
+    {
+      "id": "wandering_ruins",
+      "name": "Wandering Ruins",
+      "type": "anomaly",
+      "position": {"q": 2, "r": 2},
+      "properties": {"description": "Ruins that move and change", "origin": "pre_shattering"}
+    },
+    {
+      "id": "reality_tears",
+      "name": "Reality Tears",
+      "type": "hazard",
+      "position": {"hexes": ["q1_r1", "q4_r1"]},
+      "properties": {"effect": "random_teleportation", "danger": "high"}
+    },
+    {
+      "id": "lost_ones",
+      "name": "The Lost Ones",
+      "type": "creatures",
+      "position": {"hexes": ["q0_r1", "q5_r1", "q0_r4", "q5_r4"]},
+      "properties": {"type": "corrupted_humanoids", "origin": "former_settlers"}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "conn_duskwall",
+      "from": "edge_north",
+      "to": "location.region.duskwall",
+      "type": "sealed_border",
+      "properties": {"status": "warded", "breachable": true}
+    }
+  ],
+
+  "terrain": {
+    "default": "void_corrupted",
+    "atmosphere": "wrong",
+    "temperature": "none",
+    "hazards": ["void_corruption", "reality_tears", "void_creatures", "madness", "temporal_distortion"]
+  },
+
+  "metadata": {
+    "created": "2025-12-27T00:00:00.000Z",
+    "generator": "claude_opus_4.5",
+    "notes": "Void-corrupted wasteland - source of corruption",
+    "suitable_agents": ["party-rpg", "action-sim"],
+    "warnings": ["extremely_dangerous", "reality_unstable", "navigation_unreliable"]
+  }
+}

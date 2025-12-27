@@ -1,0 +1,223 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.locale.last_light",
+  "name": "Last Light - The Final Fortress",
+  "type": "locale",
+  "scale": "locale",
+  "tags": ["fortress_monastery", "sacred", "military", "border"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.region.duskwall",
+      "anchor": {"hex": "q4_r4", "coords": {"q": 4, "r": 4}},
+      "entity_id": "region.duskwall"
+    },
+    "children": [
+      {
+        "location_id": "location.district.vigil",
+        "anchor": {"coords": [200, 50]},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.sanctum",
+        "anchor": {"coords": [200, 200]},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.healing_halls",
+        "anchor": {"coords": [100, 300]},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.training_grounds",
+        "anchor": {"coords": [300, 300]},
+        "entity_id": null
+      }
+    ]
+  },
+
+  "entity_id": "locale.last_light",
+
+  "bounds": {
+    "width": 400,
+    "height": 450,
+    "depth": null,
+    "units": "m"
+  },
+
+  "geometry": {
+    "format": "geojson",
+    "source": "claude_opus_4.5",
+    "data": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "id": "outer_walls",
+          "properties": {"name": "The First Wall", "type": "fortification"},
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [[20, 20], [380, 20], [390, 430], [10, 430], [20, 20]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "vigil_district",
+          "properties": {"name": "The Vigil", "type": "military"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[50, 30], [350, 30], [350, 120], [50, 120], [50, 30]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "wall_towers",
+          "properties": {"name": "Wall Towers", "type": "fortification"},
+          "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [[50, 30], [150, 30], [250, 30], [350, 30]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "sanctum_district",
+          "properties": {"name": "The Sanctum", "type": "religious"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[100, 130], [300, 130], [300, 280], [100, 280], [100, 130]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "shard_reliquary",
+          "properties": {"name": "Shard Reliquary", "type": "sacred", "entity_id": "holding.shard_of_sacrifice"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[170, 180], [230, 180], [230, 240], [170, 240], [170, 180]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "hall_of_names",
+          "properties": {"name": "Hall of Names", "type": "memorial"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[120, 140], [160, 140], [160, 200], [120, 200], [120, 140]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "healing_halls",
+          "properties": {"name": "Halls of Healing", "type": "medical"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[50, 290], [150, 290], [150, 400], [50, 400], [50, 290]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "training_grounds",
+          "properties": {"name": "Training Grounds", "type": "military", "entity_id": "force.duskwatch_wardens"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[250, 290], [380, 290], [380, 420], [250, 420], [250, 290]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "high_warden_tower",
+          "properties": {"name": "High Warden's Tower", "type": "command"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[240, 140], [280, 140], [280, 180], [240, 180], [240, 140]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "eternal_flame",
+          "properties": {"name": "The Eternal Flame", "type": "sacred"},
+          "geometry": {
+            "type": "Point",
+            "coordinates": [200, 75]
+          }
+        }
+      ]
+    }
+  },
+
+  "features": [
+    {
+      "id": "high_warden_quarters",
+      "name": "High Warden's Tower",
+      "type": "building",
+      "position": {"x": 260, "y": 160},
+      "properties": {"occupant": "agent.high_warden_sera", "function": "command"}
+    },
+    {
+      "id": "reliquary_chamber",
+      "name": "Shard Reliquary",
+      "type": "sacred",
+      "position": {"x": 200, "y": 210},
+      "properties": {"entity_id": "holding.shard_of_sacrifice", "heavily_warded": true}
+    },
+    {
+      "id": "eternal_flame_beacon",
+      "name": "The Eternal Flame",
+      "type": "landmark",
+      "position": {"x": 200, "y": 75},
+      "properties": {"function": "beacon", "never_extinguished": true}
+    },
+    {
+      "id": "void_armory",
+      "name": "Blessed Armory",
+      "type": "military",
+      "position": {"x": 315, "y": 350},
+      "properties": {"contains": "void_warded_weapons"}
+    },
+    {
+      "id": "south_gate",
+      "name": "Gate of Final Standing",
+      "type": "fortification",
+      "position": {"x": 200, "y": 430},
+      "properties": {"faces": "hollow_wastes", "warded": true}
+    },
+    {
+      "id": "infirmary_chief",
+      "name": "Chief Healer's Quarters",
+      "type": "medical",
+      "position": {"x": 100, "y": 345},
+      "properties": {"specialty": "void_corruption_treatment"}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "south_gate",
+      "from": "gate_of_final_standing",
+      "to": "location.region.hollow_wastes",
+      "type": "sealed_gate",
+      "properties": {"status": "sealed", "opens_for": "patrols_only"}
+    },
+    {
+      "id": "supply_road",
+      "from": "edge_north",
+      "to": "location.region.duskwall",
+      "type": "road",
+      "properties": {"name": "Supply Road", "heavily_guarded": true}
+    }
+  ],
+
+  "terrain": {
+    "default": "stone_fortress",
+    "atmosphere": "sacred",
+    "temperature": "cold",
+    "hazards": ["void_proximity"]
+  },
+
+  "metadata": {
+    "created": "2025-12-27T00:00:00.000Z",
+    "generator": "claude_opus_4.5",
+    "notes": "Duskwatch headquarters - fortress-monastery on the Breach Line",
+    "suitable_agents": ["city-builder", "party-rpg", "action-sim"]
+  }
+}

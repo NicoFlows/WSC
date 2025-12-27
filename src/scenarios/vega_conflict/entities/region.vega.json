@@ -5,6 +5,11 @@
   "tags": ["contested", "strategic", "industrial", "populated"],
   "attrs": {
     "coords": {"x": 25.3, "y": -12.7, "z": 4.1},
+    "map_position": {
+      "location_id": "location.sector.coreward_reach",
+      "coords": {"x": 25.3, "y": -12.7, "z": 4.1},
+      "system": "vega"
+    },
     "security": 0.4,
     "economy": 0.7,
     "population": 0.6,

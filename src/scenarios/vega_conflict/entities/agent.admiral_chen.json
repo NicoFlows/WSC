@@ -14,7 +14,12 @@
     },
     "status": "active",
     "salience": 0.9,
-    "location": "locale.garrison_alpha"
+    "location": "locale.garrison_alpha",
+    "map_position": {
+      "location_id": "location.system.vega",
+      "coords": {"orbit": 3, "body": "garrison_alpha_station"},
+      "feature": "command_bridge"
+    }
   },
   "ai": {
     "persona": "Admiral Wei Chen is a 58-year-old career military officer who rose through the ranks through a combination of genuine competence and political acumen. He believes absolutely in the Hegemony's mission to bring order to human space, viewing the chaos of the Free Traders as a disease that must be excised. The defection of then-Commander Reva from his command was a personal humiliation he has never forgiven, and destroying her has become an obsession that sometimes clouds his otherwise cold judgment. He is respected by his subordinates for his fairness and tactical brilliance, but feared for his willingness to accept casualties—including his own people—to achieve objectives.",

@@ -1,0 +1,207 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.locale.thornhold",
+  "name": "Thornhold - The Iron Throne",
+  "type": "locale",
+  "scale": "locale",
+  "tags": ["capital", "fortress", "royal_seat", "industrial"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.region.iron_marches",
+      "anchor": {"hex": "q5_r3", "coords": {"q": 5, "r": 3}},
+      "entity_id": "region.iron_marches"
+    },
+    "children": [
+      {
+        "location_id": "location.district.crown",
+        "anchor": {"coords": [250, 100]},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.anvil",
+        "anchor": {"coords": [150, 300]},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.shield",
+        "anchor": {"coords": [350, 250]},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.commons",
+        "anchor": {"coords": [200, 400]},
+        "entity_id": null
+      }
+    ]
+  },
+
+  "entity_id": "locale.thornhold",
+
+  "bounds": {
+    "width": 500,
+    "height": 500,
+    "depth": null,
+    "units": "m"
+  },
+
+  "geometry": {
+    "format": "geojson",
+    "source": "claude_opus_4.5",
+    "data": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "id": "crown_district",
+          "properties": {"name": "The Crown", "type": "royal", "entity_id": null},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[200, 50], [300, 50], [350, 100], [350, 200], [300, 250], [200, 250], [150, 200], [150, 100], [200, 50]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "iron_throne_palace",
+          "properties": {"name": "The Iron Throne", "type": "palace", "entity_id": null},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[220, 100], [280, 100], [280, 180], [220, 180], [220, 100]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "anvil_district",
+          "properties": {"name": "The Anvil", "type": "industrial", "entity_id": null},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[50, 250], [200, 250], [200, 400], [50, 400], [50, 250]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "grand_forge",
+          "properties": {"name": "The Grand Forge", "type": "industrial", "entity_id": null},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[80, 280], [170, 280], [170, 370], [80, 370], [80, 280]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "shield_district",
+          "properties": {"name": "The Shield", "type": "military", "entity_id": null},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[300, 200], [450, 200], [450, 350], [300, 350], [300, 200]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "war_barracks",
+          "properties": {"name": "Legion Barracks", "type": "military", "entity_id": "force.iron_legions"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[320, 220], [430, 220], [430, 330], [320, 330], [320, 220]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "commons_district",
+          "properties": {"name": "The Commons", "type": "residential", "entity_id": null},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[100, 400], [350, 400], [350, 480], [100, 480], [100, 400]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "market_square",
+          "properties": {"name": "Iron Market", "type": "commercial", "entity_id": null},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[180, 410], [270, 410], [270, 470], [180, 470], [180, 410]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "outer_walls",
+          "properties": {"name": "Outer Walls", "type": "fortification", "entity_id": null},
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [[50, 50], [450, 50], [480, 250], [450, 480], [50, 480], [20, 250], [50, 50]]
+          }
+        }
+      ]
+    }
+  },
+
+  "features": [
+    {
+      "id": "iron_throne",
+      "name": "The Iron Throne",
+      "type": "building",
+      "position": {"x": 250, "y": 140},
+      "properties": {"occupant": "agent.king_aldric", "entity_id": "holding.shard_of_valor"}
+    },
+    {
+      "id": "grand_forge",
+      "name": "The Grand Forge",
+      "type": "industrial",
+      "position": {"x": 125, "y": 325},
+      "properties": {"output": "iron_goods", "eternal_flame": true}
+    },
+    {
+      "id": "hall_ancestors",
+      "name": "Hall of Ancestors",
+      "type": "religious",
+      "position": {"x": 320, "y": 150},
+      "properties": {"function": "royal_tombs"}
+    },
+    {
+      "id": "war_college",
+      "name": "Iron War College",
+      "type": "military",
+      "position": {"x": 375, "y": 275},
+      "properties": {"trains": "officers", "commander": "agent.prince_marcus"}
+    },
+    {
+      "id": "princess_tower",
+      "name": "Princess Elena's Tower",
+      "type": "residence",
+      "position": {"x": 280, "y": 180},
+      "properties": {"occupant": "agent.princess_elena", "secret": "hidden_library"}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "main_gate",
+      "from": "edge_south",
+      "to": "location.region.iron_marches",
+      "type": "gate",
+      "properties": {"name": "Iron Gate", "security": "high"}
+    },
+    {
+      "id": "twilight_passage",
+      "from": "crown_district",
+      "to": "location.locale.starfall",
+      "type": "magical",
+      "properties": {"name": "Royal Passage", "permission": "royal_only"}
+    }
+  ],
+
+  "terrain": {
+    "default": "stone",
+    "atmosphere": "smoky",
+    "temperature": "warm",
+    "hazards": []
+  },
+
+  "metadata": {
+    "created": "2025-12-27T00:00:00.000Z",
+    "generator": "claude_opus_4.5",
+    "notes": "Capital city of Ironhold - fortress-city carved from mountain",
+    "suitable_agents": ["city-builder", "party-rpg"]
+  }
+}

@@ -7,6 +7,11 @@
     "kind": "starship",
     "owner": "agent.captain_reva",
     "location": "locale.port_nexus",
+    "map_position": {
+      "location_id": "location.locale.port_nexus",
+      "coords": {"x": 175, "y": 50},
+      "feature": "bay_7"
+    },
     "value": 0.8
   },
   "ai": {

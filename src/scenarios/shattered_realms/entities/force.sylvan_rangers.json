@@ -9,6 +9,11 @@
     "morale": 0.85,
     "quality": 0.9,
     "location": "region.silverwood",
+    "map_position": {
+      "location_id": "location.locale.starfall",
+      "coords": {"x": 350, "y": 250, "z": 50},
+      "feature": "ranger_roost"
+    },
     "commander": null,
     "composition": ["elven_archers", "mage_warriors", "treant_allies", "beast_companions"]
   },

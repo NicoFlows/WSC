@@ -1,0 +1,154 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.region.iron_marches",
+  "name": "The Iron Marches",
+  "type": "region",
+  "scale": "region",
+  "tags": ["highlands", "industrial", "fortified", "human"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.world.shattered_realms",
+      "anchor": {"hex": "q8_r4", "coords": {"q": 8, "r": 4}},
+      "entity_id": null
+    },
+    "children": [
+      {
+        "location_id": "location.locale.thornhold",
+        "anchor": {"hex": "q5_r3", "coords": {"q": 5, "r": 3}},
+        "entity_id": "locale.thornhold"
+      }
+    ]
+  },
+
+  "entity_id": "region.iron_marches",
+
+  "bounds": {
+    "width": 10,
+    "height": 10,
+    "depth": null,
+    "units": "hexes_20km"
+  },
+
+  "geometry": {
+    "format": "hex_grid",
+    "source": "claude_opus_4.5",
+    "data": {
+      "layout": "odd-q",
+      "hex_size": 20,
+      "hex_units": "km",
+      "hexes": {
+        "q0_r0": {"q": 0, "r": 0, "terrain": "mountains", "name": "Northern Peaks"},
+        "q1_r0": {"q": 1, "r": 0, "terrain": "mountains"},
+        "q2_r0": {"q": 2, "r": 0, "terrain": "mountains"},
+        "q3_r0": {"q": 3, "r": 0, "terrain": "mountains", "feature": "iron_mine"},
+        "q4_r0": {"q": 4, "r": 0, "terrain": "tundra"},
+        "q5_r0": {"q": 5, "r": 0, "terrain": "tundra"},
+
+        "q0_r1": {"q": 0, "r": 1, "terrain": "mountains"},
+        "q1_r1": {"q": 1, "r": 1, "terrain": "mountains", "feature": "fortress"},
+        "q2_r1": {"q": 2, "r": 1, "terrain": "highlands"},
+        "q3_r1": {"q": 3, "r": 1, "terrain": "highlands", "feature": "iron_mine"},
+        "q4_r1": {"q": 4, "r": 1, "terrain": "highlands"},
+        "q5_r1": {"q": 5, "r": 1, "terrain": "plains"},
+
+        "q0_r2": {"q": 0, "r": 2, "terrain": "mountains"},
+        "q1_r2": {"q": 1, "r": 2, "terrain": "highlands"},
+        "q2_r2": {"q": 2, "r": 2, "terrain": "highlands", "feature": "forge_town"},
+        "q3_r2": {"q": 3, "r": 2, "terrain": "highlands"},
+        "q4_r2": {"q": 4, "r": 2, "terrain": "highlands"},
+        "q5_r2": {"q": 5, "r": 2, "terrain": "plains"},
+
+        "q0_r3": {"q": 0, "r": 3, "terrain": "mountains"},
+        "q1_r3": {"q": 1, "r": 3, "terrain": "highlands"},
+        "q2_r3": {"q": 2, "r": 3, "terrain": "highlands"},
+        "q3_r3": {"q": 3, "r": 3, "terrain": "highlands", "feature": "war_college"},
+        "q4_r3": {"q": 4, "r": 3, "terrain": "highlands"},
+        "q5_r3": {"q": 5, "r": 3, "terrain": "highlands", "feature": "capital", "locale": "thornhold"},
+
+        "q0_r4": {"q": 0, "r": 4, "terrain": "hills"},
+        "q1_r4": {"q": 1, "r": 4, "terrain": "highlands"},
+        "q2_r4": {"q": 2, "r": 4, "terrain": "highlands", "feature": "iron_mine"},
+        "q3_r4": {"q": 3, "r": 4, "terrain": "highlands"},
+        "q4_r4": {"q": 4, "r": 4, "terrain": "highlands", "feature": "fortress"},
+        "q5_r4": {"q": 5, "r": 4, "terrain": "plains"},
+
+        "q0_r5": {"q": 0, "r": 5, "terrain": "forest"},
+        "q1_r5": {"q": 1, "r": 5, "terrain": "hills"},
+        "q2_r5": {"q": 2, "r": 5, "terrain": "highlands"},
+        "q3_r5": {"q": 3, "r": 5, "terrain": "highlands", "feature": "border_fort"},
+        "q4_r5": {"q": 4, "r": 5, "terrain": "plains"},
+        "q5_r5": {"q": 5, "r": 5, "terrain": "plains", "feature": "trade_post"}
+      }
+    }
+  },
+
+  "features": [
+    {
+      "id": "thornhold_capital",
+      "name": "Thornhold",
+      "type": "city",
+      "position": {"q": 5, "r": 3},
+      "properties": {"entity_id": "locale.thornhold", "population": "large"}
+    },
+    {
+      "id": "deep_iron_mine",
+      "name": "Deep Iron Mines",
+      "type": "resource",
+      "position": {"q": 3, "r": 0},
+      "properties": {"resource": "iron", "quality": "exceptional"}
+    },
+    {
+      "id": "war_college",
+      "name": "The Iron War College",
+      "type": "military",
+      "position": {"q": 3, "r": 3},
+      "properties": {"trains": "force.iron_legions"}
+    },
+    {
+      "id": "blackpass",
+      "name": "Blackpass Fortress",
+      "type": "fortification",
+      "position": {"q": 1, "r": 1},
+      "properties": {"historical": "site of King Aldric's famous victory"}
+    },
+    {
+      "id": "twilight_gate",
+      "name": "Twilight Gate",
+      "type": "portal",
+      "position": {"q": 0, "r": 5},
+      "properties": {"connects_to": "location.region.silverwood", "entity_id": "link.silverwood.iron_marches"}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "conn_silverwood",
+      "from": "twilight_gate",
+      "to": "location.region.silverwood",
+      "type": "magical_path",
+      "properties": {"travel_time": "variable"}
+    },
+    {
+      "id": "conn_delta",
+      "from": "edge_southeast",
+      "to": "location.region.delta",
+      "type": "road",
+      "properties": {"name": "Iron Road", "travel_days": 14}
+    }
+  ],
+
+  "terrain": {
+    "default": "highlands",
+    "atmosphere": "standard",
+    "temperature": "cold",
+    "hazards": ["harsh_winters", "mountain_passes", "orc_raids"]
+  },
+
+  "metadata": {
+    "created": "2025-12-27T00:00:00.000Z",
+    "generator": "claude_opus_4.5",
+    "notes": "Iron Kingdom homeland - industrial highlands",
+    "suitable_agents": ["continental-strategy", "city-builder"]
+  }
+}

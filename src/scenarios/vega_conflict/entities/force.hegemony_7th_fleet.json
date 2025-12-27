@@ -14,6 +14,11 @@
       "support": 15
     },
     "location": "region.vega",
+    "map_position": {
+      "location_id": "location.system.vega",
+      "coords": {"orbit": 3, "body": "garrison_alpha_station"},
+      "feature": "fleet_anchorage"
+    },
     "stance": "defensive",
     "morale": 0.7,
     "supply": 0.8,

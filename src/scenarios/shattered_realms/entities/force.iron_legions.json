@@ -9,6 +9,11 @@
     "morale": 0.7,
     "quality": 0.8,
     "location": "region.iron_marches",
+    "map_position": {
+      "location_id": "location.locale.thornhold",
+      "coords": {"x": 375, "y": 275},
+      "feature": "war_barracks"
+    },
     "commander": "agent.prince_marcus",
     "composition": ["heavy_infantry", "siege_engineers", "cavalry", "archers"]
   },

@@ -1,0 +1,239 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.locale.portway",
+  "name": "Portway - The Golden Confluence",
+  "type": "locale",
+  "scale": "locale",
+  "tags": ["trade_hub", "multicultural", "wealthy", "chaotic"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.region.delta",
+      "anchor": {"hex": "q4_r3", "coords": {"q": 4, "r": 3}},
+      "entity_id": "region.delta"
+    },
+    "children": [
+      {
+        "location_id": "location.district.exchange",
+        "anchor": {"coords": [200, 150]},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.docks",
+        "anchor": {"coords": [400, 300]},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.warrens",
+        "anchor": {"coords": [100, 400]},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.embassy_row",
+        "anchor": {"coords": [300, 100]},
+        "entity_id": null
+      },
+      {
+        "location_id": "location.district.gilded_mile",
+        "anchor": {"coords": [150, 200]},
+        "entity_id": null
+      }
+    ]
+  },
+
+  "entity_id": "locale.portway",
+
+  "bounds": {
+    "width": 600,
+    "height": 550,
+    "depth": null,
+    "units": "m"
+  },
+
+  "geometry": {
+    "format": "geojson",
+    "source": "claude_opus_4.5",
+    "data": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "id": "exchange_district",
+          "properties": {"name": "The Exchange", "type": "commercial"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[150, 100], [280, 100], [280, 220], [150, 220], [150, 100]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "golden_exchange",
+          "properties": {"name": "Golden Exchange", "type": "government", "entity_id": "holding.shard_of_fortune"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[180, 130], [250, 130], [250, 190], [180, 190], [180, 130]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "vault_houses",
+          "properties": {"name": "Vault of Houses", "type": "bank"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[160, 195], [220, 195], [220, 215], [160, 215], [160, 195]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "embassy_row",
+          "properties": {"name": "Embassy Row", "type": "diplomatic"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[280, 80], [420, 80], [420, 160], [280, 160], [280, 80]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "gilded_mile",
+          "properties": {"name": "The Gilded Mile", "type": "luxury"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[100, 180], [150, 180], [150, 320], [100, 320], [100, 180]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "docks_district",
+          "properties": {"name": "The Docks", "type": "port"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[350, 200], [550, 200], [550, 400], [350, 400], [350, 200]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "thousand_ships",
+          "properties": {"name": "The Thousand Ships", "type": "harbor", "entity_id": "force.merchant_fleet"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[450, 250], [540, 250], [540, 380], [450, 380], [450, 250]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "warrens_district",
+          "properties": {"name": "The Warrens", "type": "slum"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[50, 350], [200, 350], [200, 500], [50, 500], [50, 350]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "whisper_market",
+          "properties": {"name": "Whisper Market", "type": "black_market"},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[[80, 400], [150, 400], [150, 460], [80, 460], [80, 400]]]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "canals",
+          "properties": {"name": "Canal Network", "type": "waterway"},
+          "geometry": {
+            "type": "MultiLineString",
+            "coordinates": [
+              [[100, 250], [350, 250], [350, 200]],
+              [[200, 100], [200, 350]],
+              [[350, 300], [200, 300], [200, 400]]
+            ]
+          }
+        }
+      ]
+    }
+  },
+
+  "features": [
+    {
+      "id": "golden_exchange_hall",
+      "name": "Golden Exchange Hall",
+      "type": "building",
+      "position": {"x": 215, "y": 160},
+      "properties": {"function": "merchant_council", "entity_id": "holding.shard_of_fortune"}
+    },
+    {
+      "id": "ironhold_embassy",
+      "name": "Ironhold Embassy",
+      "type": "diplomatic",
+      "position": {"x": 300, "y": 120},
+      "properties": {"faction": "polity.ironhold"}
+    },
+    {
+      "id": "silverwood_delegation",
+      "name": "Silverwood Delegation",
+      "type": "diplomatic",
+      "position": {"x": 380, "y": 120},
+      "properties": {"faction": "polity.silverwood", "minimal_staff": true}
+    },
+    {
+      "id": "harbormaster",
+      "name": "Harbormaster's Tower",
+      "type": "administrative",
+      "position": {"x": 400, "y": 280},
+      "properties": {"controls": "shipping"}
+    },
+    {
+      "id": "thieves_guild",
+      "name": "Thieves' Guild",
+      "type": "criminal",
+      "position": {"x": 115, "y": 430},
+      "properties": {"hidden": true, "controls": "black_market"}
+    },
+    {
+      "id": "void_cult_cell",
+      "name": "Merchant House Veloris",
+      "type": "front",
+      "position": {"x": 140, "y": 280},
+      "properties": {"secret": "void_cult_infiltration", "hidden": true}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "iron_road_gate",
+      "from": "edge_north",
+      "to": "location.region.iron_marches",
+      "type": "road",
+      "properties": {"name": "Iron Road", "travel_days": 14}
+    },
+    {
+      "id": "sea_lanes",
+      "from": "thousand_ships",
+      "to": "edge_ocean",
+      "type": "sea_lane",
+      "properties": {"destinations": ["distant_ports", "coastal_towns"]}
+    },
+    {
+      "id": "river_passage",
+      "from": "docks_district",
+      "to": "location.region.delta",
+      "type": "river",
+      "properties": {"upstream": true}
+    }
+  ],
+
+  "terrain": {
+    "default": "urban",
+    "atmosphere": "humid",
+    "temperature": "temperate",
+    "hazards": ["flooding", "crime", "political_intrigue"]
+  },
+
+  "metadata": {
+    "created": "2025-12-27T00:00:00.000Z",
+    "generator": "claude_opus_4.5",
+    "notes": "Largest city - canal-crossed trading hub at river confluence",
+    "suitable_agents": ["city-builder", "party-rpg"]
+  }
+}

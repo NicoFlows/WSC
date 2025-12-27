@@ -10,6 +10,11 @@
     "status": "active",
     "salience": 0.85,
     "location": "locale.starfall",
+    "map_position": {
+      "location_id": "location.locale.starfall",
+      "coords": {"x": 200, "y": 150, "z": 80},
+      "feature": "star_tower_peak"
+    },
     "age": 847,
     "health": "eternal"
   },

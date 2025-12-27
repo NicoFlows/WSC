@@ -1,0 +1,158 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.region.duskwall",
+  "name": "The Duskwall",
+  "type": "region",
+  "scale": "region",
+  "tags": ["borderland", "militarized", "sacred", "vigilant"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.world.shattered_realms",
+      "anchor": {"hex": "q6_r10", "coords": {"q": 6, "r": 10}},
+      "entity_id": null
+    },
+    "children": [
+      {
+        "location_id": "location.locale.last_light",
+        "anchor": {"hex": "q4_r4", "coords": {"q": 4, "r": 4}},
+        "entity_id": "locale.last_light"
+      }
+    ]
+  },
+
+  "entity_id": "region.duskwall",
+
+  "bounds": {
+    "width": 10,
+    "height": 6,
+    "depth": null,
+    "units": "hexes_15km"
+  },
+
+  "geometry": {
+    "format": "hex_grid",
+    "source": "claude_opus_4.5",
+    "data": {
+      "layout": "odd-q",
+      "hex_size": 15,
+      "hex_units": "km",
+      "hexes": {
+        "q0_r0": {"q": 0, "r": 0, "terrain": "plains"},
+        "q1_r0": {"q": 1, "r": 0, "terrain": "plains"},
+        "q2_r0": {"q": 2, "r": 0, "terrain": "hills"},
+        "q3_r0": {"q": 3, "r": 0, "terrain": "hills"},
+        "q4_r0": {"q": 4, "r": 0, "terrain": "badlands"},
+        "q5_r0": {"q": 5, "r": 0, "terrain": "badlands"},
+
+        "q0_r1": {"q": 0, "r": 1, "terrain": "hills"},
+        "q1_r1": {"q": 1, "r": 1, "terrain": "badlands"},
+        "q2_r1": {"q": 2, "r": 1, "terrain": "badlands", "feature": "watchtower"},
+        "q3_r1": {"q": 3, "r": 1, "terrain": "badlands"},
+        "q4_r1": {"q": 4, "r": 1, "terrain": "badlands", "feature": "fortress_monastery"},
+        "q5_r1": {"q": 5, "r": 1, "terrain": "badlands"},
+        "q6_r1": {"q": 6, "r": 1, "terrain": "badlands", "feature": "watchtower"},
+
+        "q0_r2": {"q": 0, "r": 2, "terrain": "badlands"},
+        "q1_r2": {"q": 1, "r": 2, "terrain": "badlands", "feature": "fortress_monastery"},
+        "q2_r2": {"q": 2, "r": 2, "terrain": "scarred_earth"},
+        "q3_r2": {"q": 3, "r": 2, "terrain": "badlands"},
+        "q4_r2": {"q": 4, "r": 2, "terrain": "scarred_earth"},
+        "q5_r2": {"q": 5, "r": 2, "terrain": "badlands", "feature": "fortress_monastery"},
+        "q6_r2": {"q": 6, "r": 2, "terrain": "badlands"},
+
+        "q0_r3": {"q": 0, "r": 3, "terrain": "badlands"},
+        "q1_r3": {"q": 1, "r": 3, "terrain": "scarred_earth"},
+        "q2_r3": {"q": 2, "r": 3, "terrain": "fortress_badlands", "feature": "warding_stones"},
+        "q3_r3": {"q": 3, "r": 3, "terrain": "fortress_badlands", "feature": "warding_stones"},
+        "q4_r3": {"q": 4, "r": 3, "terrain": "fortress_badlands", "feature": "warding_stones"},
+        "q5_r3": {"q": 5, "r": 3, "terrain": "fortress_badlands", "feature": "warding_stones"},
+        "q6_r3": {"q": 6, "r": 3, "terrain": "scarred_earth"},
+
+        "q0_r4": {"q": 0, "r": 4, "terrain": "scarred_earth"},
+        "q1_r4": {"q": 1, "r": 4, "terrain": "fortress_badlands", "feature": "weak_point"},
+        "q2_r4": {"q": 2, "r": 4, "terrain": "fortress_badlands"},
+        "q3_r4": {"q": 3, "r": 4, "terrain": "fortress_badlands"},
+        "q4_r4": {"q": 4, "r": 4, "terrain": "fortress_badlands", "feature": "capital", "locale": "last_light"},
+        "q5_r4": {"q": 5, "r": 4, "terrain": "fortress_badlands"},
+        "q6_r4": {"q": 6, "r": 4, "terrain": "scarred_earth", "feature": "old_crossing"},
+
+        "q1_r5": {"q": 1, "r": 5, "terrain": "corrupted", "region": "hollow_wastes"},
+        "q2_r5": {"q": 2, "r": 5, "terrain": "corrupted", "region": "hollow_wastes"},
+        "q3_r5": {"q": 3, "r": 5, "terrain": "corrupted", "region": "hollow_wastes"},
+        "q4_r5": {"q": 4, "r": 5, "terrain": "corrupted", "region": "hollow_wastes"},
+        "q5_r5": {"q": 5, "r": 5, "terrain": "corrupted", "region": "hollow_wastes"},
+        "q6_r5": {"q": 6, "r": 5, "terrain": "corrupted", "region": "hollow_wastes"}
+      }
+    }
+  },
+
+  "features": [
+    {
+      "id": "last_light_fortress",
+      "name": "Last Light",
+      "type": "city",
+      "position": {"q": 4, "r": 4},
+      "properties": {"entity_id": "locale.last_light", "population": "small"}
+    },
+    {
+      "id": "breach_line",
+      "name": "The Breach Line",
+      "type": "fortification",
+      "position": {"hexes": ["q2_r3", "q3_r3", "q4_r3", "q5_r3"]},
+      "properties": {"entity_id": "link.duskwall.hollow_wastes", "warded": true}
+    },
+    {
+      "id": "weak_point",
+      "name": "The Weak Point",
+      "type": "hazard",
+      "position": {"q": 1, "r": 4},
+      "properties": {"threat": "void_incursion", "risk": "high"}
+    },
+    {
+      "id": "old_crossing",
+      "name": "Old Crossing",
+      "type": "ruins",
+      "position": {"q": 6, "r": 4},
+      "properties": {"status": "fallen", "haunted": true}
+    },
+    {
+      "id": "eastern_monastery",
+      "name": "Dawn's Edge Monastery",
+      "type": "religious",
+      "position": {"q": 5, "r": 2},
+      "properties": {"order": "duskwatch", "specialty": "void_hunters"}
+    },
+    {
+      "id": "western_monastery",
+      "name": "Twilight Watch",
+      "type": "religious",
+      "position": {"q": 1, "r": 2},
+      "properties": {"order": "duskwatch", "specialty": "chaplains"}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "conn_hollow_wastes",
+      "from": "breach_line",
+      "to": "location.region.hollow_wastes",
+      "type": "sealed_border",
+      "properties": {"status": "sealed", "breaches": "occasional"}
+    }
+  ],
+
+  "terrain": {
+    "default": "badlands",
+    "atmosphere": "tainted",
+    "temperature": "cold",
+    "hazards": ["void_incursions", "corrupted_creatures", "psychological_warfare"]
+  },
+
+  "metadata": {
+    "created": "2025-12-27T00:00:00.000Z",
+    "generator": "claude_opus_4.5",
+    "notes": "Duskwatch fortress line - border against the Void",
+    "suitable_agents": ["continental-strategy", "party-rpg", "action-sim"]
+  }
+}

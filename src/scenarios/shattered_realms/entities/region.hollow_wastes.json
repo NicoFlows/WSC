@@ -5,6 +5,11 @@
   "tags": ["void_corrupted", "dangerous", "mysterious", "forbidden"],
   "attrs": {
     "coords": {"x": 35, "y": 85},
+    "map_position": {
+      "location_id": "location.world.shattered_realms",
+      "coords": {"q": 6, "r": 13},
+      "hex": "q6_r13"
+    },
     "security": 0.0,
     "economy": 0.0,
     "population": 0.1,

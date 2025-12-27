@@ -5,6 +5,11 @@
   "tags": ["borderland", "militarized", "sacred", "vigilant"],
   "attrs": {
     "coords": {"x": 35, "y": 70},
+    "map_position": {
+      "location_id": "location.world.shattered_realms",
+      "coords": {"q": 6, "r": 10},
+      "hex": "q6_r10"
+    },
     "security": 0.7,
     "economy": 0.4,
     "population": 0.4,

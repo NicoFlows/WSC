@@ -10,6 +10,11 @@
     "status": "active",
     "salience": 0.95,
     "location": "locale.thornhold",
+    "map_position": {
+      "location_id": "location.locale.thornhold",
+      "coords": {"x": 250, "y": 140},
+      "feature": "iron_throne"
+    },
     "age": 62,
     "health": "failing"
   },

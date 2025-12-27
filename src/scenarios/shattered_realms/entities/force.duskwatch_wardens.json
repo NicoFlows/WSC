@@ -9,6 +9,11 @@
     "morale": 0.9,
     "quality": 0.85,
     "location": "region.duskwall",
+    "map_position": {
+      "location_id": "location.locale.last_light",
+      "coords": {"x": 315, "y": 355},
+      "feature": "training_grounds"
+    },
     "commander": "agent.high_warden_sera",
     "composition": ["warden_knights", "void_hunters", "chaplains", "siege_defenders"]
   },

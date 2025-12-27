@@ -1,0 +1,154 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.region.delta",
+  "name": "The Delta",
+  "type": "region",
+  "scale": "region",
+  "tags": ["coastal", "mercantile", "diverse", "wealthy"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.world.shattered_realms",
+      "anchor": {"hex": "q10_r8", "coords": {"q": 10, "r": 8}},
+      "entity_id": null
+    },
+    "children": [
+      {
+        "location_id": "location.locale.portway",
+        "anchor": {"hex": "q4_r3", "coords": {"q": 4, "r": 3}},
+        "entity_id": "locale.portway"
+      }
+    ]
+  },
+
+  "entity_id": "region.delta",
+
+  "bounds": {
+    "width": 8,
+    "height": 8,
+    "depth": null,
+    "units": "hexes_15km"
+  },
+
+  "geometry": {
+    "format": "hex_grid",
+    "source": "claude_opus_4.5",
+    "data": {
+      "layout": "odd-q",
+      "hex_size": 15,
+      "hex_units": "km",
+      "hexes": {
+        "q0_r0": {"q": 0, "r": 0, "terrain": "plains"},
+        "q1_r0": {"q": 1, "r": 0, "terrain": "plains"},
+        "q2_r0": {"q": 2, "r": 0, "terrain": "river"},
+        "q3_r0": {"q": 3, "r": 0, "terrain": "plains"},
+        "q4_r0": {"q": 4, "r": 0, "terrain": "hills"},
+
+        "q0_r1": {"q": 0, "r": 1, "terrain": "plains"},
+        "q1_r1": {"q": 1, "r": 1, "terrain": "river"},
+        "q2_r1": {"q": 2, "r": 1, "terrain": "wetlands"},
+        "q3_r1": {"q": 3, "r": 1, "terrain": "river"},
+        "q4_r1": {"q": 4, "r": 1, "terrain": "plains"},
+        "q5_r1": {"q": 5, "r": 1, "terrain": "coast"},
+
+        "q0_r2": {"q": 0, "r": 2, "terrain": "river", "name": "North River"},
+        "q1_r2": {"q": 1, "r": 2, "terrain": "wetlands"},
+        "q2_r2": {"q": 2, "r": 2, "terrain": "delta_island", "feature": "warehouse_district"},
+        "q3_r2": {"q": 3, "r": 2, "terrain": "delta_island"},
+        "q4_r2": {"q": 4, "r": 2, "terrain": "wetlands"},
+        "q5_r2": {"q": 5, "r": 2, "terrain": "coast"},
+        "q6_r2": {"q": 6, "r": 2, "terrain": "ocean"},
+
+        "q0_r3": {"q": 0, "r": 3, "terrain": "river", "name": "Central River"},
+        "q1_r3": {"q": 1, "r": 3, "terrain": "delta_island"},
+        "q2_r3": {"q": 2, "r": 3, "terrain": "delta_island", "feature": "banking_district"},
+        "q3_r3": {"q": 3, "r": 3, "terrain": "delta_island"},
+        "q4_r3": {"q": 4, "r": 3, "terrain": "urban_delta", "feature": "capital", "locale": "portway"},
+        "q5_r3": {"q": 5, "r": 3, "terrain": "harbor"},
+        "q6_r3": {"q": 6, "r": 3, "terrain": "ocean"},
+
+        "q0_r4": {"q": 0, "r": 4, "terrain": "river", "name": "South River"},
+        "q1_r4": {"q": 1, "r": 4, "terrain": "wetlands"},
+        "q2_r4": {"q": 2, "r": 4, "terrain": "delta_island"},
+        "q3_r4": {"q": 3, "r": 4, "terrain": "delta_island", "feature": "shipyards"},
+        "q4_r4": {"q": 4, "r": 4, "terrain": "harbor"},
+        "q5_r4": {"q": 5, "r": 4, "terrain": "ocean"},
+
+        "q0_r5": {"q": 0, "r": 5, "terrain": "wetlands"},
+        "q1_r5": {"q": 1, "r": 5, "terrain": "wetlands", "feature": "smuggler_coves"},
+        "q2_r5": {"q": 2, "r": 5, "terrain": "coast"},
+        "q3_r5": {"q": 3, "r": 5, "terrain": "coast"},
+        "q4_r5": {"q": 4, "r": 5, "terrain": "ocean"}
+      }
+    }
+  },
+
+  "features": [
+    {
+      "id": "portway_city",
+      "name": "Portway",
+      "type": "city",
+      "position": {"q": 4, "r": 3},
+      "properties": {"entity_id": "locale.portway", "population": "very_large"}
+    },
+    {
+      "id": "golden_exchange",
+      "name": "The Golden Exchange",
+      "type": "landmark",
+      "position": {"q": 2, "r": 3},
+      "properties": {"function": "central_banking", "entity_id": "holding.shard_of_fortune"}
+    },
+    {
+      "id": "great_shipyards",
+      "name": "The Great Shipyards",
+      "type": "industrial",
+      "position": {"q": 3, "r": 4},
+      "properties": {"builds": "force.merchant_fleet"}
+    },
+    {
+      "id": "smuggler_coves",
+      "name": "The Smuggler's Coves",
+      "type": "criminal",
+      "position": {"q": 1, "r": 5},
+      "properties": {"activity": "smuggling", "hidden": true}
+    },
+    {
+      "id": "iron_road_terminus",
+      "name": "Iron Road Terminus",
+      "type": "trade",
+      "position": {"q": 0, "r": 0},
+      "properties": {"connects_to": "location.region.iron_marches"}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "conn_iron_marches",
+      "from": "iron_road_terminus",
+      "to": "location.region.iron_marches",
+      "type": "road",
+      "properties": {"name": "Iron Road", "travel_days": 14}
+    },
+    {
+      "id": "conn_sea_routes",
+      "from": "portway_city",
+      "to": "edge_ocean",
+      "type": "sea_lane",
+      "properties": {"destinations": "multiple_ports"}
+    }
+  ],
+
+  "terrain": {
+    "default": "delta_wetlands",
+    "atmosphere": "standard",
+    "temperature": "temperate",
+    "hazards": ["flooding", "pirates", "political_intrigue"]
+  },
+
+  "metadata": {
+    "created": "2025-12-27T00:00:00.000Z",
+    "generator": "claude_opus_4.5",
+    "notes": "Freehold merchant republic - wealthy trade hub",
+    "suitable_agents": ["continental-strategy", "city-builder"]
+  }
+}

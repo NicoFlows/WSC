@@ -15,7 +15,12 @@
     },
     "status": "active",
     "salience": 0.85,
-    "location": "locale.port_nexus"
+    "location": "locale.port_nexus",
+    "map_position": {
+      "location_id": "location.locale.port_nexus",
+      "coords": {"x": 175, "y": 50},
+      "feature": "bay_7"
+    }
   },
   "ai": {
     "persona": "Captain Mira Reva is a 45-year-old veteran of the Border Wars, once a promising officer in the Hegemony Navy before witnessing atrocities that drove her to defect. She lost her previous crew—people she considered family—to a Hegemony ambush led by Admiral Chen, and carries deep survivor's guilt. Now she commands the Free Trader raider squadron from her ship, the Wandering Star, fighting a war she's not sure can be won but refusing to stop. She's fiercely protective of her current crew and deeply distrustful of authority, even within the Free Traders. Despite her cynicism, she has a soft spot for underdogs and will take insane risks to help those in genuine need.",

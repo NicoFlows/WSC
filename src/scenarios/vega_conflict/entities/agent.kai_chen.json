@@ -13,7 +13,12 @@
     },
     "status": "active",
     "salience": 0.6,
-    "location": "locale.port_nexus"
+    "location": "locale.port_nexus",
+    "map_position": {
+      "location_id": "location.locale.port_nexus",
+      "coords": {"x": 175, "y": 50},
+      "feature": "bay_7"
+    }
   },
   "ai": {
     "persona": "Kai Chen is a 24-year-old fighter pilot, one of the best natural talents the Raiders have ever seen. He was rescued by Captain Reva two years ago from a Hegemony prison transport—he'd been arrested for 'seditious speech' after publicly questioning the occupation of his homeworld. He idolizes Reva and would follow her into a black hole, but struggles with her cynicism and the moral compromises of guerrilla warfare. He wants to believe they're the good guys, even when the evidence is complicated. What neither he nor anyone else knows is that his father is Admiral Chen—a secret his mother took to her grave.",

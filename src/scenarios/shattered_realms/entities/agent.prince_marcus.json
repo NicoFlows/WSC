@@ -10,6 +10,11 @@
     "status": "active",
     "salience": 0.8,
     "location": "locale.thornhold",
+    "map_position": {
+      "location_id": "location.locale.thornhold",
+      "coords": {"x": 375, "y": 275},
+      "feature": "war_college"
+    },
     "age": 32,
     "health": "excellent"
   },

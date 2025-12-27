@@ -10,6 +10,11 @@
     "status": "active",
     "salience": 0.9,
     "location": "locale.thornhold",
+    "map_position": {
+      "location_id": "location.locale.thornhold",
+      "coords": {"x": 280, "y": 180},
+      "feature": "princess_tower"
+    },
     "age": 24,
     "health": "excellent"
   },

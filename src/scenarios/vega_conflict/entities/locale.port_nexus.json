@@ -5,6 +5,11 @@
   "tags": ["trade_hub", "neutral_ground", "diverse", "bustling"],
   "attrs": {
     "region_id": "region.vega",
+    "map_position": {
+      "location_id": "location.system.vega",
+      "coords": {"orbit": 3, "body": "vega_prime"},
+      "feature": "orbital_station"
+    },
     "owner_polity_id": "polity.hegemony",
     "services": ["market", "shipyard", "fuel_depot", "medical", "entertainment", "black_market"],
     "security_level": 0.5,

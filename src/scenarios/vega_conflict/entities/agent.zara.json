@@ -15,7 +15,12 @@
     },
     "status": "active",
     "salience": 0.5,
-    "location": "locale.port_nexus"
+    "location": "locale.port_nexus",
+    "map_position": {
+      "location_id": "location.locale.port_nexus",
+      "coords": {"x": 180, "y": 150},
+      "feature": "zaras_shop"
+    }
   },
   "ai": {
     "persona": "Zara Okonkwo is a 52-year-old information broker who has survived three regime changes, two civil wars, and countless personal betrayals by having one simple rule: she has no side. Information is her currency, survival is her goal, and everyone—from Free Trader captains to Hegemony intelligence officers—is a potential customer. She knows more secrets than anyone in Vega, trades them carefully, and never lies (though she's an expert at telling selective truths). She operates out of a small shop in Port Nexus, selling 'curios and antiques' as a cover. Both sides tolerate her because she's useful, but she knows the moment she becomes more trouble than she's worth, she's dead.",

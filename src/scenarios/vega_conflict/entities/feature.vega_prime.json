@@ -5,6 +5,11 @@
   "tags": ["habitable", "industrial", "populated", "war_scarred"],
   "attrs": {
     "region_id": "region.vega",
+    "map_position": {
+      "location_id": "location.system.vega",
+      "coords": {"orbit": 3},
+      "feature": "vega_prime"
+    },
     "kind": "planet",
     "properties": {
       "biome": "temperate",

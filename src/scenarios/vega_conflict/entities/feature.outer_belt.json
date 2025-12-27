@@ -5,6 +5,11 @@
   "tags": ["asteroid_field", "dangerous", "uncharted", "hideout"],
   "attrs": {
     "region_id": "region.vega",
+    "map_position": {
+      "location_id": "location.system.vega",
+      "coords": {"orbit": 6},
+      "feature": "outer_belt"
+    },
     "kind": "asteroid_belt",
     "properties": {
       "biome": "vacuum",

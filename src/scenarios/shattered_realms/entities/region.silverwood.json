@@ -5,6 +5,11 @@
   "tags": ["ancient_forest", "magical", "elven", "isolated"],
   "attrs": {
     "coords": {"x": 20, "y": 45},
+    "map_position": {
+      "location_id": "location.world.shattered_realms",
+      "coords": {"q": 3, "r": 6},
+      "hex": "q3_r6"
+    },
     "security": 0.9,
     "economy": 0.5,
     "population": 0.3,

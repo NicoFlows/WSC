@@ -10,6 +10,11 @@
     "status": "active",
     "salience": 0.85,
     "location": "locale.last_light",
+    "map_position": {
+      "location_id": "location.locale.last_light",
+      "coords": {"x": 260, "y": 160},
+      "feature": "high_warden_quarters"
+    },
     "age": 45,
     "health": "scarred"
   },

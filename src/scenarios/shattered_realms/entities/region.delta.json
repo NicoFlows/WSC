@@ -5,6 +5,11 @@
   "tags": ["coastal", "mercantile", "diverse", "wealthy"],
   "attrs": {
     "coords": {"x": 60, "y": 55},
+    "map_position": {
+      "location_id": "location.world.shattered_realms",
+      "coords": {"q": 10, "r": 8},
+      "hex": "q10_r8"
+    },
     "security": 0.5,
     "economy": 0.9,
     "population": 0.8,

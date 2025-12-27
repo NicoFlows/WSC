@@ -5,6 +5,11 @@
   "tags": ["highlands", "fortified", "industrial", "human_dominated"],
   "attrs": {
     "coords": {"x": 45, "y": 30},
+    "map_position": {
+      "location_id": "location.world.shattered_realms",
+      "coords": {"q": 8, "r": 4},
+      "hex": "q8_r4"
+    },
     "security": 0.8,
     "economy": 0.7,
     "population": 0.75,

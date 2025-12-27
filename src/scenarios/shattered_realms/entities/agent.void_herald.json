@@ -10,6 +10,11 @@
     "status": "awakening",
     "salience": 0.9,
     "location": "region.hollow_wastes",
+    "map_position": {
+      "location_id": "location.region.hollow_wastes",
+      "coords": {"q": 3, "r": 3},
+      "feature": "hollow_heart"
+    },
     "age": "timeless",
     "health": "reforming"
   },
