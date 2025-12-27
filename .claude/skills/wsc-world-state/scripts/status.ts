@@ -122,9 +122,29 @@ async function main() {
   console.log('World:');
   console.log(`  Name: ${state.settings?.name || 'Unnamed'}`);
   console.log(`  Genre: ${state.settings?.genre || 'Unknown'}`);
+  console.log(`  Scenario: ${state.active_scenario || 'none'}`);
   console.log(`  Current tick: ${state.tick}`);
   console.log(`  Created: ${state.created_at}`);
   console.log(`  Updated: ${state.updated_at}`);
+
+  // Show active conflicts
+  const conflicts = state.active_conflicts || [];
+  if (conflicts.length > 0) {
+    console.log(`\nActive Conflicts: ${conflicts.length}`);
+    for (const c of conflicts) {
+      console.log(`  - ${c.id}: ${c.parties.join(' vs ')} in ${c.location} (intensity: ${c.intensity})`);
+    }
+  }
+
+  // Show drill-down opportunities
+  const opportunities = state.drill_down_opportunities || [];
+  if (opportunities.length > 0) {
+    console.log(`\nDrill-Down Opportunities: ${opportunities.length}`);
+    for (const o of opportunities) {
+      const marker = o.importance > 0.7 ? '[!]' : '[ ]';
+      console.log(`  ${marker} ${o.description} (${o.importance.toFixed(2)}) → ${o.suggested_agent}`);
+    }
+  }
 
   console.log('\nEntities:');
   if (totalEntities === 0) {

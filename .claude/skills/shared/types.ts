@@ -231,9 +231,32 @@ export type ChronicleEvent = z.infer<typeof ChronicleEventSchema>;
 // World State Schema
 // =============================================================================
 
+export const DrillDownOpportunitySchema = z.object({
+  id: z.string(),
+  event_id: z.string(),
+  type: z.string(),
+  description: z.string(),
+  importance: z.number().min(0).max(1),
+  suggested_agent: z.string(),
+  expires_at_tick: z.number().optional(),
+  context: z.record(z.any()).optional(),
+});
+
+export const ActiveConflictSchema = z.object({
+  id: z.string(),
+  type: z.string(),
+  parties: z.array(z.string()),
+  location: z.string(),
+  started_at_tick: z.number(),
+  intensity: z.number().min(0).max(1),
+});
+
 export const WorldStateSchema = z.object({
   tick: z.number(),
   last_event_id: z.number(),
+  active_scenario: z.string().optional(),
+  drill_down_opportunities: z.array(DrillDownOpportunitySchema).optional(),
+  active_conflicts: z.array(ActiveConflictSchema).optional(),
   created_at: z.string(),
   updated_at: z.string(),
   settings: z.object({
@@ -242,6 +265,8 @@ export const WorldStateSchema = z.object({
   }).passthrough().optional(),
 });
 
+export type DrillDownOpportunity = z.infer<typeof DrillDownOpportunitySchema>;
+export type ActiveConflict = z.infer<typeof ActiveConflictSchema>;
 export type WorldState = z.infer<typeof WorldStateSchema>;
 
 // =============================================================================
