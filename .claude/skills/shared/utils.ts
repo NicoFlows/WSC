@@ -29,12 +29,87 @@ export function getProjectRoot(): string {
   return cachedProjectRoot;
 }
 
-export function getWorldDir(): string {
+// =============================================================================
+// World Instance Utilities
+// =============================================================================
+
+export interface WorldsRegistry {
+  active_world: string | null;
+  worlds: Record<string, {
+    scenario: string;
+    name: string;
+    created_at: string;
+    last_played: string;
+  }>;
+}
+
+export function getWorldsDir(): string {
+  return join(getProjectRoot(), 'src', 'worlds');
+}
+
+export function getWorldsRegistry(): WorldsRegistry {
+  const registryPath = join(getWorldsDir(), 'worlds.json');
+  if (!existsSync(registryPath)) {
+    return { active_world: null, worlds: {} };
+  }
+  return readJson<WorldsRegistry>(registryPath);
+}
+
+export function saveWorldsRegistry(registry: WorldsRegistry): void {
+  const registryPath = join(getWorldsDir(), 'worlds.json');
+  writeJson(registryPath, registry);
+}
+
+export function getActiveWorldId(): string | null {
+  const registry = getWorldsRegistry();
+  return registry.active_world;
+}
+
+export function setActiveWorld(worldId: string): void {
+  const registry = getWorldsRegistry();
+  if (!registry.worlds[worldId]) {
+    throw new Error(`World '${worldId}' does not exist`);
+  }
+  registry.active_world = worldId;
+  registry.worlds[worldId].last_played = new Date().toISOString();
+  saveWorldsRegistry(registry);
+}
+
+/**
+ * Get the directory for a specific world instance
+ * @param worldId - The world instance ID (e.g., "vega_conflict_001")
+ */
+export function getWorldInstanceDir(worldId: string): string {
+  return join(getWorldsDir(), worldId);
+}
+
+/**
+ * Get the directory for the currently active world
+ * Falls back to legacy src/world if no active world is set
+ */
+export function getWorldDir(worldId?: string): string {
+  const id = worldId || getActiveWorldId();
+  if (id) {
+    return getWorldInstanceDir(id);
+  }
+  // Legacy fallback for backwards compatibility
   return join(getProjectRoot(), 'src', 'world');
 }
 
-export function getEntitiesDir(): string {
-  return join(getWorldDir(), 'entities');
+export function getEntitiesDir(worldId?: string): string {
+  return join(getWorldDir(worldId), 'entities');
+}
+
+export function getLocationsDir(worldId?: string): string {
+  return join(getWorldDir(worldId), 'locations');
+}
+
+export function getChronicleFile(worldId?: string): string {
+  return join(getWorldDir(worldId), 'chronicle.ndjson');
+}
+
+export function getStateFile(worldId?: string): string {
+  return join(getWorldDir(worldId), 'state.json');
 }
 
 export function getExamplesDir(): string {
@@ -49,12 +124,33 @@ export function getScenarioDir(scenarioId: string): string {
   return join(getScenariosDir(), scenarioId);
 }
 
-export function getChronicleFile(): string {
-  return join(getWorldDir(), 'chronicle.ndjson');
+/**
+ * Generate a unique world ID from a scenario name
+ */
+export function generateWorldId(scenarioId: string): string {
+  const registry = getWorldsRegistry();
+  const existingIds = Object.keys(registry.worlds).filter(id => id.startsWith(scenarioId));
+
+  // Find next available number
+  let num = 1;
+  while (existingIds.includes(`${scenarioId}_${String(num).padStart(3, '0')}`)) {
+    num++;
+  }
+
+  return `${scenarioId}_${String(num).padStart(3, '0')}`;
 }
 
-export function getStateFile(): string {
-  return join(getWorldDir(), 'state.json');
+/**
+ * List all world instances
+ */
+export function listWorlds(): { id: string; scenario: string; name: string; active: boolean }[] {
+  const registry = getWorldsRegistry();
+  return Object.entries(registry.worlds).map(([id, world]) => ({
+    id,
+    scenario: world.scenario,
+    name: world.name,
+    active: registry.active_world === id,
+  }));
 }
 
 // =============================================================================

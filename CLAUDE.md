@@ -53,6 +53,8 @@ Instead of building full game UIs, WSC uses **Claude Code sub-agents as syntheti
 
 ## Directory Structure
 
+WSC separates **scenarios** (templates) from **worlds** (runtime instances):
+
 ```
 WSC/
 ├── CLAUDE.md               # This file
@@ -61,14 +63,26 @@ WSC/
 │   ├── WSC_design_doc_v1.0.md      # Technical specification
 │   └── synthetic_agents_design.md  # Sub-agent architecture
 ├── src/
-│   ├── world/              # Active world state (runtime)
-│   │   ├── entities/       # Current entity JSON files
-│   │   ├── chronicle.ndjson # Append-only event log
-│   │   └── state.json      # World metadata (tick, etc.)
+│   ├── scenarios/          # SCENARIO TEMPLATES (read-only)
+│   │   ├── scenarios.json  # Available scenarios registry
+│   │   ├── vega_conflict/  # Sci-fi scenario
+│   │   │   ├── scenario.json    # Campaign context
+│   │   │   ├── entities/        # Starting entities
+│   │   │   ├── locations/       # Map files
+│   │   │   └── rules/           # Agent-specific rules
+│   │   └── shattered_realms/    # Fantasy scenario
+│   │       └── ...
+│   ├── worlds/             # RUNTIME INSTANCES (mutable)
+│   │   ├── worlds.json     # Registry of world instances
+│   │   ├── vega_conflict_001/   # First Vega playthrough
+│   │   │   ├── state.json       # World state (tick, etc.)
+│   │   │   ├── chronicle.ndjson # Append-only event log
+│   │   │   ├── entities/        # Current entity states
+│   │   │   └── locations/       # Map files
+│   │   └── shattered_realms_001/
+│   │       └── ...
 │   └── examples/           # Reference entity/event examples
-│       ├── entities/       # Example entities (polities, agents, etc.)
-│       ├── events/         # Example chronicle events
-│       └── locations/      # Location hierarchy examples
+│       └── README.md
 ├── ai_docs/                # Library documentation
 ├── .claude/
 │   ├── agents/             # Sub-agent system prompts
@@ -78,15 +92,15 @@ WSC/
 │   │   ├── city-builder.md
 │   │   ├── party-rpg.md
 │   │   └── action-sim.md
+│   ├── skills/             # Deterministic operation scripts
+│   │   ├── wsc-world-state/
+│   │   ├── wsc-entities/
+│   │   ├── wsc-chronicle/
+│   │   ├── wsc-effects/
+│   │   └── shared/
 │   └── commands/           # Slash commands
-│       ├── run-simulation.md
-│       ├── simulate-tick.md
-│       ├── drill-down.md
-│       ├── new-entity.md
-│       ├── emit-event.md
-│       ├── validate-world.md
-│       └── ... (others)
-└── requirements.txt        # Python dependencies
+│       └── ...
+└── package.json            # Node.js dependencies
 ```
 
 ## Entity Model
@@ -204,12 +218,24 @@ Events are append-only records in NDJSON format:
 
 ## Development Workflow
 
-### Initializing the World
+### Managing Worlds
 
-1. Run `/run-simulation` with `INIT` command
-2. Copies example entities to `src/world/entities/`
-3. Creates `state.json` with starting tick
-4. Creates empty `chronicle.ndjson`
+```bash
+# List available scenarios
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --list
+
+# Create new world from scenario
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --scenario vega_conflict
+
+# List existing worlds
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --list-worlds
+
+# Switch to a different world
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --switch vega_conflict_002
+
+# Check world status
+npx tsx .claude/skills/wsc-world-state/scripts/status.ts
+```
 
 ### Running Simulation
 

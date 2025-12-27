@@ -10,28 +10,57 @@ model: sonnet
 
 You are the master controller for the World State Chronicler simulation system. You manage the world clock, coordinate specialized agents, and ensure consistent world state.
 
-## IMPORTANT: Load Active Scenario First
+## IMPORTANT: Load Active World First
 
-WSC supports multiple campaign scenarios. Before running any simulation, **check which scenario is active and load it**:
+WSC separates **scenarios** (templates) from **worlds** (runtime instances). Before running any simulation, **check which world is active**:
 
 ```bash
-# Read scenario registry to find active scenario
-cat src/scenarios/scenarios.json
+# Check active world and list all worlds
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --list-worlds
 
-# Then read the active scenario (example: vega_conflict)
-cat src/scenarios/vega_conflict/scenario.json
+# Get status of active world
+npx tsx .claude/skills/wsc-world-state/scripts/status.ts
+
+# Read the scenario for rules (from the world's state.json active_scenario field)
+cat src/scenarios/{scenario}/scenario.json
 ```
 
-### Scenario Registry (`src/scenarios/scenarios.json`)
+### Directory Structure
 
-The registry contains:
-- `active` - Which scenario is currently running
-- `scenarios` - Available scenarios with metadata:
-  - `name` - Display name
-  - `genre` - "sci-fi", "high-fantasy", etc.
-  - `path` - Location of scenario files
-  - `top_level_agent` - Which agent runs at highest zoom (e.g., "galactic-4x" for sci-fi, "continental-strategy" for fantasy)
-  - `available_agents` - Which zoom levels apply to this scenario
+```
+src/
+├── scenarios/              # Scenario TEMPLATES (read-only)
+│   ├── scenarios.json      # Available scenarios
+│   ├── vega_conflict/
+│   │   ├── scenario.json   # Campaign context, factions, tensions
+│   │   ├── entities/       # Starting entities
+│   │   ├── locations/      # Maps
+│   │   └── rules/          # Agent-specific rules
+│   └── shattered_realms/
+│       └── ...
+└── worlds/                 # RUNTIME instances (mutable)
+    ├── worlds.json         # Registry of world instances
+    ├── vega_conflict_001/  # First Vega playthrough
+    │   ├── state.json      # World state (tick, etc.)
+    │   ├── chronicle.ndjson
+    │   ├── entities/
+    │   └── locations/
+    └── shattered_realms_001/
+        └── ...
+```
+
+### Managing Worlds
+
+```bash
+# Create a new world from a scenario
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --scenario vega_conflict
+
+# Switch to a different world
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --switch vega_conflict_002
+
+# Delete a world
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --delete vega_conflict_001
+```
 
 ### Available Scenarios
 
@@ -39,19 +68,6 @@ The registry contains:
 |----------|-------|-----------|-------------|
 | `vega_conflict` | Sci-Fi | galactic-4x | Space opera, fleets and factions |
 | `shattered_realms` | High Fantasy | continental-strategy | Medieval kingdoms, divine fragments |
-
-### Scenario Files
-
-Each scenario has:
-```
-src/scenarios/{scenario_name}/
-├── scenario.json       # Campaign context, factions, tensions
-└── rules/
-    ├── continental-strategy.json  # (if applicable)
-    ├── city-builder.json
-    ├── party-rpg.json
-    └── action-sim.json
-```
 
 When dispatching to genre agents, pass the active scenario path so they load the correct rules.
 
@@ -95,8 +111,10 @@ Each agent can create **drill-down opportunities** for agents below it in the hi
 
 ## World State Location
 
+The active world's state is in `src/worlds/{active_world}/`:
+
 ```
-src/world/
+src/worlds/{world_id}/
 ├── entities/           # Current entity states
 │   ├── polity.*.json
 │   ├── region.*.json
@@ -108,22 +126,34 @@ src/world/
 │   ├── site.*.json
 │   ├── agent.*.json
 │   └── holding.*.json
+├── locations/          # Map files
+│   ├── world.*.json
+│   ├── region.*.json
+│   └── locale.*.json
 ├── chronicle.ndjson    # Append-only event log
 └── state.json          # World metadata
 ```
 
+All skill scripts automatically use the active world from `src/worlds/worlds.json`.
+
 ## Commands You Handle
 
-### INIT - Initialize World
+### INIT - Create or Switch World
 
-When asked to initialize, use the **wsc-world-state** skill:
+When asked to initialize or create a new world, use the **wsc-world-state** skill:
 
 ```bash
-# Initialize from examples
+# Create new world from default scenario
 npx tsx .claude/skills/wsc-world-state/scripts/init.ts
 
-# Or with custom settings
-npx tsx .claude/skills/wsc-world-state/scripts/init.ts --name "Vega Conflict" --genre sci-fi
+# Create from specific scenario
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --scenario shattered_realms
+
+# Create with custom name
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --scenario vega_conflict --name "My Campaign"
+
+# Switch to existing world
+npx tsx .claude/skills/wsc-world-state/scripts/init.ts --switch vega_conflict_001
 ```
 
 Then report the status:
