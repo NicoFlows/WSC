@@ -1,0 +1,198 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.site.zaras_shop",
+  "name": "Zara's Curiosity Shop",
+  "type": "shop_interior",
+  "scale": "site",
+  "tags": ["shop", "cramped", "cluttered", "secrets", "information"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.district.docking_bay_7",
+      "anchor": {"coords": {"x": 12, "y": 8}, "feature": "shop_row"},
+      "entity_id": "site.docking_bay_7"
+    },
+    "children": [
+      {
+        "location_id": "location.room.zaras_back_room",
+        "anchor": {"room": "back_room"},
+        "entity_id": null
+      }
+    ]
+  },
+
+  "entity_id": "site.zaras_shop",
+
+  "bounds": {
+    "width": 10,
+    "height": 8,
+    "depth": 3,
+    "units": "m"
+  },
+
+  "geometry": {
+    "format": "rooms",
+    "source": "wsc-manual-v1",
+    "data": {
+      "grid_size": 1,
+      "grid_units": "m",
+      "rects": [
+        {
+          "id": "main_shop",
+          "name": "Main Shop Floor",
+          "x": 0,
+          "y": 0,
+          "w": 7,
+          "h": 6,
+          "properties": {"public": true, "cluttered": true}
+        },
+        {
+          "id": "counter_area",
+          "name": "Counter",
+          "x": 5,
+          "y": 2,
+          "w": 2,
+          "h": 2,
+          "properties": {"zara_position": true, "register": true}
+        },
+        {
+          "id": "back_room",
+          "name": "Back Room",
+          "x": 7,
+          "y": 1,
+          "w": 3,
+          "h": 5,
+          "properties": {"private": true, "secure_storage": true}
+        },
+        {
+          "id": "entrance_alcove",
+          "name": "Entrance",
+          "x": 0,
+          "y": 2,
+          "w": 1,
+          "h": 2,
+          "properties": {"door": true, "sensor": true}
+        }
+      ],
+      "doors": [
+        {
+          "id": "front_door",
+          "from": "entrance_alcove",
+          "to": "external",
+          "position": {"x": 0, "y": 3},
+          "type": "sliding",
+          "properties": {"locked_after_hours": true, "sensor_chime": true}
+        },
+        {
+          "id": "back_door",
+          "from": "main_shop",
+          "to": "back_room",
+          "position": {"x": 7, "y": 3},
+          "type": "hinged",
+          "properties": {"locked": true, "keypad": true, "hidden_by_curtain": true}
+        }
+      ],
+      "features": [
+        {
+          "id": "display_shelves_1",
+          "room": "main_shop",
+          "type": "shelving",
+          "position": {"x": 1, "y": 0},
+          "properties": {"contents": "curiosities", "dusty": true}
+        },
+        {
+          "id": "display_shelves_2",
+          "room": "main_shop",
+          "type": "shelving",
+          "position": {"x": 1, "y": 5},
+          "properties": {"contents": "antiques", "valuable_items": true}
+        },
+        {
+          "id": "counter",
+          "room": "counter_area",
+          "type": "counter",
+          "position": {"x": 5, "y": 2},
+          "properties": {"data_terminal": true, "hidden_compartment": true}
+        },
+        {
+          "id": "safe",
+          "room": "back_room",
+          "type": "safe",
+          "position": {"x": 9, "y": 2},
+          "properties": {"biometric": true, "contains": "sensitive_data"}
+        },
+        {
+          "id": "cot",
+          "room": "back_room",
+          "type": "furniture",
+          "position": {"x": 8, "y": 5},
+          "properties": {"zara_sleeps_here": true}
+        },
+        {
+          "id": "hidden_terminal",
+          "room": "back_room",
+          "type": "computer",
+          "position": {"x": 9, "y": 4},
+          "properties": {"encrypted": true, "intel_network": true}
+        }
+      ]
+    }
+  },
+
+  "features": [
+    {
+      "id": "incense_burner",
+      "name": "Incense Burner",
+      "type": "atmospheric",
+      "position": {"x": 3, "y": 3},
+      "properties": {"scent": "sandalwood_and_machine_oil", "always_burning": true}
+    },
+    {
+      "id": "window_display",
+      "name": "Window Display",
+      "type": "display",
+      "position": {"x": 0, "y": 0, "w": 1, "h": 2},
+      "properties": {"visible_from_outside": true, "eclectic_junk": true}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "to_bay",
+      "from": "front_door",
+      "to": "location.district.docking_bay_7",
+      "type": "door",
+      "properties": {"public_access": true}
+    },
+    {
+      "id": "emergency_exit",
+      "from": "back_room",
+      "to": "location.locale.port_nexus",
+      "type": "maintenance_hatch",
+      "properties": {
+        "hidden": true,
+        "leads_to": "maintenance_tunnels",
+        "escape_route": true
+      }
+    }
+  ],
+
+  "terrain": {
+    "default": "shop_floor",
+    "atmosphere": "standard_smoky",
+    "temperature": "warm",
+    "hazards": ["cluttered_floor", "precariously_stacked_items"]
+  },
+
+  "metadata": {
+    "created": "2025-01-15T00:00:00Z",
+    "generator": "manual",
+    "notes": "Key location for the Intel Deal scene. Zara's shop is a front for her information brokering. The back room contains her real operation.",
+    "suitable_agents": ["party-rpg"],
+    "scene_notes": {
+      "atmosphere": "The cramped shop smells of incense and machine oil. Antiques from a dozen worlds crowd the shelves—most of them junk, but the discerning eye might spot a treasure.",
+      "zara_position": "Behind the counter, data pad in hand, expression carefully neutral",
+      "lighting": "Dim, with spotlights on certain display items"
+    }
+  }
+}

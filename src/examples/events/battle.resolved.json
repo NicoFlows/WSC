@@ -1,0 +1,37 @@
+{
+  "id": "evt_10492",
+  "t_world": 1042.33,
+  "t_stream": "02:14:33",
+  "type": "battle.resolved",
+  "where": "region.vega",
+  "who": ["force.hegemony_7th_fleet", "force.free_trader_raiders", "agent.admiral_chen", "agent.captain_reva"],
+  "data": {
+    "battle_name": "Battle of the Outer Belt",
+    "outcome": "free_trader_victory",
+    "victory_type": "tactical",
+    "losses": {
+      "hegemony": {
+        "strength_before": 0.75,
+        "strength_after": 0.50,
+        "ships_lost": {"cruisers": 2, "destroyers": 8, "fighters": 45},
+        "casualties": 1200,
+        "notable_losses": []
+      },
+      "free_traders": {
+        "strength_before": 0.25,
+        "strength_after": 0.20,
+        "ships_lost": {"destroyers": 1, "fighters": 12},
+        "casualties": 180,
+        "notable_losses": []
+      }
+    },
+    "territory_change": false,
+    "tactical_summary": "Reva lured the 7th Fleet into the dense asteroid field where superior Hegemony numbers counted for nothing. Using pre-positioned sensor buoys and intimate knowledge of the terrain, the Raiders executed a devastating ambush before melting back into the belt.",
+    "turning_point": "Hegemony cruiser Relentless destroyed by asteroid collision while pursuing Raiders"
+  },
+  "causes": ["evt_10311", "evt_10456", "evt_10478"],
+  "source": "lens.regional",
+  "confidence": 0.98,
+  "importance": 0.91,
+  "narrative_summary": "In a stunning upset, Captain Reva's outnumbered Raiders ambushed the Hegemony 7th Fleet in the Outer Belt, destroying two cruisers and eight destroyers while suffering minimal losses. The victory proved the Raiders could hurt the Hegemony—but also guaranteed brutal retaliation."
+}

@@ -1,0 +1,38 @@
+{
+  "id": "link.vega_inner.outer_belt",
+  "type": "link",
+  "name": "Belt Passage",
+  "tags": ["hidden", "dangerous", "smuggler_route", "unmapped"],
+  "attrs": {
+    "endpoints": ["locale.port_nexus", "feature.outer_belt"],
+    "kind": "secret_route",
+    "capacity": 0.2,
+    "risk": 0.6,
+    "bidirectional": true,
+    "distance": 8.7,
+    "travel_time": "18_standard_hours"
+  },
+  "ai": {
+    "persona": "The Belt Passage is a smuggler's secret—a treacherous route through the inner system's debris fields that connects Port Nexus to the Outer Belt while avoiding Hegemony patrol routes. Only experienced pilots with the right nav data can thread it safely. For everyone else, it's a death trap of tumbling rocks and sensor ghosts. The Free Traders guard this route jealously; it's their lifeline.",
+    "navigation": {
+      "difficulty": 0.85,
+      "required_skill": "expert_pilot",
+      "nav_data_required": true,
+      "sensor_coverage": 0.1
+    },
+    "hazards": [
+      {"type": "collision", "probability": 0.3, "mitigation": "nav_data"},
+      {"type": "getting_lost", "probability": 0.2, "mitigation": "experienced_pilot"},
+      {"type": "ambush", "probability": 0.1, "mitigation": "varies"}
+    ],
+    "voice": {
+      "tone": "whispered",
+      "speech_patterns": "This route isn't discussed openly. References are oblique: 'the back door,' 'the ghost road,' 'taking the scenic route.'"
+    },
+    "access": {
+      "known_to": ["polity.free_traders", "select_smugglers"],
+      "hegemony_awareness": 0.2,
+      "cost_for_nav_data": "high_or_favor"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "region.nexus_prime",
+  "type": "region",
+  "name": "Nexus Prime",
+  "tags": ["hegemony_core", "wealthy", "secure", "trade_hub"],
+  "attrs": {
+    "coords": {"x": 0.0, "y": 0.0, "z": 0.0},
+    "security": 0.95,
+    "economy": 0.95,
+    "population": 0.9,
+    "hazards": [],
+    "terrain": "stable_g_class_star"
+  },
+  "ai": {
+    "persona": "Nexus Prime is the gleaming heart of the Hegemony, a system so secure and prosperous that most citizens have never heard a weapon fired in anger. Massive orbital habitats circle the temperate world of Prime itself, while the system's jump points bustle with commerce from across human space. Beneath the surface calm, however, the intelligence services wage an endless shadow war against dissent.",
+    "atmosphere": {
+      "mood": "controlled_prosperity",
+      "visual": "Gleaming stations, orderly traffic lanes, constant patrols",
+      "sounds": ["smooth announcements", "commerce chatter", "patriotic music"]
+    },
+    "active_tensions": [
+      "underground_resistance",
+      "class_inequality",
+      "surveillance_state"
+    ],
+    "rumors": [
+      "The Supreme Commander hasn't been seen in months",
+      "They say the lower hab levels are like a different world",
+      "Someone's been hacking the propaganda feeds"
+    ],
+    "voice": {
+      "tone": "polished",
+      "speech_patterns": "Official communications are smooth and reassuring. Dissent is 'misinformation.' Problems are 'opportunities for improvement.'"
+    }
+  }
+}

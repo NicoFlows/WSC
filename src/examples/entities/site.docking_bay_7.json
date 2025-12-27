@@ -1,0 +1,53 @@
+{
+  "id": "site.port_nexus.docking_bay_7",
+  "type": "site",
+  "name": "Docking Bay 7",
+  "tags": ["commercial", "busy", "smuggler_friendly", "watched"],
+  "attrs": {
+    "locale_id": "locale.port_nexus",
+    "owner_polity_id": "polity.hegemony",
+    "population": 800,
+    "prosperity": 0.5,
+    "unrest": 0.3,
+    "hazard": 0.2,
+    "infrastructure": {
+      "power": {"type": "station_grid", "capacity": 0.7, "reliability": 0.9},
+      "transit": {"type": "cargo_lifts", "capacity": 0.8, "speed": 0.6},
+      "housing": {"type": "worker_quarters", "capacity": 200, "quality": 0.4},
+      "production": {"type": "cargo_handling", "throughput": 0.75},
+      "defense": {"type": "security_checkpoint", "strength": 0.4},
+      "culture": {"type": "cantina", "quality": 0.5}
+    }
+  },
+  "ai": {
+    "persona": "Bay 7 is where the interesting ships dock—the ones with cargo manifests that don't quite add up, the ones whose captains pay in cash and don't make eye contact with security. It's technically under Hegemony jurisdiction, but the dock master has an understanding with certain parties. For the right price, inspections can be delayed, records can be misplaced, and crates can move without questions.",
+    "atmosphere": {
+      "mood": "busy_shady",
+      "visual": "Stacked cargo containers, flickering lights, crews loading and unloading",
+      "sounds": ["loader machinery", "shouted instructions", "ship systems cycling"],
+      "smells": ["hydraulic fluid", "ship exhaust", "something cooking in the cantina"]
+    },
+    "active_tensions": [
+      "hegemony_inspection_pressure",
+      "competing_smuggler_crews",
+      "dock_worker_union_disputes"
+    ],
+    "npcs_typical": [
+      {"role": "dock_master", "disposition": "corrupt_practical"},
+      {"role": "security_guard", "disposition": "underpaid_bored"},
+      {"role": "loader_crew", "disposition": "hardworking_cynical"},
+      {"role": "ship_crews", "disposition": "varied"}
+    ],
+    "voice": {
+      "tone": "working_class_suspicious",
+      "vocabulary": ["cargo", "manifest", "inspection", "delay", "misunderstanding"],
+      "speech_patterns": "Nobody asks direct questions. Everything is implied. A knowing look says more than words."
+    },
+    "scene_hooks": [
+      "A crate is being loaded that shouldn't exist",
+      "Two crews are having a territorial dispute",
+      "Hegemony inspector just arrived unannounced",
+      "Someone left a data chip in the cantina"
+    ]
+  }
+}

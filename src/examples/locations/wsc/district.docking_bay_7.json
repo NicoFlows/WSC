@@ -1,0 +1,184 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.district.docking_bay_7",
+  "name": "Docking Bay 7",
+  "type": "docking_facility",
+  "scale": "district",
+  "tags": ["docking", "industrial", "busy", "accessible"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.locale.port_nexus",
+      "anchor": {"district": "docking_ring", "coords": {"x": 7, "y": 0}},
+      "entity_id": "locale.port_nexus"
+    },
+    "children": [
+      {
+        "location_id": "location.site.zaras_shop",
+        "anchor": {"coords": {"x": 12, "y": 8}, "feature": "shop_row"},
+        "entity_id": "site.zaras_shop"
+      },
+      {
+        "location_id": "location.site.bay_7_control",
+        "anchor": {"coords": {"x": 5, "y": 2}, "feature": "control_booth"},
+        "entity_id": null
+      }
+    ]
+  },
+
+  "entity_id": "site.docking_bay_7",
+
+  "bounds": {
+    "width": 80,
+    "height": 60,
+    "depth": 20,
+    "units": "m"
+  },
+
+  "geometry": {
+    "format": "grid",
+    "source": "wsc-manual-v1",
+    "data": {
+      "width": 16,
+      "height": 12,
+      "cell_size": 5,
+      "cell_units": "m",
+      "default_terrain": "deck_plating",
+      "cells": {
+        "0_0": {"terrain": "wall"},
+        "0_1": {"terrain": "wall"},
+        "0_2": {"terrain": "wall"},
+        "0_3": {"terrain": "airlock", "id": "main_airlock"},
+        "0_4": {"terrain": "airlock", "id": "main_airlock"},
+        "0_5": {"terrain": "wall"},
+        "0_6": {"terrain": "wall"},
+        "0_7": {"terrain": "wall"},
+        "0_8": {"terrain": "wall"},
+        "0_9": {"terrain": "airlock", "id": "cargo_airlock"},
+        "0_10": {"terrain": "airlock", "id": "cargo_airlock"},
+        "0_11": {"terrain": "wall"},
+
+        "1_3": {"terrain": "deck_plating", "feature": "umbilical_connection"},
+        "1_4": {"terrain": "deck_plating", "feature": "umbilical_connection"},
+        "1_9": {"terrain": "deck_plating", "feature": "cargo_lift"},
+        "1_10": {"terrain": "deck_plating", "feature": "cargo_lift"},
+
+        "2_0": {"terrain": "deck_plating"},
+        "2_1": {"terrain": "deck_plating"},
+        "2_2": {"terrain": "deck_plating"},
+        "2_3": {"terrain": "landing_pad", "id": "pad_alpha"},
+        "2_4": {"terrain": "landing_pad", "id": "pad_alpha"},
+        "2_5": {"terrain": "landing_pad", "id": "pad_alpha"},
+        "2_6": {"terrain": "landing_pad", "id": "pad_alpha"},
+        "2_7": {"terrain": "landing_pad", "id": "pad_alpha"},
+        "2_8": {"terrain": "deck_plating"},
+        "2_9": {"terrain": "cargo_area"},
+        "2_10": {"terrain": "cargo_area"},
+        "2_11": {"terrain": "deck_plating"},
+
+        "5_0": {"terrain": "room", "room_id": "control_booth"},
+        "5_1": {"terrain": "room", "room_id": "control_booth"},
+        "5_2": {"terrain": "deck_plating"},
+
+        "8_0": {"terrain": "room", "room_id": "crew_lounge"},
+        "8_1": {"terrain": "room", "room_id": "crew_lounge"},
+        "8_2": {"terrain": "deck_plating", "feature": "corridor_to_promenade"},
+
+        "10_8": {"terrain": "deck_plating", "feature": "shop_row"},
+        "11_8": {"terrain": "deck_plating", "feature": "shop_row"},
+        "12_8": {"terrain": "room", "room_id": "zaras_shop"},
+        "13_8": {"terrain": "room", "room_id": "zaras_shop"},
+        "12_9": {"terrain": "room", "room_id": "zaras_shop"},
+        "13_9": {"terrain": "room", "room_id": "zaras_shop"},
+
+        "15_5": {"terrain": "door", "id": "exit_to_promenade"},
+        "15_6": {"terrain": "door", "id": "exit_to_promenade"}
+      }
+    }
+  },
+
+  "features": [
+    {
+      "id": "pad_alpha",
+      "name": "Landing Pad Alpha",
+      "type": "landing_pad",
+      "position": {"x": 3, "y": 2, "w": 5, "h": 4},
+      "properties": {
+        "capacity": "small_medium",
+        "current_ship": "holding.wandering_star",
+        "fuel_available": true,
+        "repair_available": true
+      }
+    },
+    {
+      "id": "control_booth",
+      "name": "Bay Control",
+      "type": "control_room",
+      "position": {"x": 0, "y": 5, "w": 2, "h": 2},
+      "properties": {"staffed": true, "monitors_bay": true}
+    },
+    {
+      "id": "cargo_area",
+      "name": "Cargo Staging",
+      "type": "cargo_area",
+      "position": {"x": 9, "y": 2, "w": 2, "h": 6},
+      "properties": {"crates": 15, "scanner": true}
+    },
+    {
+      "id": "zaras_shop",
+      "name": "Zara's Curiosity Shop",
+      "type": "shop",
+      "position": {"x": 8, "y": 12, "w": 2, "h": 2},
+      "properties": {
+        "owner": "agent.zara",
+        "business_type": "curiosities",
+        "front_for": "information_broker"
+      }
+    },
+    {
+      "id": "crew_lounge",
+      "name": "Pilot's Rest",
+      "type": "lounge",
+      "position": {"x": 0, "y": 8, "w": 2, "h": 2},
+      "properties": {"serves_food": true, "serves_drinks": true}
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "to_promenade",
+      "from": "exit_to_promenade",
+      "to": "location.locale.port_nexus",
+      "type": "corridor",
+      "properties": {"direction": "commercial_promenade"}
+    },
+    {
+      "id": "to_space",
+      "from": "main_airlock",
+      "to": "external",
+      "type": "airlock",
+      "properties": {"ship_umbilical": true}
+    },
+    {
+      "id": "cargo_to_space",
+      "from": "cargo_airlock",
+      "to": "external",
+      "type": "cargo_airlock",
+      "properties": {"heavy_lift": true}
+    }
+  ],
+
+  "terrain": {
+    "default": "deck_plating",
+    "atmosphere": "standard",
+    "temperature": "controlled",
+    "hazards": ["heavy_machinery", "cargo_movement", "vacuum_nearby"]
+  },
+
+  "metadata": {
+    "created": "2025-01-15T00:00:00Z",
+    "generator": "manual",
+    "notes": "Where the Wandering Star docks. Adjacent to Zara's shop. Key location for scene with Zara.",
+    "suitable_agents": ["party-rpg", "action-sim"]
+  }
+}

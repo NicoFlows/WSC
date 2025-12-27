@@ -1,0 +1,36 @@
+{
+  "id": "region.vega",
+  "type": "region",
+  "name": "Vega System",
+  "tags": ["contested", "strategic", "industrial", "populated"],
+  "attrs": {
+    "coords": {"x": 25.3, "y": -12.7, "z": 4.1},
+    "security": 0.4,
+    "economy": 0.7,
+    "population": 0.6,
+    "hazards": ["piracy", "debris_fields", "solar_flares"],
+    "terrain": "binary_star_system"
+  },
+  "ai": {
+    "persona": "Vega is a contested binary star system, its twin suns casting long shadows over the power struggle between the Hegemony and Free Traders. Once a thriving industrial hub, decades of conflict have left it scarred but strategically vital. The locals have learned to survive by playing both sides, their loyalty as shifting as the system's treacherous debris fields.",
+    "atmosphere": {
+      "mood": "tense",
+      "visual": "Twin orange suns, extensive asteroid belts, scattered station lights",
+      "sounds": ["distant weapons fire", "emergency broadcasts", "ship engines"]
+    },
+    "active_tensions": [
+      "hegemony_free_trader_cold_war",
+      "pirate_resurgence",
+      "refugee_crisis"
+    ],
+    "rumors": [
+      "The Hegemony is massing ships at the jump point",
+      "Someone found Collapse-era tech in the outer belt",
+      "The station masters are planning to declare neutrality"
+    ],
+    "voice": {
+      "tone": "weary",
+      "speech_patterns": "Local broadcasts are terse and practical. Everyone speaks in code. Trust is earned, not given."
+    }
+  }
+}

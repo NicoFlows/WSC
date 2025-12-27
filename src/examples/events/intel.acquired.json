@@ -1,0 +1,32 @@
+{
+  "id": "evt_10520",
+  "t_world": 1045.0,
+  "t_stream": null,
+  "type": "intel.acquired",
+  "where": "locale.port_nexus",
+  "who": ["agent.captain_reva", "agent.zara"],
+  "data": {
+    "intel_type": "strategic",
+    "subject": "hegemony_reinforcement_schedule",
+    "source": "agent.zara",
+    "reliability": 0.8,
+    "cost": {
+      "credits": 50000,
+      "favor_owed": true
+    },
+    "contents": {
+      "summary": "Hegemony 12th Fleet diverted to Nexus Prime; Vega reinforcements delayed 30 days",
+      "implications": ["window_of_opportunity", "hegemony_internal_politics"],
+      "expiration": "30_days"
+    },
+    "secrecy": {
+      "known_to": ["agent.captain_reva", "agent.zara"],
+      "hegemony_aware_of_leak": false
+    }
+  },
+  "causes": ["evt_10492"],
+  "source": "lens.scene",
+  "confidence": 0.8,
+  "importance": 0.75,
+  "narrative_summary": "Zara's network delivered crucial intelligence: the Hegemony reinforcements Captain Reva feared were delayed. Someone high up was playing political games with Admiral Chen. Reva had thirty days to press her advantage—or prepare for the hammer to fall."
+}

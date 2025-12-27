@@ -1,0 +1,237 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.system.vega",
+  "name": "Vega System",
+  "type": "binary_star_system",
+  "scale": "system",
+  "tags": ["contested", "binary_star", "industrial", "strategic", "debris_fields"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.sector.coreward_reach",
+      "anchor": {"coords": {"x": 25.3, "y": -12.7, "z": 4.1}},
+      "entity_id": null
+    },
+    "children": [
+      {
+        "location_id": "location.body.vega_prime",
+        "anchor": {"orbit": 3, "body_type": "planet"},
+        "entity_id": "feature.vega_prime"
+      },
+      {
+        "location_id": "location.body.vega_station",
+        "anchor": {"orbit": 3, "body_type": "station", "orbits": "vega_prime"},
+        "entity_id": "locale.garrison_alpha"
+      },
+      {
+        "location_id": "location.body.outer_belt",
+        "anchor": {"orbit": 6, "body_type": "asteroid_belt"},
+        "entity_id": "feature.outer_belt"
+      }
+    ]
+  },
+
+  "entity_id": "region.vega",
+
+  "bounds": {
+    "width": 40,
+    "height": 40,
+    "depth": 5,
+    "units": "au"
+  },
+
+  "geometry": {
+    "format": "orbital",
+    "source": "wsc-manual-v1",
+    "data": {
+      "center": {
+        "id": "vega_alpha",
+        "type": "star",
+        "class": "A0V",
+        "properties": {
+          "mass_solar": 2.1,
+          "luminosity_solar": 40,
+          "companion": "vega_beta"
+        }
+      },
+      "binary_companion": {
+        "id": "vega_beta",
+        "type": "star",
+        "class": "K2V",
+        "properties": {
+          "mass_solar": 0.8,
+          "luminosity_solar": 0.4,
+          "separation_au": 0.2
+        }
+      },
+      "orbits": [
+        {
+          "slot": 1,
+          "distance_au": 0.8,
+          "bodies": [
+            {
+              "id": "vega_i",
+              "name": "Vega I",
+              "type": "planet",
+              "subtype": "molten",
+              "properties": {"habitable": false, "resources": "minerals"}
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "distance_au": 1.5,
+          "bodies": [
+            {
+              "id": "vega_ii",
+              "name": "Vega II",
+              "type": "planet",
+              "subtype": "barren",
+              "properties": {"habitable": false, "resources": "rare_earth"}
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "distance_au": 3.2,
+          "bodies": [
+            {
+              "id": "vega_prime",
+              "name": "Vega Prime",
+              "type": "planet",
+              "subtype": "terrestrial",
+              "properties": {
+                "habitable": true,
+                "population": 12000000,
+                "atmosphere": "standard",
+                "gravity": 0.95
+              }
+            },
+            {
+              "id": "vega_prime_moon",
+              "name": "Shepherd's Watch",
+              "type": "moon",
+              "orbits": "vega_prime",
+              "properties": {"military_base": true}
+            },
+            {
+              "id": "garrison_alpha_station",
+              "name": "Garrison Alpha",
+              "type": "station",
+              "orbits": "vega_prime",
+              "properties": {"hegemony_military": true, "docking": true}
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "distance_au": 5.8,
+          "bodies": [
+            {
+              "id": "vega_iv",
+              "name": "Vega IV",
+              "type": "planet",
+              "subtype": "gas_giant",
+              "properties": {"moons": 12, "fuel_skimming": true}
+            }
+          ]
+        },
+        {
+          "slot": 5,
+          "distance_au": 8.5,
+          "bodies": [
+            {
+              "id": "inner_belt",
+              "name": "Inner Belt",
+              "type": "asteroid_belt",
+              "properties": {"density": "sparse", "mined": true}
+            }
+          ]
+        },
+        {
+          "slot": 6,
+          "distance_au": 15.0,
+          "bodies": [
+            {
+              "id": "outer_belt",
+              "name": "Outer Belt",
+              "type": "asteroid_belt",
+              "properties": {
+                "density": "dense",
+                "resources": "rich",
+                "pirate_activity": true,
+                "free_trader_presence": true
+              }
+            }
+          ]
+        }
+      ],
+      "features": [
+        {
+          "id": "jump_point_nexus",
+          "name": "Nexus Jump Point",
+          "type": "jump_point",
+          "position_au": {"x": -12, "y": 5, "z": 0},
+          "properties": {"destination": "nexus_prime", "travel_days": 3}
+        },
+        {
+          "id": "jump_point_deneb",
+          "name": "Deneb Jump Point",
+          "type": "jump_point",
+          "position_au": {"x": 18, "y": -8, "z": 2},
+          "properties": {"destination": "deneb_station", "travel_days": 4}
+        },
+        {
+          "id": "debris_field_alpha",
+          "name": "Graveyard Alpha",
+          "type": "debris_field",
+          "position_au": {"x": 4, "y": 2, "z": 0},
+          "properties": {"description": "Remnants of a battle from the first war", "salvage": true}
+        }
+      ]
+    }
+  },
+
+  "features": [
+    {
+      "id": "contested_corridor",
+      "name": "The Corridor",
+      "type": "patrol_zone",
+      "position": {"orbit_range": [3, 6]},
+      "properties": {
+        "description": "Heavily patrolled space between Vega Prime and the Outer Belt"
+      }
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "jump_nexus",
+      "from": "jump_point_nexus",
+      "to": "location.system.nexus_prime",
+      "type": "jump_lane",
+      "properties": {"travel_days": 3}
+    },
+    {
+      "id": "jump_deneb",
+      "from": "jump_point_deneb",
+      "to": "location.system.deneb_station",
+      "type": "jump_lane",
+      "properties": {"travel_days": 4}
+    }
+  ],
+
+  "terrain": {
+    "default": "vacuum",
+    "atmosphere": "none",
+    "temperature": "variable",
+    "hazards": ["solar_flares", "debris_fields", "radiation_zones", "piracy"]
+  },
+
+  "metadata": {
+    "created": "2025-01-15T00:00:00Z",
+    "generator": "manual",
+    "notes": "Primary contested system in the Vega Conflict scenario. Binary star creates interesting navigation challenges.",
+    "suitable_agents": ["galactic-4x", "action-sim"]
+  }
+}

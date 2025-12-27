@@ -1,0 +1,172 @@
+{
+  "name": "Iceshade Pits",
+  "type": "cave",
+  "generator": "one-page-dungeon (manual transcription from PNG)",
+  "version": "1.0",
+  "gridSize": 5,
+  "gridUnits": "feet",
+  "description": "A natural cave system with two entrances from the west. The caves feature irregular chambers connected by narrow passages, with scattered rocks and debris throughout.",
+  "entrances": [
+    {
+      "id": "entrance_north",
+      "position": {"x": 0, "y": 8},
+      "direction": "east",
+      "description": "Northern cave mouth, narrow passage with ladder"
+    },
+    {
+      "id": "entrance_south",
+      "position": {"x": 0, "y": 16},
+      "direction": "east",
+      "description": "Southern cave mouth, wider opening"
+    }
+  ],
+  "chambers": [
+    {
+      "id": "chamber_northwest",
+      "name": "Northwest Cavern",
+      "type": "cavern",
+      "approximate_bounds": {"x": 6, "y": 2, "w": 10, "h": 8},
+      "description": "Large irregular cavern in the northwest section. Rocky floor with debris.",
+      "features": ["rocks", "uneven_floor"],
+      "connections": ["passage_north_central"]
+    },
+    {
+      "id": "chamber_northeast",
+      "name": "Northeast Chamber",
+      "type": "cavern",
+      "approximate_bounds": {"x": 18, "y": 2, "w": 8, "h": 6},
+      "description": "Smaller cavern in the northeast corner with a narrow entrance.",
+      "features": ["narrow_entrance", "debris"],
+      "connections": ["passage_north_central"]
+    },
+    {
+      "id": "chamber_central_upper",
+      "name": "Upper Central Cave",
+      "type": "cavern",
+      "approximate_bounds": {"x": 12, "y": 6, "w": 8, "h": 6},
+      "description": "Central cavern connecting the northern chambers to the rest of the complex.",
+      "features": ["rock_pillars", "uneven_floor"],
+      "connections": ["passage_north_central", "passage_central_south"]
+    },
+    {
+      "id": "chamber_east",
+      "name": "Eastern Cavern",
+      "type": "cavern",
+      "approximate_bounds": {"x": 20, "y": 8, "w": 8, "h": 10},
+      "description": "Large irregular chamber on the eastern side with multiple rock formations.",
+      "features": ["stalagmites", "debris", "shadows"],
+      "connections": ["passage_central_east"]
+    },
+    {
+      "id": "chamber_west_entry",
+      "name": "Western Entry Chamber",
+      "type": "cavern",
+      "approximate_bounds": {"x": 2, "y": 12, "w": 8, "h": 8},
+      "description": "Entry chamber accessed from the southern cave mouth. Natural gathering area.",
+      "features": ["smooth_floor", "echoes"],
+      "connections": ["entrance_south", "passage_west_central"]
+    },
+    {
+      "id": "chamber_central_lower",
+      "name": "Lower Central Cave",
+      "type": "cavern",
+      "approximate_bounds": {"x": 10, "y": 14, "w": 10, "h": 8},
+      "description": "Sprawling lower central area with irregular walls and scattered rocks.",
+      "features": ["rock_formations", "debris", "uneven_floor"],
+      "connections": ["passage_central_south", "passage_west_central", "passage_south"]
+    },
+    {
+      "id": "chamber_southwest",
+      "name": "Southwest Cavern",
+      "type": "cavern",
+      "approximate_bounds": {"x": 4, "y": 20, "w": 8, "h": 8},
+      "description": "Southern chamber with irregular shape and rocky outcroppings.",
+      "features": ["rock_pillars", "shadows", "dampness"],
+      "connections": ["passage_south"]
+    },
+    {
+      "id": "chamber_south",
+      "name": "Southern Chamber",
+      "type": "cavern",
+      "approximate_bounds": {"x": 12, "y": 22, "w": 8, "h": 6},
+      "description": "Southernmost chamber of the cave system. Dead end with interesting formations.",
+      "features": ["stalactites", "mineral_deposits"],
+      "connections": ["passage_south"]
+    }
+  ],
+  "passages": [
+    {
+      "id": "passage_north_entry",
+      "connects": ["entrance_north", "chamber_northwest"],
+      "width": "narrow",
+      "features": ["ladder", "steep"]
+    },
+    {
+      "id": "passage_north_central",
+      "connects": ["chamber_northwest", "chamber_central_upper", "chamber_northeast"],
+      "width": "medium",
+      "features": ["winding"]
+    },
+    {
+      "id": "passage_central_east",
+      "connects": ["chamber_central_upper", "chamber_east"],
+      "width": "narrow",
+      "features": ["squeeze_point"]
+    },
+    {
+      "id": "passage_central_south",
+      "connects": ["chamber_central_upper", "chamber_central_lower"],
+      "width": "medium",
+      "features": ["rocky"]
+    },
+    {
+      "id": "passage_west_central",
+      "connects": ["chamber_west_entry", "chamber_central_lower"],
+      "width": "wide",
+      "features": ["main_corridor"]
+    },
+    {
+      "id": "passage_south",
+      "connects": ["chamber_central_lower", "chamber_southwest", "chamber_south"],
+      "width": "medium",
+      "features": ["branching", "debris"]
+    }
+  ],
+  "pointsOfInterest": [
+    {
+      "id": "poi_1",
+      "chamber": "chamber_northeast",
+      "position": {"x": 24, "y": 3},
+      "type": "feature",
+      "description": "Small alcove with mineral deposits"
+    },
+    {
+      "id": "poi_2",
+      "chamber": "chamber_east",
+      "position": {"x": 25, "y": 12},
+      "type": "hazard",
+      "description": "Unstable rock formation"
+    },
+    {
+      "id": "poi_3",
+      "chamber": "chamber_south",
+      "position": {"x": 16, "y": 25},
+      "type": "feature",
+      "description": "Underground pool (ice cold)"
+    }
+  ],
+  "terrain": {
+    "floor": "natural_stone",
+    "walls": "rough_rock",
+    "ceiling_height": "variable_10_to_20_feet",
+    "lighting": "none",
+    "temperature": "cold",
+    "humidity": "damp"
+  },
+  "metadata": {
+    "source_image": "iceshade_pits.png",
+    "transcription_notes": "Manual transcription from Watabou Cave generator PNG. Grid squares estimated at 5ft. Chamber boundaries are approximate due to irregular natural cave shapes.",
+    "suitable_for": ["party-rpg", "action-sim"],
+    "suggested_encounters": ["ambush", "exploration", "lair"]
+  }
+}

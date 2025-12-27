@@ -1,0 +1,38 @@
+{
+  "id": "link.nexus_prime.vega",
+  "type": "link",
+  "name": "Nexus-Vega Trade Lane",
+  "tags": ["major_route", "patrolled", "high_traffic", "strategic"],
+  "attrs": {
+    "endpoints": ["region.nexus_prime", "region.vega"],
+    "kind": "jump_lane",
+    "capacity": 0.8,
+    "risk": 0.3,
+    "bidirectional": true,
+    "distance": 25.3,
+    "travel_time": "3_standard_days"
+  },
+  "ai": {
+    "persona": "The Nexus-Vega lane is the jugular vein of Hegemony logistics in this sector—a constant stream of freighters, military convoys, and passenger liners moving between the capital and the contested frontier. The Hegemony patrols it heavily, but the route is long and the Free Traders know every hiding spot. It's become a cat-and-mouse game: convoys travel in groups, raiders pick off stragglers, and insurance rates climb ever higher.",
+    "traffic_pattern": {
+      "commercial": 0.6,
+      "military": 0.3,
+      "civilian": 0.1,
+      "peak_times": ["standard_week_start", "standard_week_end"]
+    },
+    "hazards": [
+      {"type": "piracy", "probability": 0.15, "location": "mid_route"},
+      {"type": "raiders", "probability": 0.25, "location": "vega_approach"},
+      {"type": "hegemony_inspection", "probability": 0.4, "location": "both_ends"}
+    ],
+    "voice": {
+      "tone": "businesslike_tense",
+      "speech_patterns": "Traffic control is professional but clipped. Everyone watches their sensors. Convoy masters bark orders; independent captains keep their heads down."
+    },
+    "control_points": [
+      {"name": "Nexus Gate", "controller": "polity.hegemony", "security": 0.95},
+      {"name": "Waypoint Sigma", "controller": "polity.hegemony", "security": 0.6},
+      {"name": "Vega Approach", "controller": "polity.hegemony", "security": 0.5}
+    ]
+  }
+}

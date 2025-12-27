@@ -1,0 +1,28 @@
+{
+  "id": "evt_10495",
+  "t_world": 1042.5,
+  "t_stream": "02:45:00",
+  "type": "agent.promoted",
+  "where": "locale.port_nexus",
+  "who": ["agent.kai_chen", "agent.captain_reva"],
+  "data": {
+    "agent_id": "agent.kai_chen",
+    "previous_role": "fighter_pilot",
+    "new_role": "squadron_leader",
+    "promotion_type": "field_promotion",
+    "reason": "exceptional_performance_in_battle",
+    "promoted_by": "agent.captain_reva",
+    "salience_change": {
+      "before": 0.4,
+      "after": 0.6
+    },
+    "context": "During the Battle of the Outer Belt, Kai Chen led a desperate fighter screen that allowed the main force to escape. His quick thinking and natural leadership saved dozens of lives.",
+    "ceremony": false,
+    "public_knowledge": true
+  },
+  "causes": ["evt_10492"],
+  "source": "lens.scene",
+  "confidence": 1.0,
+  "importance": 0.65,
+  "narrative_summary": "In the aftermath of the battle, Captain Reva promoted Kai Chen to squadron leader, recognizing his heroic actions during the retreat. 'You've got the instincts,' she told him. 'Now learn to trust them.' The young pilot had taken his first real step toward becoming a leader."
+}

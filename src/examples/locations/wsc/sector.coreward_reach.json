@@ -1,0 +1,206 @@
+{
+  "$schema": "wsc-location-v1",
+  "id": "location.sector.coreward_reach",
+  "name": "Coreward Reach",
+  "type": "sector",
+  "scale": "sector",
+  "tags": ["core_worlds", "developed", "contested", "strategic"],
+
+  "hierarchy": {
+    "parent": {
+      "location_id": "location.galaxy.local_cluster",
+      "anchor": {"region": "coreward", "coords": {"x": 0, "y": 0, "z": 0}},
+      "entity_id": null
+    },
+    "children": [
+      {
+        "location_id": "location.system.nexus_prime",
+        "anchor": {"coords": {"x": 0, "y": 0, "z": 0}},
+        "entity_id": "region.nexus_prime"
+      },
+      {
+        "location_id": "location.system.vega",
+        "anchor": {"coords": {"x": 25.3, "y": -12.7, "z": 4.1}},
+        "entity_id": "region.vega"
+      },
+      {
+        "location_id": "location.system.altair",
+        "anchor": {"coords": {"x": -15.2, "y": 8.4, "z": -2.3}},
+        "entity_id": "region.altair"
+      },
+      {
+        "location_id": "location.system.deneb_station",
+        "anchor": {"coords": {"x": 40.1, "y": 5.6, "z": 12.0}},
+        "entity_id": "region.deneb"
+      }
+    ]
+  },
+
+  "entity_id": null,
+
+  "bounds": {
+    "width": 100,
+    "height": 100,
+    "depth": 50,
+    "units": "light_years"
+  },
+
+  "geometry": {
+    "format": "graph",
+    "source": "wsc-manual-v1",
+    "data": {
+      "nodes": [
+        {
+          "id": "nexus_prime",
+          "name": "Nexus Prime",
+          "type": "star_system",
+          "coords": {"x": 0, "y": 0, "z": 0},
+          "properties": {
+            "star_class": "G2V",
+            "planets": 6,
+            "stations": 3,
+            "population": "high",
+            "controller": "polity.hegemony",
+            "importance": 0.95
+          }
+        },
+        {
+          "id": "vega",
+          "name": "Vega",
+          "type": "star_system",
+          "coords": {"x": 25.3, "y": -12.7, "z": 4.1},
+          "properties": {
+            "star_class": "A0V_binary",
+            "planets": 4,
+            "stations": 2,
+            "population": "medium",
+            "controller": "contested",
+            "importance": 0.8
+          }
+        },
+        {
+          "id": "altair",
+          "name": "Altair",
+          "type": "star_system",
+          "coords": {"x": -15.2, "y": 8.4, "z": -2.3},
+          "properties": {
+            "star_class": "A7V",
+            "planets": 3,
+            "stations": 1,
+            "population": "low",
+            "controller": "polity.free_traders",
+            "importance": 0.5
+          }
+        },
+        {
+          "id": "deneb_station",
+          "name": "Deneb Station",
+          "type": "deep_space_station",
+          "coords": {"x": 40.1, "y": 5.6, "z": 12.0},
+          "properties": {
+            "star_class": null,
+            "stations": 1,
+            "population": "low",
+            "controller": "neutral",
+            "importance": 0.6
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "lane_nexus_vega",
+          "from": "nexus_prime",
+          "to": "vega",
+          "type": "jump_lane",
+          "properties": {
+            "travel_days": 3,
+            "stability": 0.9,
+            "traffic": "heavy",
+            "patrols": "hegemony"
+          }
+        },
+        {
+          "id": "lane_nexus_altair",
+          "from": "nexus_prime",
+          "to": "altair",
+          "type": "jump_lane",
+          "properties": {
+            "travel_days": 2,
+            "stability": 0.95,
+            "traffic": "medium",
+            "patrols": "mixed"
+          }
+        },
+        {
+          "id": "lane_vega_deneb",
+          "from": "vega",
+          "to": "deneb_station",
+          "type": "jump_lane",
+          "properties": {
+            "travel_days": 4,
+            "stability": 0.7,
+            "traffic": "light",
+            "patrols": "none"
+          }
+        },
+        {
+          "id": "lane_altair_vega",
+          "from": "altair",
+          "to": "vega",
+          "type": "jump_lane",
+          "properties": {
+            "travel_days": 5,
+            "stability": 0.6,
+            "traffic": "smuggler_route",
+            "patrols": "none"
+          }
+        }
+      ]
+    }
+  },
+
+  "features": [
+    {
+      "id": "nexus_vega_corridor",
+      "name": "The Contested Corridor",
+      "type": "strategic_zone",
+      "position": {"x": 12, "y": -6, "z": 2},
+      "properties": {
+        "description": "The jump lane between Nexus and Vega, primary theater of the cold war"
+      }
+    },
+    {
+      "id": "outer_belt_region",
+      "name": "Vega Outer Belt",
+      "type": "resource_zone",
+      "position": {"x": 28, "y": -15, "z": 4},
+      "properties": {
+        "description": "Rich asteroid belt, source of conflict between factions"
+      }
+    }
+  ],
+
+  "connections": [
+    {
+      "id": "conn_to_rimward",
+      "from": "deneb_station",
+      "to": "location.sector.rimward_expanse",
+      "type": "sector_jump_lane",
+      "properties": {"travel_days": 14, "difficulty": "hazardous"}
+    }
+  ],
+
+  "terrain": {
+    "default": "interstellar_space",
+    "atmosphere": "none",
+    "temperature": "absolute_zero",
+    "hazards": ["radiation", "pirates", "hegemony_patrols"]
+  },
+
+  "metadata": {
+    "created": "2025-01-15T00:00:00Z",
+    "generator": "manual",
+    "notes": "Primary sector for the Vega Conflict scenario. Contains the main contested systems.",
+    "suitable_agents": ["galactic-4x"]
+  }
+}

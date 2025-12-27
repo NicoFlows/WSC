@@ -1,0 +1,44 @@
+{
+  "id": "evt_10525",
+  "t_world": 1046.0,
+  "t_stream": null,
+  "type": "influence.changed",
+  "where": "region.vega",
+  "who": ["polity.hegemony", "polity.free_traders"],
+  "data": {
+    "changes": [
+      {
+        "polity": "polity.hegemony",
+        "influence_before": 0.55,
+        "influence_after": 0.48,
+        "delta": -0.07,
+        "reason": "military_defeat_reputation_damage"
+      },
+      {
+        "polity": "polity.free_traders",
+        "influence_before": 0.35,
+        "influence_after": 0.42,
+        "delta": 0.07,
+        "reason": "military_victory_recruitment_surge"
+      }
+    ],
+    "control_changed": false,
+    "controller": "polity.hegemony",
+    "threshold_warnings": {
+      "hegemony_at_risk": true,
+      "threshold": 0.45,
+      "current": 0.48
+    },
+    "contributing_factors": [
+      "battle_outcome",
+      "civilian_perception",
+      "recruitment",
+      "supply_disruption"
+    ]
+  },
+  "causes": ["evt_10492", "evt_10495"],
+  "source": "lens.grand_strategy",
+  "confidence": 0.95,
+  "importance": 0.70,
+  "narrative_summary": "The Battle of the Outer Belt sent shockwaves through Vega. Hegemony influence dropped sharply as word spread of their humiliation, while Free Trader recruiters found eager volunteers. For the first time in years, the balance of power in Vega was genuinely in question."
+}

@@ -1,0 +1,33 @@
+{
+  "id": "presence.hegemony.vega",
+  "type": "presence",
+  "name": "Hegemony Presence in Vega",
+  "tags": ["military_occupation", "contested", "unstable"],
+  "attrs": {
+    "polity_id": "polity.hegemony",
+    "region_id": "region.vega",
+    "influence": 0.55,
+    "control": true,
+    "states_active": ["military_buildup", "security_lockdown"],
+    "states_pending": ["economic_sanctions"],
+    "states_cooldown": ["propaganda_campaign"]
+  },
+  "ai": {
+    "persona": "The Hegemony's grip on Vega is firm but contested. Military patrols are constant, checkpoints ubiquitous, and the local garrison commander has broad emergency powers. Despite this, Free Trader sympathizers operate openly in the outer settlements, and the black market thrives. The Hegemony knows it holds Vega by force, not loyalty.",
+    "goals": [
+      "crush_free_trader_presence",
+      "secure_industrial_output",
+      "prevent_open_rebellion",
+      "interdict_smuggling_routes"
+    ],
+    "doctrine": {
+      "aggression": 0.8,
+      "tolerance_for_dissent": 0.2,
+      "resource_extraction": 0.7
+    },
+    "voice": {
+      "tone": "authoritarian",
+      "speech_patterns": "Local Hegemony broadcasts emphasize security threats and citizen duty. Curfews are 'safety measures.' Searches are 'routine procedures.'"
+    }
+  }
+}

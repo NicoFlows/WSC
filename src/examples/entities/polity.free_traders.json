@@ -1,0 +1,51 @@
+{
+  "id": "polity.free_traders",
+  "type": "polity",
+  "name": "The Free Traders Confederacy",
+  "tags": ["libertarian", "decentralized", "mercantile", "diverse"],
+  "attrs": {
+    "allegiance": null,
+    "government": "confederacy",
+    "ethos": "freedom_through_commerce",
+    "doctrines": ["free_trade", "mutual_defense", "individual_sovereignty"],
+    "resources": {
+      "wealth": 0.6,
+      "military": 0.4,
+      "influence": 0.5,
+      "technology": 0.6
+    }
+  },
+  "ai": {
+    "persona": "The Free Traders Confederacy is a loose alliance of independent captains, merchant houses, and frontier settlements united by their rejection of Hegemony control. They value personal freedom above all else and view commerce as the great equalizer. While they lack military might, they excel at evasion, negotiation, and knowing when to run. Their decentralized nature makes them hard to destroy but also hard to coordinate.",
+    "doctrine": {
+      "aggression": 0.3,
+      "diplomacy": 0.8,
+      "economic_focus": 0.9,
+      "risk_tolerance": 0.5,
+      "preferred_methods": ["negotiation", "bribery", "smuggling", "guerrilla_tactics", "strategic_retreat"]
+    },
+    "goals": [
+      "maintain_independence",
+      "keep_trade_routes_open",
+      "undermine_hegemony_monopolies",
+      "recruit_disaffected_hegemony_citizens",
+      "establish_safe_havens"
+    ],
+    "relationships": {
+      "polity.hegemony": {"stance": "defiant", "trust": 0.05},
+      "polity.merchant_league": {"stance": "friendly", "trust": 0.7},
+      "polity.frontier_alliance": {"stance": "allied", "trust": 0.8}
+    },
+    "voice": {
+      "tone": "casual",
+      "vocabulary": ["freedom", "opportunity", "fair deal", "horizon", "your call", "no masters"],
+      "speech_patterns": "Informal, direct communication. Heavy use of spacer slang. Negotiations are blunt but fair. Distrust of formal titles and bureaucratic language."
+    },
+    "memory": ["evt_founding_charter", "evt_hegemony_blockade_001", "evt_trade_route_victory"],
+    "secrets": [
+      "Secret alliance with Hegemony dissidents",
+      "Hidden fuel depot locations",
+      "Blackmail material on several Hegemony admirals"
+    ]
+  }
+}

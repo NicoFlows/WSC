@@ -1,0 +1,59 @@
+{
+  "id": "site.garrison_alpha.command_center",
+  "type": "site",
+  "name": "Garrison Alpha Command Center",
+  "tags": ["military", "restricted", "high_security", "strategic"],
+  "attrs": {
+    "locale_id": "locale.garrison_alpha",
+    "owner_polity_id": "polity.hegemony",
+    "population": 150,
+    "prosperity": 0.8,
+    "unrest": 0.05,
+    "hazard": 0.1,
+    "infrastructure": {
+      "power": {"type": "dedicated_reactor", "capacity": 0.95, "reliability": 0.99},
+      "transit": {"type": "secure_lifts", "capacity": 0.5, "speed": 0.9},
+      "housing": {"type": "officer_quarters", "capacity": 50, "quality": 0.8},
+      "production": {"type": "command_systems", "throughput": 0.95},
+      "defense": {"type": "marine_garrison", "strength": 0.9},
+      "culture": {"type": "officers_mess", "quality": 0.7}
+    }
+  },
+  "ai": {
+    "persona": "The nerve center of Hegemony operations in Vega, the Command Center is a fortress within a fortress. Holographic displays show real-time fleet positions, intelligence reports scroll across screens, and Admiral Chen's word is law. Access requires the highest clearance, and the marine guards have standing orders to shoot unauthorized personnel. From here, the Hegemony plans its slow strangulation of Free Trader resistance.",
+    "atmosphere": {
+      "mood": "controlled_intensity",
+      "visual": "Blue holographic displays, uniformed officers at stations, tactical maps",
+      "sounds": ["system beeps", "murmured reports", "the hum of electronics"],
+      "smells": ["recycled air", "coffee", "tension"]
+    },
+    "active_tensions": [
+      "intelligence_gaps",
+      "pressure_from_high_command",
+      "suspected_security_breach"
+    ],
+    "npcs_typical": [
+      {"role": "flag_officer", "disposition": "stressed_competent"},
+      {"role": "intelligence_analyst", "disposition": "paranoid_sharp"},
+      {"role": "communications_officer", "disposition": "professional_tired"},
+      {"role": "marine_guard", "disposition": "alert_intimidating"}
+    ],
+    "voice": {
+      "tone": "military_tense",
+      "vocabulary": ["tactical", "intelligence", "assets", "threat assessment", "operational security"],
+      "speech_patterns": "Everything is classified. Reports are brief and factual. Speculation is discouraged; conclusions must be supported."
+    },
+    "security": {
+      "clearance_required": "officer_grade_3_plus",
+      "biometric_scan": true,
+      "armed_guards": 12,
+      "automated_defenses": true
+    },
+    "scene_hooks": [
+      "Intelligence report reveals a mole",
+      "The admiral asks for a volunteer for a dangerous mission",
+      "An unexpected communication from Free Trader leadership",
+      "A system shows something impossible in the outer belt"
+    ]
+  }
+}

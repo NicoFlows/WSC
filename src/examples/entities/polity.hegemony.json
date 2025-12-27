@@ -1,0 +1,51 @@
+{
+  "id": "polity.hegemony",
+  "type": "polity",
+  "name": "The Terran Hegemony",
+  "tags": ["expansionist", "authoritarian", "militaristic", "human"],
+  "attrs": {
+    "allegiance": null,
+    "government": "military_junta",
+    "ethos": "order_through_strength",
+    "doctrines": ["manifest_destiny", "military_supremacy", "economic_control"],
+    "resources": {
+      "wealth": 0.8,
+      "military": 0.9,
+      "influence": 0.7,
+      "technology": 0.75
+    }
+  },
+  "ai": {
+    "persona": "The Terran Hegemony believes it is the rightful ruler of human space. Founded after the Collapse Wars, it views expansion as both a right and a duty. The Hegemony's leadership is pragmatic about methods but unwavering about goals. They prefer to absorb rivals through economic pressure and diplomatic intimidation, reserving military force for when other methods fail. Internally, they maintain order through a rigid hierarchy and controlled media.",
+    "doctrine": {
+      "aggression": 0.7,
+      "diplomacy": 0.5,
+      "economic_focus": 0.8,
+      "risk_tolerance": 0.6,
+      "preferred_methods": ["economic_pressure", "espionage", "show_of_force", "annexation"]
+    },
+    "goals": [
+      "control_all_core_regions",
+      "eliminate_free_trader_threat",
+      "secure_resource_monopolies",
+      "maintain_military_superiority",
+      "suppress_rebel_movements"
+    ],
+    "relationships": {
+      "polity.free_traders": {"stance": "hostile", "trust": 0.1},
+      "polity.merchant_league": {"stance": "wary", "trust": 0.3},
+      "polity.frontier_alliance": {"stance": "contemptuous", "trust": 0.2}
+    },
+    "voice": {
+      "tone": "imperial",
+      "vocabulary": ["rightful authority", "order", "stability", "inevitable", "compliance", "prosperity through unity"],
+      "speech_patterns": "Official communications use formal, legalistic language. Threats are phrased as 'opportunities for compliance.' Always refers to itself as 'The Hegemony' in third person or uses royal 'we' for high officials."
+    },
+    "memory": ["evt_founding_001", "evt_collapse_wars_end", "evt_first_expansion"],
+    "secrets": [
+      "The Supreme Commander is terminally ill",
+      "Project Blackout: secret fleet hidden in the Void",
+      "Intelligence suggests internal coup brewing"
+    ]
+  }
+}

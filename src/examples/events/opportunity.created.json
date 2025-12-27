@@ -1,0 +1,42 @@
+{
+  "id": "evt_10530",
+  "t_world": 1047.0,
+  "t_stream": null,
+  "type": "opportunity.created",
+  "where": "link.nexus_prime.vega",
+  "who": ["polity.free_traders", "force.free_trader_raiders"],
+  "data": {
+    "opportunity_type": "convoy.interdiction",
+    "opportunity_id": "opp_convoy_058",
+    "target": {
+      "type": "supply_convoy",
+      "composition": {"freighters": 4, "escorts": 2},
+      "cargo": ["military_supplies", "fuel", "spare_parts"],
+      "value": 0.6,
+      "destination": "locale.garrison_alpha"
+    },
+    "window": {
+      "start_tick": 1048.0,
+      "end_tick": 1050.0,
+      "best_intercept": "waypoint_sigma"
+    },
+    "risk_assessment": {
+      "detection_chance": 0.3,
+      "combat_difficulty": 0.4,
+      "escape_routes": 2,
+      "reinforcement_time": "6_hours"
+    },
+    "strategic_value": {
+      "resource_denial": 0.7,
+      "propaganda": 0.5,
+      "intelligence": 0.3
+    },
+    "recommended_lens": "lens.embodied",
+    "drill_down_available": true
+  },
+  "causes": ["evt_10520"],
+  "source": "lens.regional",
+  "confidence": 0.85,
+  "importance": 0.55,
+  "narrative_summary": "Intelligence pinpointed a vulnerable Hegemony supply convoy en route to Garrison Alpha. Lightly escorted and carrying critical military supplies, it was exactly the kind of target the Raiders loved—high value, manageable risk, and deeply embarrassing to Admiral Chen."
+}
