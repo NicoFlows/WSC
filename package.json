@@ -5,6 +5,11 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "test": "npx tsx tests/run-tests.ts",
+    "test:verbose": "npx tsx tests/run-tests.ts --verbose",
+    "test:chronicle": "npx tsx tests/scripts/chronicle.test.ts",
+    "test:entities": "npx tsx tests/scripts/entities.test.ts",
+    "test:world": "npx tsx tests/scripts/world-state.test.ts",
     "entity:validate": "npx tsx .claude/skills/wsc-entities/scripts/validate.ts",
     "entity:query": "npx tsx .claude/skills/wsc-entities/scripts/query.ts",
     "entity:create": "npx tsx .claude/skills/wsc-entities/scripts/create.ts",
