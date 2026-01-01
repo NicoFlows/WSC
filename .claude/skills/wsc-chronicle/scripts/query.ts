@@ -21,6 +21,12 @@
  *   npx tsx query.ts --depth 0                  # Only top-level events (depth 0)
  *   npx tsx query.ts --depth 1                  # Only first-level drill-downs
  *   npx tsx query.ts --tree evt_10500           # Show event and all descendants
+ *
+ * Output formats:
+ *   npx tsx query.ts --verbose                  # Full details for each event
+ *   npx tsx query.ts -v                         # Short form
+ *   npx tsx query.ts --id evt_10492             # Show single event in full detail
+ *   npx tsx query.ts --json                     # Raw JSON output
  */
 
 import { existsSync, readFileSync, readdirSync } from 'fs';
@@ -51,6 +57,9 @@ interface QueryOptions {
   parent?: string;
   depth?: number;
   tree?: string;  // Show event and all descendants
+  // Output format
+  verbose?: boolean;  // Show full details
+  id?: string;        // Show single event by ID
 }
 
 function parseArgs(): QueryOptions {
@@ -119,6 +128,14 @@ function parseArgs(): QueryOptions {
         break;
       case '--tree':
         if (next) { options.tree = next; i++; }
+        break;
+      // Output format
+      case '--verbose':
+      case '-v':
+        options.verbose = true;
+        break;
+      case '--id':
+        if (next) { options.id = next; i++; }
         break;
     }
   }
@@ -296,16 +313,79 @@ function formatEventRow(event: ChronicleEvent): string[] {
   ];
 }
 
+/**
+ * Format a single event with full details (verbose mode)
+ */
+function formatEventVerbose(event: ChronicleEvent): string {
+  const lines: string[] = [];
+  const divider = '─'.repeat(70);
+
+  lines.push(divider);
+  lines.push(`  ${event.id}  │  ${event.type}`);
+  lines.push(divider);
+
+  // Time information
+  lines.push('');
+  lines.push('  TIME');
+  lines.push(`    t_world: ${event.t_world}`);
+  if (event.t_scale) lines.push(`    t_scale: ${event.t_scale}`);
+  if (event.t_local !== undefined) lines.push(`    t_local: ${event.t_local}`);
+  if (event.t_parent) lines.push(`    t_parent: ${event.t_parent}`);
+  if (event.t_depth !== undefined) lines.push(`    t_depth: ${event.t_depth}`);
+  if (event.t_stream) lines.push(`    t_stream: ${event.t_stream}`);
+
+  // Location and participants
+  lines.push('');
+  lines.push('  CONTEXT');
+  lines.push(`    Where: ${event.where}`);
+  lines.push(`    Who: ${event.who.join(', ')}`);
+
+  // Causality
+  if (event.causes && event.causes.length > 0) {
+    lines.push(`    Causes: ${event.causes.join(', ')}`);
+  }
+
+  // Metadata
+  lines.push('');
+  lines.push('  METADATA');
+  if (event.importance !== undefined) lines.push(`    Importance: ${event.importance.toFixed(2)}`);
+  if (event.confidence !== undefined) lines.push(`    Confidence: ${event.confidence.toFixed(2)}`);
+  if (event.source) lines.push(`    Source: ${event.source}`);
+
+  // Narrative summary
+  if (event.narrative_summary) {
+    lines.push('');
+    lines.push('  NARRATIVE');
+    // Word wrap the summary
+    const words = event.narrative_summary.split(' ');
+    let currentLine = '    ';
+    for (const word of words) {
+      if (currentLine.length + word.length > 72) {
+        lines.push(currentLine);
+        currentLine = '    ' + word + ' ';
+      } else {
+        currentLine += word + ' ';
+      }
+    }
+    if (currentLine.trim()) lines.push(currentLine);
+  }
+
+  // Data payload
+  if (event.data && Object.keys(event.data).length > 0) {
+    lines.push('');
+    lines.push('  DATA');
+    const dataStr = JSON.stringify(event.data, null, 2);
+    for (const line of dataStr.split('\n')) {
+      lines.push('    ' + line);
+    }
+  }
+
+  lines.push('');
+  return lines.join('\n');
+}
+
 async function main() {
   const options = parseArgs();
-
-  // Default to showing last 10 events if no filters
-  if (!options.type && !options.where && !options.who &&
-      options.minImportance === undefined && options.after === undefined &&
-      !options.causesOf && !options.causedBy &&
-      !options.scale && !options.parent && options.depth === undefined && !options.tree) {
-    options.last = options.last || 10;
-  }
 
   const allEvents = loadEvents(options);
 
@@ -313,6 +393,29 @@ async function main() {
     console.log('No events found. Chronicle may be empty.');
     console.log('Use --examples to view example events.');
     return;
+  }
+
+  // Handle --id: find and display single event
+  if (options.id) {
+    const event = allEvents.find(e => e.id === options.id);
+    if (!event) {
+      console.log(`Event '${options.id}' not found.`);
+      return;
+    }
+    if (options.json) {
+      console.log(JSON.stringify(event, null, 2));
+    } else {
+      console.log(formatEventVerbose(event));
+    }
+    return;
+  }
+
+  // Default to showing last 10 events if no filters
+  if (!options.type && !options.where && !options.who &&
+      options.minImportance === undefined && options.after === undefined &&
+      !options.causesOf && !options.causedBy &&
+      !options.scale && !options.parent && options.depth === undefined && !options.tree) {
+    options.last = options.last || 10;
   }
 
   let results: ChronicleEvent[];
@@ -347,9 +450,17 @@ async function main() {
     return;
   }
 
+  // Output format
   if (options.json) {
     console.log(JSON.stringify(results, null, 2));
+  } else if (options.verbose) {
+    // Verbose: show full details for each event
+    for (const event of results) {
+      console.log(formatEventVerbose(event));
+    }
+    console.log(`${results.length} events found.`);
   } else {
+    // Default: compact table
     const headers = ['ID', 'Time', 'Type', 'Imp', 'Summary'];
     const rows = results.map(formatEventRow);
     console.log(formatTable(headers, rows));
