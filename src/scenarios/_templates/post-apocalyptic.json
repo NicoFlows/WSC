@@ -1,0 +1,127 @@
+{
+  "$comment": "Post-Apocalyptic Scenario Template - Copy and customize for your scenario",
+
+  "id": "{{scenario_id}}",
+  "name": "{{Scenario Name}}",
+  "version": "1.0.0",
+
+  "setting": {
+    "genre": "post-apocalyptic",
+    "era": "{{Era description, e.g., 'Year 47 After the Fall'}}",
+    "theme": "{{Core thematic conflict: survival, rebuilding, tribal warfare, etc.}}",
+    "tone": "{{Tone: grimdark, hopeful rebuild, survival horror, etc.}}",
+    "inspirations": ["{{Inspiration 1}}", "{{Inspiration 2}}"],
+    "apocalypse_type": "{{nuclear | plague | AI uprising | environmental | supernatural}}"
+  },
+
+  "lore_summary": "{{2-3 sentences describing what happened and where things stand now}}",
+
+  "starting_state": {
+    "tick": 1000,
+    "tick_unit": "day",
+    "calendar_reference": "{{How survivors track time}}",
+    "situation": "{{Current state of affairs}}"
+  },
+
+  "factions": {
+    "polity.{{faction1_id}}": {
+      "role": "{{settlement | raider_gang | cult | remnant_military}}",
+      "starting_regions": ["region.{{home_territory}}"],
+      "contested_regions": ["region.{{disputed}}"],
+      "objectives": ["{{Goal 1: survive, expand, convert, etc.}}", "{{Goal 2}}"],
+      "resources": "{{What they control: water, weapons, medicine, etc.}}"
+    },
+    "polity.{{faction2_id}}": {
+      "role": "{{role}}",
+      "starting_regions": ["region.{{territory}}"],
+      "contested_regions": ["region.{{disputed}}"],
+      "objectives": ["{{Goal 1}}", "{{Goal 2}}"]
+    }
+  },
+
+  "key_characters": {
+    "agent.{{survivor_id}}": {
+      "role": "protagonist",
+      "arc": "{{Character arc: lone wanderer, reluctant leader, etc.}}",
+      "narrative_weight": 1.0
+    },
+    "agent.{{threat_id}}": {
+      "role": "antagonist",
+      "arc": "{{Character arc: warlord, zealot, desperate survivor, etc.}}",
+      "narrative_weight": 0.9
+    }
+  },
+
+  "victory_conditions": {
+    "{{faction1}}_dominance": {
+      "description": "{{How faction1 wins - control, extermination, etc.}}",
+      "condition": "presence.{{faction1}}.{{region}}.control == true"
+    },
+    "{{faction2}}_dominance": {
+      "description": "{{How faction2 wins}}",
+      "condition": "presence.{{faction2}}.{{region}}.control == true"
+    },
+    "extinction": {
+      "description": "All factions wiped out",
+      "condition": "polity.{{faction1}}.attrs.population < 100 AND polity.{{faction2}}.attrs.population < 100"
+    },
+    "stalemate": {
+      "description": "Ongoing struggle",
+      "condition": "tick > 2000"
+    }
+  },
+
+  "narrative_hooks": [
+    {
+      "id": "{{hook_id}}",
+      "description": "{{Pre-war bunker, cure for plague, working tech, etc.}}",
+      "known_to": [],
+      "reveal_conditions": ["{{When this might come to light}}"]
+    }
+  ],
+
+  "suggested_drilldowns": [
+    {
+      "type": "party-rpg",
+      "description": "{{Scene description: negotiation, scavenging, etc.}}",
+      "participants": ["agent.{{id1}}", "agent.{{id2}}"],
+      "location": "locale.{{location}}"
+    },
+    {
+      "type": "action-sim",
+      "description": "{{Combat: raider attack, mutant encounter, etc.}}",
+      "participants": ["force.{{id1}}", "force.{{id2}}"],
+      "location": "region.{{location}}"
+    }
+  ],
+
+  "entities": {
+    "polities": ["polity.{{faction1_id}}", "polity.{{faction2_id}}"],
+    "regions": ["region.{{wasteland}}", "region.{{settlement_area}}"],
+    "forces": ["force.{{warband}}", "force.{{militia}}"],
+    "locales": ["locale.{{stronghold}}", "locale.{{trading_post}}"],
+    "agents": ["agent.{{survivor_id}}", "agent.{{threat_id}}"],
+    "holdings": ["holding.{{valuable_resource}}"]
+  },
+
+  "_location_hierarchy_guide": {
+    "post_apocalyptic_scales": [
+      "region - A territory or zone (The Deadlands, The Green Zone)",
+      "locale - A settlement, ruin, or major location",
+      "site - A building, bunker, or specific area",
+      "room - A specific room or chamber"
+    ],
+    "example_hierarchy": [
+      "location.region.dead_zone",
+      "  └── location.locale.old_chicago",
+      "        └── location.site.water_treatment_plant",
+      "              └── location.room.control_room"
+    ]
+  },
+
+  "_survival_mechanics": {
+    "resources": ["water", "food", "medicine", "fuel", "ammunition", "salvage"],
+    "hazards": ["radiation", "disease", "mutants", "raiders", "starvation"],
+    "scarcity_level": "{{How desperate is survival: extreme, moderate, manageable}}"
+  }
+}

@@ -20,7 +20,9 @@
     "world:tick": "npx tsx .claude/skills/wsc-world-state/scripts/tick.ts",
     "world:status": "npx tsx .claude/skills/wsc-world-state/scripts/status.ts",
     "world:check-victory": "npx tsx .claude/skills/wsc-world-state/scripts/check-victory.ts",
-    "effects:apply": "npx tsx .claude/skills/wsc-effects/scripts/apply.ts"
+    "effects:apply": "npx tsx .claude/skills/wsc-effects/scripts/apply.ts",
+    "scenario:validate": "npx tsx .claude/skills/wsc-scenarios/scripts/validate.ts",
+    "scenario:list": "npx tsx .claude/skills/wsc-scenarios/scripts/validate.ts --list"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

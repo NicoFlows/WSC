@@ -1,0 +1,130 @@
+{
+  "$comment": "Fantasy Scenario Template - Copy and customize for your scenario",
+
+  "id": "{{scenario_id}}",
+  "name": "{{Scenario Name}}",
+  "version": "1.0.0",
+
+  "setting": {
+    "genre": "high-fantasy",
+    "era": "{{Era description, e.g., 'Third Age, Year 1247'}}",
+    "theme": "{{Core thematic conflict}}",
+    "tone": "{{Tone: epic heroism, dark fantasy, sword & sorcery, etc.}}",
+    "inspirations": ["{{Inspiration 1}}", "{{Inspiration 2}}"]
+  },
+
+  "lore_summary": "{{2-3 sentences describing the world and current situation}}",
+
+  "starting_state": {
+    "tick": 1000,
+    "tick_unit": "week",
+    "calendar_reference": "{{How to translate ticks to dates}}",
+    "situation": "{{Current state of affairs}}"
+  },
+
+  "factions": {
+    "polity.{{faction1_id}}": {
+      "role": "{{kingdom | empire | guild | cult}}",
+      "starting_regions": ["region.{{home_region}}"],
+      "contested_regions": ["region.{{contested}}"],
+      "objectives": ["{{Goal 1}}", "{{Goal 2}}"]
+    },
+    "polity.{{faction2_id}}": {
+      "role": "{{role}}",
+      "starting_regions": ["region.{{home_region}}"],
+      "contested_regions": ["region.{{contested}}"],
+      "objectives": ["{{Goal 1}}", "{{Goal 2}}"]
+    }
+  },
+
+  "key_characters": {
+    "agent.{{hero_id}}": {
+      "role": "protagonist",
+      "arc": "{{Character arc: chosen one, reluctant hero, fallen knight, etc.}}",
+      "narrative_weight": 1.0
+    },
+    "agent.{{villain_id}}": {
+      "role": "antagonist",
+      "arc": "{{Character arc: dark lord, corrupted ruler, tragic villain, etc.}}",
+      "narrative_weight": 0.9
+    }
+  },
+
+  "victory_conditions": {
+    "{{faction1}}_victory": {
+      "description": "{{How faction1 wins}}",
+      "condition": "presence.{{faction1}}.{{region}}.influence >= 0.9"
+    },
+    "{{faction2}}_victory": {
+      "description": "{{How faction2 wins}}",
+      "condition": "presence.{{faction2}}.{{region}}.influence >= 0.9"
+    },
+    "dark_victory": {
+      "description": "The darkness consumes all",
+      "condition": "agent.{{villain_id}}.attrs.power >= 1.0"
+    },
+    "stalemate": {
+      "description": "Endless war with no resolution",
+      "condition": "tick > 2000"
+    }
+  },
+
+  "narrative_hooks": [
+    {
+      "id": "{{hook_id}}",
+      "description": "{{Prophecy, hidden lineage, secret artifact, etc.}}",
+      "known_to": [],
+      "reveal_conditions": ["{{When this might come to light}}"]
+    }
+  ],
+
+  "suggested_drilldowns": [
+    {
+      "type": "party-rpg",
+      "description": "{{Scene description: audience with king, tavern intrigue, etc.}}",
+      "participants": ["agent.{{id1}}", "agent.{{id2}}"],
+      "location": "locale.{{location}}"
+    },
+    {
+      "type": "party-rpg",
+      "description": "{{Combat scene: dungeon crawl, siege, etc.}}",
+      "participants": ["agent.{{hero}}", "agent.{{companion}}"],
+      "location": "site.{{dungeon}}"
+    }
+  ],
+
+  "entities": {
+    "polities": ["polity.{{faction1_id}}", "polity.{{faction2_id}}"],
+    "regions": ["region.{{main_region}}"],
+    "forces": ["force.{{army1}}", "force.{{army2}}"],
+    "locales": ["locale.{{castle}}", "locale.{{city}}"],
+    "agents": ["agent.{{hero_id}}", "agent.{{villain_id}}"],
+    "holdings": ["holding.{{artifact}}"]
+  },
+
+  "_location_hierarchy_guide": {
+    "fantasy_scales": [
+      "world - The entire world or continent",
+      "continent - A major landmass",
+      "region - A kingdom, territory, or geographic area",
+      "locale - A city, castle, or major location",
+      "site - A district, building, or dungeon level",
+      "room - A specific chamber or area"
+    ],
+    "example_hierarchy": [
+      "location.world.middle_earth",
+      "  └── location.continent.gondor",
+      "        └── location.region.minas_tirith_region",
+      "              └── location.locale.minas_tirith",
+      "                    └── location.site.citadel",
+      "                          └── location.room.throne_room"
+    ]
+  },
+
+  "_magic_system_notes": {
+    "description": "Define your magic system here for consistency",
+    "types": ["{{arcane}}", "{{divine}}", "{{primal}}"],
+    "limitations": ["{{Costs}}", "{{Restrictions}}"],
+    "common_effects": ["{{What magic can typically do}}"]
+  }
+}
