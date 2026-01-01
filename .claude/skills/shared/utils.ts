@@ -233,3 +233,189 @@ export function formatError(message: string): string {
 export function formatWarning(message: string): string {
   return `⚠ ${message}`;
 }
+
+// =============================================================================
+// Location Resolution Utilities
+// =============================================================================
+
+export interface WhereLocation {
+  scale?: string;
+  system?: string;
+  body?: string;
+  locale?: string;
+  site?: string;
+  orbit_au?: number;
+  coords?: { x: number; y: number; z?: number };
+  hierarchy?: string[];
+}
+
+interface LocationFile {
+  id: string;
+  name: string;
+  type?: string;
+  scale?: string;
+  hierarchy?: {
+    parent?: {
+      location_id?: string;
+      anchor?: {
+        coords?: { x: number; y: number; z?: number };
+        orbit?: number;
+      };
+    };
+    children?: Array<{
+      location_id?: string;
+      anchor?: {
+        orbit?: number;
+        body_type?: string;
+      };
+    }>;
+  };
+  entity_id?: string;
+  geometry?: {
+    data?: {
+      orbits?: Array<{
+        slot: number;
+        distance_au: number;
+        bodies?: Array<{
+          id: string;
+          name: string;
+          type: string;
+        }>;
+      }>;
+    };
+  };
+}
+
+/**
+ * Find a location file that matches an entity ID
+ * Entity IDs like "locale.port_nexus" may map to location files like "locale.port_nexus.json"
+ */
+export function findLocationFile(entityId: string, worldId?: string): string | null {
+  const locationsDir = getLocationsDir(worldId);
+  if (!existsSync(locationsDir)) {
+    return null;
+  }
+
+  // Try direct match first (e.g., locale.port_nexus -> locale.port_nexus.json)
+  const directPath = join(locationsDir, `${entityId}.json`);
+  if (existsSync(directPath)) {
+    return directPath;
+  }
+
+  // Try with location. prefix
+  const prefixPath = join(locationsDir, `location.${entityId}.json`);
+  if (existsSync(prefixPath)) {
+    return prefixPath;
+  }
+
+  // Search for file containing this entity_id
+  const files = readdirSync(locationsDir).filter(f => f.endsWith('.json'));
+  for (const file of files) {
+    try {
+      const content = readJson<LocationFile>(join(locationsDir, file));
+      if (content.entity_id === entityId) {
+        return join(locationsDir, file);
+      }
+    } catch {
+      // Skip invalid files
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Resolve location coordinates from a location file and its hierarchy
+ */
+export function resolveLocationCoords(locationPath: string, worldId?: string): WhereLocation {
+  const location = readJson<LocationFile>(locationPath);
+  const result: WhereLocation = {
+    scale: location.scale || location.type,
+    hierarchy: [],
+  };
+
+  // Build hierarchy path and extract coordinates
+  const visited = new Set<string>();
+  let current: LocationFile | null = location;
+  let currentPath = locationPath;
+
+  while (current && !visited.has(current.id)) {
+    visited.add(current.id);
+    result.hierarchy!.unshift(current.id);
+
+    // Extract info based on scale
+    const scale = current.scale || current.type || '';
+    if (scale === 'system' || scale.includes('system')) {
+      result.system = current.name;
+    } else if (scale === 'body' || scale.includes('body') || scale.includes('planet') || scale.includes('station')) {
+      result.body = current.name;
+    } else if (scale === 'locale' || scale.includes('locale')) {
+      result.locale = current.name;
+    } else if (scale === 'site' || scale.includes('site') || scale.includes('district')) {
+      result.site = current.name;
+    }
+
+    // Try to get coordinates from hierarchy anchor
+    if (current.hierarchy?.parent?.anchor?.coords) {
+      result.coords = current.hierarchy.parent.anchor.coords;
+    }
+
+    // Try to get orbit distance
+    if (current.hierarchy?.parent?.anchor?.orbit) {
+      const orbitSlot = current.hierarchy.parent.anchor.orbit;
+      // Look up orbit distance from parent's geometry if available
+      const parentId = current.hierarchy?.parent?.location_id;
+      if (parentId) {
+        const parentPath = findLocationFile(parentId.replace('location.', ''), worldId);
+        if (parentPath) {
+          try {
+            const parent = readJson<LocationFile>(parentPath);
+            const orbitData = parent.geometry?.data?.orbits?.find(o => o.slot === orbitSlot);
+            if (orbitData?.distance_au) {
+              result.orbit_au = orbitData.distance_au;
+            }
+          } catch {
+            // Ignore errors reading parent
+          }
+        }
+      }
+    }
+
+    // Move to parent
+    const parentId = current.hierarchy?.parent?.location_id;
+    if (parentId) {
+      const parentPath = findLocationFile(parentId.replace('location.', ''), worldId);
+      if (parentPath && !visited.has(parentId)) {
+        try {
+          current = readJson<LocationFile>(parentPath);
+          currentPath = parentPath;
+        } catch {
+          current = null;
+        }
+      } else {
+        current = null;
+      }
+    } else {
+      current = null;
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Resolve location data for an entity ID
+ * Returns null if no location data can be found
+ */
+export function resolveWhereLocation(entityId: string, worldId?: string): WhereLocation | null {
+  const locationPath = findLocationFile(entityId, worldId);
+  if (!locationPath) {
+    return null;
+  }
+
+  try {
+    return resolveLocationCoords(locationPath, worldId);
+  } catch {
+    return null;
+  }
+}

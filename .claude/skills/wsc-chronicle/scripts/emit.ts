@@ -33,6 +33,7 @@ import {
   appendNdjson,
   formatSuccess,
   formatError,
+  resolveWhereLocation,
 } from '../../shared/utils.js';
 
 interface EmitOptions {
@@ -52,6 +53,8 @@ interface EmitOptions {
   tLocal?: number;        // Local time within current scale
   depth?: number;         // Nesting depth (0 = top level)
   tWorld?: number;        // Override t_world (for drill-downs that need specific parent tick)
+  // Location options
+  noLocation?: boolean;   // Skip location embedding
 }
 
 function parseArgs(): EmitOptions {
@@ -161,6 +164,9 @@ function parseArgs(): EmitOptions {
           i++;
         }
         break;
+      case '--no-location':
+        options.noLocation = true;
+        break;
     }
   }
 
@@ -244,6 +250,9 @@ async function main() {
     console.log('  --depth      Nesting depth (0 = top level, 1 = first drill-down, etc.)');
     console.log('  --t-world    Override world tick (for drill-downs preserving parent tick)');
     console.log('');
+    console.log('Location Embedding (default: enabled):');
+    console.log('  --no-location  Skip automatic location coordinate embedding');
+    console.log('');
     console.log('Examples:');
     console.log('  # Top-level galactic event');
     console.log('  npx tsx emit.ts --type fleet.moved --where region.vega --who force.7th_fleet --scale galactic');
@@ -270,6 +279,12 @@ async function main() {
   // Determine depth: if parent is specified but depth isn't, default to 1
   const depth = options.depth ?? (options.parent ? 1 : 0);
 
+  // Resolve location coordinates unless disabled
+  let whereLocation: ReturnType<typeof resolveWhereLocation> = undefined;
+  if (!options.noLocation && options.where) {
+    whereLocation = resolveWhereLocation(options.where) ?? undefined;
+  }
+
   const event: ChronicleEvent = {
     id,
     // Hierarchical time
@@ -282,6 +297,7 @@ async function main() {
     type: options.type,
     where: options.where,
     who: options.who,
+    where_location: whereLocation,
     data: options.data || {},
     causes: options.causes,
     source: options.source || 'lens.manual',
@@ -326,6 +342,18 @@ async function main() {
     console.log(`  t_parent: ${event.t_parent} (depth: ${event.t_depth})`);
   }
   console.log(`  Importance: ${event.importance}`);
+  if (event.where_location) {
+    const loc = event.where_location;
+    const parts: string[] = [];
+    if (loc.system) parts.push(`system: ${loc.system}`);
+    if (loc.body) parts.push(`body: ${loc.body}`);
+    if (loc.locale) parts.push(`locale: ${loc.locale}`);
+    if (loc.site) parts.push(`site: ${loc.site}`);
+    if (loc.coords) parts.push(`coords: (${loc.coords.x}, ${loc.coords.y}${loc.coords.z !== undefined ? `, ${loc.coords.z}` : ''})`);
+    if (parts.length > 0) {
+      console.log(`  Location: ${parts.join(', ')}`);
+    }
+  }
   if (event.narrative_summary) {
     console.log(`  Summary: ${event.narrative_summary}`);
   }

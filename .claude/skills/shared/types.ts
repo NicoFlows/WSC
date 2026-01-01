@@ -259,6 +259,20 @@ export const ChronicleEventSchema = z.object({
   // Event content
   type: EventTypeSchema,
   where: EntityIdSchema,
+  where_location: z.object({
+    scale: z.string().optional(),           // galaxy, sector, system, body, locale, site, room
+    system: z.string().optional(),          // Star system name
+    body: z.string().optional(),            // Planet/station/belt name
+    locale: z.string().optional(),          // Station/city/settlement name
+    site: z.string().optional(),            // District/zone within locale
+    orbit_au: z.number().optional(),        // Distance from star in AU
+    coords: z.object({
+      x: z.number(),
+      y: z.number(),
+      z: z.number().optional(),
+    }).optional(),
+    hierarchy: z.array(z.string()).optional(), // Full path: ["galaxy.local_cluster", "sector.coreward", "system.vega", ...]
+  }).optional(),
   who: z.array(EntityIdSchema),
   data: z.record(z.any()),
 

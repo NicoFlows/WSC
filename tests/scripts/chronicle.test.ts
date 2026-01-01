@@ -249,6 +249,112 @@ console.log('\n📝 Chronicle Emit Tests\n');
 }
 
 // ============================================================================
+// LOCATION EMBEDDING TESTS
+// ============================================================================
+
+console.log('\n📍 Location Embedding Tests\n');
+
+// Test 23: Emit with known location embeds where_location by default
+{
+  const result = runScript('emit.ts', [
+    '--type', 'test.location',
+    '--where', 'region.vega',
+    '--who', 'agent.test',
+    '--dry-run',
+  ]);
+  assertIncludes(result.stdout, '"where_location"', 'Location embedding is included by default');
+  assertIncludes(result.stdout, '"hierarchy"', 'Location includes hierarchy');
+}
+
+// Test 24: Location embedding includes system name for region
+{
+  const result = runScript('emit.ts', [
+    '--type', 'test.location',
+    '--where', 'region.vega',
+    '--who', 'agent.test',
+    '--dry-run',
+  ]);
+  assertIncludes(result.stdout, 'Vega System', 'Location includes system name');
+}
+
+// Test 25: Location embedding includes locale details
+{
+  const result = runScript('emit.ts', [
+    '--type', 'test.location',
+    '--where', 'locale.port_nexus',
+    '--who', 'agent.test',
+    '--dry-run',
+  ]);
+  assertIncludes(result.stdout, '"locale":', 'Locale field is present');
+  assertIncludes(result.stdout, 'Port Nexus', 'Locale name is included');
+}
+
+// Test 26: Location embedding includes orbit_au when available
+{
+  const result = runScript('emit.ts', [
+    '--type', 'test.location',
+    '--where', 'locale.port_nexus',
+    '--who', 'agent.test',
+    '--dry-run',
+  ]);
+  assertIncludes(result.stdout, '"orbit_au"', 'Orbit AU is included when available');
+}
+
+// Test 27: --no-location flag skips embedding
+{
+  const result = runScript('emit.ts', [
+    '--type', 'test.location',
+    '--where', 'region.vega',
+    '--who', 'agent.test',
+    '--no-location',
+    '--dry-run',
+  ]);
+  assert(!result.stdout.includes('"where_location"'), '--no-location skips embedding');
+}
+
+// Test 28: Unknown location still works (no embedding)
+{
+  const result = runScript('emit.ts', [
+    '--type', 'test.location',
+    '--where', 'region.unknown_region',
+    '--who', 'agent.test',
+    '--dry-run',
+  ]);
+  assert(result.status === 0, 'Unknown location does not cause error');
+  assertIncludes(result.stdout, '"where": "region.unknown_region"', 'Event still has where field');
+}
+
+// Test 29: Location hierarchy is complete
+{
+  const result = runScript('emit.ts', [
+    '--type', 'test.location',
+    '--where', 'locale.port_nexus',
+    '--who', 'agent.test',
+    '--dry-run',
+  ]);
+  assertIncludes(result.stdout, 'location.galaxy.local_cluster', 'Hierarchy includes galaxy');
+  assertIncludes(result.stdout, 'location.sector.coreward_reach', 'Hierarchy includes sector');
+  assertIncludes(result.stdout, 'location.system.vega', 'Hierarchy includes system');
+}
+
+// Test 30: Help shows --no-location option
+{
+  const result = runScript('emit.ts', []);
+  assertIncludes(result.stdout, '--no-location', 'Help shows --no-location option');
+}
+
+// Test 31: Location embedding includes coords when available
+{
+  const result = runScript('emit.ts', [
+    '--type', 'test.location',
+    '--where', 'region.vega',
+    '--who', 'agent.test',
+    '--dry-run',
+  ]);
+  assertIncludes(result.stdout, '"coords"', 'Coordinates are included when available');
+}
+
+// ============================================================================
 // SUMMARY
 // ============================================================================
 
