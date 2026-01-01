@@ -314,10 +314,43 @@ export const ActiveConflictSchema = z.object({
   intensity: z.number().min(0).max(1),
 });
 
+/**
+ * Simulation status - controls whether the simulation continues or stops
+ */
+export const SimulationStatuses = [
+  'running',    // Simulation is active, continue processing ticks
+  'paused',     // Temporarily stopped, can resume
+  'victory',    // A victory condition was met
+  'stalemate',  // Stalemate condition met (e.g., max ticks exceeded)
+  'error',      // Simulation stopped due to error
+] as const;
+
+export type SimulationStatus = typeof SimulationStatuses[number];
+
+export const SimulationStatusSchema = z.enum(SimulationStatuses);
+
+/**
+ * Records when and how the simulation ended
+ */
+export const VictoryRecordSchema = z.object({
+  condition_id: z.string(),           // e.g., "hegemony_victory", "free_trader_victory", "stalemate"
+  winner: z.string().optional(),       // Polity ID of the winner (if applicable)
+  description: z.string(),             // Human-readable description
+  achieved_at_tick: z.number(),        // When victory was achieved
+  final_state: z.record(z.any()).optional(),  // Snapshot of key metrics at victory
+});
+
+export type VictoryRecord = z.infer<typeof VictoryRecordSchema>;
+
 export const WorldStateSchema = z.object({
   tick: z.number(),
   last_event_id: z.number(),
   active_scenario: z.string().optional(),
+
+  // Simulation lifecycle
+  simulation_status: SimulationStatusSchema.default('running'),
+  victory: VictoryRecordSchema.optional(),
+  max_ticks: z.number().optional(),    // Optional tick limit for auto-stalemate
 
   // Hierarchical simulation state
   current_scale: SimulationScaleSchema.optional(),   // What scale we're currently simulating

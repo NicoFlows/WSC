@@ -304,6 +304,81 @@ Output tick summary:
 ╚════════════════════════════════════════════╝
 ```
 
+#### Phase 6: Check Victory Conditions
+
+**CRITICAL: This phase prevents infinite simulation loops.**
+
+After each tick, check if the simulation should end:
+
+```bash
+# Check victory conditions
+npx tsx .claude/skills/wsc-world-state/scripts/check-victory.ts --json
+```
+
+The script returns:
+```json
+{
+  "continue": true/false,
+  "status": "running" | "victory" | "stalemate",
+  "condition_id": "hegemony_victory",  // if victory
+  "winner": "polity.hegemony",          // if victory
+  "description": "Human-readable outcome"
+}
+```
+
+**Exit codes:**
+- `0` - No victory, continue simulation
+- `10` - Victory achieved, stop simulation
+- `11` - Stalemate reached, stop simulation
+
+**If victory or stalemate:**
+1. Emit a `simulation.ended` event to chronicle
+2. Update `state.json` with:
+   - `simulation_status`: "victory" or "stalemate"
+   - `victory`: { condition_id, winner, description, achieved_at_tick }
+3. Output final summary
+4. **STOP processing further ticks**
+
+**Victory conditions are defined in scenario.json:**
+```json
+{
+  "victory_conditions": {
+    "hegemony_victory": {
+      "description": "Total control of Vega System",
+      "condition": "presence.hegemony.vega.influence >= 0.9 AND control == true"
+    },
+    "free_trader_victory": {
+      "description": "Break the Hegemony's grip",
+      "condition": "presence.hegemony.vega.influence < 0.3 AND force.hegemony_7th_fleet.strength < 0.3"
+    },
+    "stalemate": {
+      "description": "Prolonged conflict with no resolution",
+      "condition": "tick > 1500"
+    }
+  }
+}
+```
+
+### Continuous Simulation Loop
+
+When asked to "run until victory" or "run simulation":
+
+```
+WHILE simulation_status == "running":
+  1. Run tick phases 1-5
+  2. Check victory (phase 6)
+  3. IF victory or stalemate:
+       - Emit final event
+       - Update state
+       - BREAK
+  4. ELSE:
+       - Continue to next tick
+END
+```
+
+**IMPORTANT:** Always check `state.json.simulation_status` before starting a tick.
+If status is not "running", do not process new ticks.
+
 ### STATUS - Report World State
 
 When asked for status:

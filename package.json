@@ -10,6 +10,7 @@
     "test:chronicle": "npx tsx tests/scripts/chronicle.test.ts",
     "test:entities": "npx tsx tests/scripts/entities.test.ts",
     "test:world": "npx tsx tests/scripts/world-state.test.ts",
+    "test:victory": "npx tsx tests/scripts/victory.test.ts",
     "entity:validate": "npx tsx .claude/skills/wsc-entities/scripts/validate.ts",
     "entity:query": "npx tsx .claude/skills/wsc-entities/scripts/query.ts",
     "entity:create": "npx tsx .claude/skills/wsc-entities/scripts/create.ts",
@@ -17,6 +18,8 @@
     "chronicle:query": "npx tsx .claude/skills/wsc-chronicle/scripts/query.ts",
     "world:init": "npx tsx .claude/skills/wsc-world-state/scripts/init.ts",
     "world:tick": "npx tsx .claude/skills/wsc-world-state/scripts/tick.ts",
+    "world:status": "npx tsx .claude/skills/wsc-world-state/scripts/status.ts",
+    "world:check-victory": "npx tsx .claude/skills/wsc-world-state/scripts/check-victory.ts",
     "effects:apply": "npx tsx .claude/skills/wsc-effects/scripts/apply.ts"
   },
   "devDependencies": {
