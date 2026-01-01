@@ -210,16 +210,63 @@ export type Entity = z.infer<typeof EntitySchema>;
 
 export const EventTypeSchema = z.string().regex(/^[a-z_]+\.[a-z_]+$/);
 
+/**
+ * Simulation scales - each operates at different timescales
+ * Events are tagged with their source scale for proper temporal organization
+ */
+export const SimulationScales = [
+  'galactic',      // galactic-4x: days to weeks
+  'continental',   // continental-strategy: seasons to years
+  'city',          // city-builder: weeks to months
+  'scene',         // party-rpg: minutes to hours
+  'action',        // action-sim: seconds to minutes
+] as const;
+
+export type SimulationScale = typeof SimulationScales[number];
+
+export const SimulationScaleSchema = z.enum(SimulationScales);
+
+/**
+ * Hierarchical time context for chronicle events
+ *
+ * t_world: The parent tick at the top simulation level (integer)
+ * t_scale: Which simulation scale generated this event
+ * t_local: Local time within the current scale's context (optional)
+ * t_parent: Event ID that triggered this drill-down (for sub-scale events)
+ * t_depth: How many levels deep this event is (0 = top level)
+ *
+ * Example flow:
+ * - galactic-4x tick 1000 creates opportunity evt_10500
+ * - party-rpg resolves scene, emits evt_10501 with:
+ *   { t_world: 1000, t_scale: "scene", t_local: 15.5, t_parent: "evt_10500", t_depth: 1 }
+ * - action-sim resolves combat within scene, emits evt_10502 with:
+ *   { t_world: 1000, t_scale: "action", t_local: 47.2, t_parent: "evt_10501", t_depth: 2 }
+ */
 export const ChronicleEventSchema = z.object({
+  // Event identity
   id: z.string().regex(/^evt_\d+$/),
-  t_world: z.number(),
-  t_stream: z.string().optional(),
+
+  // Hierarchical time
+  t_world: z.number(),                              // Parent tick (integer for top-level, preserved for drill-downs)
+  t_scale: SimulationScaleSchema.optional(),        // Which scale generated this event
+  t_local: z.number().optional(),                   // Local time within current scale
+  t_parent: z.string().optional(),                  // Parent event ID (for drill-down events)
+  t_depth: z.number().int().min(0).optional(),      // Nesting depth (0 = top level)
+
+  // Legacy/optional time
+  t_stream: z.string().optional(),                  // Media alignment timestamp
+
+  // Event content
   type: EventTypeSchema,
   where: EntityIdSchema,
   who: z.array(EntityIdSchema),
   data: z.record(z.any()),
+
+  // Causal chain
   causes: z.array(z.string()).optional(),
-  source: z.string().optional(),
+
+  // Metadata
+  source: z.string().optional(),                    // Which agent/lens generated this
   confidence: z.number().min(0).max(1).optional(),
   importance: z.number().min(0).max(1).optional(),
   narrative_summary: z.string().optional(),
@@ -238,8 +285,24 @@ export const DrillDownOpportunitySchema = z.object({
   description: z.string(),
   importance: z.number().min(0).max(1),
   suggested_agent: z.string(),
+  suggested_scale: SimulationScaleSchema.optional(),  // What scale to drill down to
   expires_at_tick: z.number().optional(),
   context: z.record(z.any()).optional(),
+});
+
+/**
+ * Tracks an active drill-down session
+ * When we zoom into a lower scale, this tracks the context so we can return
+ */
+export const ActiveDrillDownSchema = z.object({
+  id: z.string(),
+  parent_event_id: z.string(),          // Event that triggered this drill-down
+  parent_scale: SimulationScaleSchema,   // Scale we came from
+  current_scale: SimulationScaleSchema,  // Scale we're currently at
+  current_depth: z.number().int().min(1),
+  started_at_tick: z.number(),
+  local_tick: z.number().optional(),     // Local time within this scale
+  context: z.record(z.any()).optional(), // Preserved context from parent
 });
 
 export const ActiveConflictSchema = z.object({
@@ -255,6 +318,11 @@ export const WorldStateSchema = z.object({
   tick: z.number(),
   last_event_id: z.number(),
   active_scenario: z.string().optional(),
+
+  // Hierarchical simulation state
+  current_scale: SimulationScaleSchema.optional(),   // What scale we're currently simulating
+  active_drill_downs: z.array(ActiveDrillDownSchema).optional(),  // Stack of active drill-downs
+
   drill_down_opportunities: z.array(DrillDownOpportunitySchema).optional(),
   active_conflicts: z.array(ActiveConflictSchema).optional(),
   created_at: z.string(),
@@ -267,6 +335,7 @@ export const WorldStateSchema = z.object({
 
 export type DrillDownOpportunity = z.infer<typeof DrillDownOpportunitySchema>;
 export type ActiveConflict = z.infer<typeof ActiveConflictSchema>;
+export type ActiveDrillDown = z.infer<typeof ActiveDrillDownSchema>;
 export type WorldState = z.infer<typeof WorldStateSchema>;
 
 // =============================================================================

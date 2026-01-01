@@ -1,7 +1,8 @@
 {
   "id": "evt_10525",
-  "t_world": 1046.0,
-  "t_stream": null,
+  "t_world": 1046,
+  "t_scale": "galactic",
+  "t_depth": 0,
   "type": "influence.changed",
   "where": "region.vega",
   "who": ["polity.hegemony", "polity.free_traders"],

@@ -1,6 +1,10 @@
 {
   "id": "evt_10495",
-  "t_world": 1042.5,
+  "t_world": 1042,
+  "t_scale": "scene",
+  "t_local": 30.0,
+  "t_parent": "evt_10492",
+  "t_depth": 1,
   "t_stream": "02:45:00",
   "type": "agent.promoted",
   "where": "locale.port_nexus",

@@ -1,6 +1,9 @@
 {
   "id": "evt_10492",
-  "t_world": 1042.33,
+  "t_world": 1042,
+  "t_scale": "galactic",
+  "t_local": 8.0,
+  "t_depth": 0,
   "t_stream": "02:14:33",
   "type": "battle.resolved",
   "where": "region.vega",

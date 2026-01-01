@@ -9,13 +9,21 @@
  *
  *   npx tsx emit.ts --type agent.killed --where locale.port --who agent.target \
  *     --causes evt_10001 --importance 0.9
+ *
+ * Hierarchical time (for drill-down events):
+ *   npx tsx emit.ts --type dialogue.occurred --where locale.port --who agent.a,agent.b \
+ *     --scale scene --parent evt_10500 --t-local 15.5 --depth 1
+ *
+ *   npx tsx emit.ts --type combat.round --where locale.port --who agent.a,agent.b \
+ *     --scale action --parent evt_10501 --t-local 47.2 --depth 2
  */
 
 import { existsSync } from 'fs';
 import {
   ChronicleEventSchema,
-  WorldStateSchema,
+  SimulationScales,
   type ChronicleEvent,
+  type SimulationScale,
 } from '../../shared/types.js';
 import {
   getChronicleFile,
@@ -38,6 +46,12 @@ interface EmitOptions {
   confidence?: number;
   summary?: string;
   dryRun?: boolean;
+  // Hierarchical time options
+  scale?: SimulationScale;
+  parent?: string;        // Parent event ID for drill-downs
+  tLocal?: number;        // Local time within current scale
+  depth?: number;         // Nesting depth (0 = top level)
+  tWorld?: number;        // Override t_world (for drill-downs that need specific parent tick)
 }
 
 function parseArgs(): EmitOptions {
@@ -110,6 +124,42 @@ function parseArgs(): EmitOptions {
         break;
       case '--dry-run':
         options.dryRun = true;
+        break;
+      // Hierarchical time options
+      case '--scale':
+        if (next) {
+          if (SimulationScales.includes(next as SimulationScale)) {
+            options.scale = next as SimulationScale;
+          } else {
+            console.error(formatError(`Invalid scale '${next}'. Valid: ${SimulationScales.join(', ')}`));
+            process.exit(1);
+          }
+          i++;
+        }
+        break;
+      case '--parent':
+        if (next) {
+          options.parent = next;
+          i++;
+        }
+        break;
+      case '--t-local':
+        if (next) {
+          options.tLocal = parseFloat(next);
+          i++;
+        }
+        break;
+      case '--depth':
+        if (next) {
+          options.depth = parseInt(next, 10);
+          i++;
+        }
+        break;
+      case '--t-world':
+        if (next) {
+          options.tWorld = parseFloat(next);
+          i++;
+        }
         break;
     }
   }
@@ -186,6 +236,21 @@ async function main() {
     console.log('  --confidence Confidence score 0-1 (default: 1.0)');
     console.log('  --summary    Narrative summary text');
     console.log('  --dry-run    Show event without emitting');
+    console.log('');
+    console.log('Hierarchical Time (for drill-down events):');
+    console.log('  --scale      Simulation scale: galactic, continental, city, scene, action');
+    console.log('  --parent     Parent event ID that triggered this drill-down');
+    console.log('  --t-local    Local time within current scale context');
+    console.log('  --depth      Nesting depth (0 = top level, 1 = first drill-down, etc.)');
+    console.log('  --t-world    Override world tick (for drill-downs preserving parent tick)');
+    console.log('');
+    console.log('Examples:');
+    console.log('  # Top-level galactic event');
+    console.log('  npx tsx emit.ts --type fleet.moved --where region.vega --who force.7th_fleet --scale galactic');
+    console.log('');
+    console.log('  # Scene drill-down from galactic event');
+    console.log('  npx tsx emit.ts --type dialogue.occurred --where locale.port --who agent.reva,agent.zara \\');
+    console.log('    --scale scene --parent evt_10500 --t-local 15.5 --depth 1');
     process.exit(1);
   }
 
@@ -200,11 +265,20 @@ async function main() {
   }
 
   const { id, num } = getNextEventId();
-  const tick = getCurrentTick();
+  const tick = options.tWorld ?? getCurrentTick();
+
+  // Determine depth: if parent is specified but depth isn't, default to 1
+  const depth = options.depth ?? (options.parent ? 1 : 0);
 
   const event: ChronicleEvent = {
     id,
+    // Hierarchical time
     t_world: tick,
+    t_scale: options.scale,
+    t_local: options.tLocal,
+    t_parent: options.parent,
+    t_depth: depth,
+    // Event content
     type: options.type,
     where: options.where,
     who: options.who,
@@ -241,6 +315,16 @@ async function main() {
   console.log(`  Type: ${event.type}`);
   console.log(`  Where: ${event.where}`);
   console.log(`  Who: ${event.who.join(', ')}`);
+  console.log(`  t_world: ${event.t_world}`);
+  if (event.t_scale) {
+    console.log(`  t_scale: ${event.t_scale}`);
+  }
+  if (event.t_local !== undefined) {
+    console.log(`  t_local: ${event.t_local}`);
+  }
+  if (event.t_parent) {
+    console.log(`  t_parent: ${event.t_parent} (depth: ${event.t_depth})`);
+  }
   console.log(`  Importance: ${event.importance}`);
   if (event.narrative_summary) {
     console.log(`  Summary: ${event.narrative_summary}`);

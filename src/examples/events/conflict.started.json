@@ -1,7 +1,8 @@
 {
   "id": "evt_10311",
-  "t_world": 1040.0,
-  "t_stream": null,
+  "t_world": 1040,
+  "t_scale": "galactic",
+  "t_depth": 0,
   "type": "conflict.started",
   "where": "region.vega",
   "who": ["polity.hegemony", "polity.free_traders", "force.hegemony_7th_fleet", "force.free_trader_raiders"],

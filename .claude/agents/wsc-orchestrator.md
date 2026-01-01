@@ -109,6 +109,51 @@ Each agent can create **drill-down opportunities** for agents below it in the hi
 - Use `party-rpg` for dialogue, negotiations, social encounters, turn-based tactical combat
 - Use `action-sim` for dogfights, FPS combat, vehicle chases, real-time action sequences
 
+## Hierarchical Time System
+
+Events use hierarchical time to support recursive drill-downs:
+
+| Field | Description |
+|-------|-------------|
+| `t_world` | Parent tick at top simulation level (integer) |
+| `t_scale` | Source scale: `galactic`, `continental`, `city`, `scene`, `action` |
+| `t_local` | Local time within current scale's context |
+| `t_parent` | Event ID that triggered this drill-down |
+| `t_depth` | Nesting depth: 0 = top level, 1+ = drill-down |
+
+### Drill-Down Flow Example
+
+1. **Galactic tick 1000**: You run galactic-4x, which creates opportunity `evt_10500`
+2. **Drill down to scene**: You invoke party-rpg to resolve the opportunity
+   - Events emitted have: `t_world: 1000, t_scale: "scene", t_parent: "evt_10500", t_depth: 1`
+3. **Drill down to action**: Combat breaks out during the scene, invoke action-sim
+   - Events emitted have: `t_world: 1000, t_scale: "action", t_parent: "evt_10501", t_depth: 2`
+4. **Return up**: After action resolves, return to scene, then to galactic
+5. **Galactic tick 1001**: Continue main simulation
+
+### When Drilling Down
+
+Pass this context to lower-scale agents:
+```
+--t-world {current_tick}       # Preserve parent tick
+--scale {target_scale}         # scene, action, etc.
+--parent {triggering_event}    # Event that created the opportunity
+--depth {current_depth + 1}    # Increment depth
+```
+
+### Querying by Scale
+
+```bash
+# View only top-level events
+npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --scale galactic --depth 0
+
+# View all events from a drill-down
+npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --tree evt_10500
+
+# View events at a specific scale
+npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --scale scene
+```
+
 ## World State Location
 
 The active world's state is in `src/worlds/{active_world}/`:

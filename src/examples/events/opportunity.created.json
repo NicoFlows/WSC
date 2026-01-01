@@ -1,7 +1,8 @@
 {
   "id": "evt_10530",
-  "t_world": 1047.0,
-  "t_stream": null,
+  "t_world": 1047,
+  "t_scale": "galactic",
+  "t_depth": 0,
   "type": "opportunity.created",
   "where": "link.nexus_prime.vega",
   "who": ["polity.free_traders", "force.free_trader_raiders"],

@@ -13,15 +13,24 @@
  *   npx tsx query.ts --causes-of evt_10492
  *   npx tsx query.ts --caused-by evt_10311
  *   npx tsx query.ts --json
+ *
+ * Hierarchical time filters:
+ *   npx tsx query.ts --scale galactic           # Only top-level events
+ *   npx tsx query.ts --scale scene              # Only scene-level events
+ *   npx tsx query.ts --parent evt_10500         # Events drilled down from specific event
+ *   npx tsx query.ts --depth 0                  # Only top-level events (depth 0)
+ *   npx tsx query.ts --depth 1                  # Only first-level drill-downs
+ *   npx tsx query.ts --tree evt_10500           # Show event and all descendants
  */
 
 import { existsSync, readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
-import { type ChronicleEvent } from '../../shared/types.js';
+import { SimulationScales, type ChronicleEvent, type SimulationScale } from '../../shared/types.js';
 import {
   getChronicleFile,
   getExamplesDir,
   formatTable,
+  formatError,
 } from '../../shared/utils.js';
 
 interface QueryOptions {
@@ -37,6 +46,11 @@ interface QueryOptions {
   causedBy?: string;
   json?: boolean;
   examples?: boolean;
+  // Hierarchical time filters
+  scale?: SimulationScale;
+  parent?: string;
+  depth?: number;
+  tree?: string;  // Show event and all descendants
 }
 
 function parseArgs(): QueryOptions {
@@ -84,6 +98,27 @@ function parseArgs(): QueryOptions {
         break;
       case '--examples':
         options.examples = true;
+        break;
+      // Hierarchical time filters
+      case '--scale':
+        if (next) {
+          if (SimulationScales.includes(next as SimulationScale)) {
+            options.scale = next as SimulationScale;
+          } else {
+            console.error(formatError(`Invalid scale '${next}'. Valid: ${SimulationScales.join(', ')}`));
+            process.exit(1);
+          }
+          i++;
+        }
+        break;
+      case '--parent':
+        if (next) { options.parent = next; i++; }
+        break;
+      case '--depth':
+        if (next) { options.depth = parseInt(next, 10); i++; }
+        break;
+      case '--tree':
+        if (next) { options.tree = next; i++; }
         break;
     }
   }
@@ -180,7 +215,54 @@ function matchesQuery(event: ChronicleEvent, options: QueryOptions, allEvents: C
     }
   }
 
+  // Scale filter
+  if (options.scale && event.t_scale !== options.scale) {
+    return false;
+  }
+
+  // Parent filter (events drilled down from a specific event)
+  if (options.parent && event.t_parent !== options.parent) {
+    return false;
+  }
+
+  // Depth filter
+  if (options.depth !== undefined) {
+    const eventDepth = event.t_depth ?? 0;
+    if (eventDepth !== options.depth) {
+      return false;
+    }
+  }
+
   return true;
+}
+
+/**
+ * Get all descendants of an event (for --tree option)
+ * Recursively finds events where t_parent links back to the root
+ */
+function getEventTree(rootId: string, allEvents: ChronicleEvent[]): ChronicleEvent[] {
+  const result: ChronicleEvent[] = [];
+  const visited = new Set<string>();
+
+  function collectDescendants(parentId: string) {
+    for (const event of allEvents) {
+      if (event.t_parent === parentId && !visited.has(event.id)) {
+        visited.add(event.id);
+        result.push(event);
+        collectDescendants(event.id);
+      }
+    }
+  }
+
+  // Include the root event itself
+  const rootEvent = allEvents.find(e => e.id === rootId);
+  if (rootEvent) {
+    result.push(rootEvent);
+    visited.add(rootId);
+  }
+
+  collectDescendants(rootId);
+  return result;
 }
 
 function formatEventRow(event: ChronicleEvent): string[] {
@@ -189,12 +271,25 @@ function formatEventRow(event: ChronicleEvent): string[] {
     : '?';
 
   const summary = event.narrative_summary
-    ? event.narrative_summary.slice(0, 40) + (event.narrative_summary.length > 40 ? '...' : '')
+    ? event.narrative_summary.slice(0, 35) + (event.narrative_summary.length > 35 ? '...' : '')
     : event.type;
 
+  // Format time with scale info
+  let timeStr = `t=${event.t_world}`;
+  if (event.t_scale) {
+    const scaleAbbrev = event.t_scale.slice(0, 3);  // gal, con, cit, sce, act
+    timeStr = `${timeStr}@${scaleAbbrev}`;
+    if (event.t_local !== undefined) {
+      timeStr = `${timeStr}:${event.t_local}`;
+    }
+  }
+
+  // Show depth with indentation indicator
+  const depthPrefix = event.t_depth ? '  '.repeat(event.t_depth) + '└─' : '';
+
   return [
-    event.id,
-    `t=${event.t_world}`,
+    depthPrefix + event.id,
+    timeStr,
     event.type,
     importance,
     summary,
@@ -207,7 +302,8 @@ async function main() {
   // Default to showing last 10 events if no filters
   if (!options.type && !options.where && !options.who &&
       options.minImportance === undefined && options.after === undefined &&
-      !options.causesOf && !options.causedBy) {
+      !options.causesOf && !options.causedBy &&
+      !options.scale && !options.parent && options.depth === undefined && !options.tree) {
     options.last = options.last || 10;
   }
 
@@ -219,10 +315,27 @@ async function main() {
     return;
   }
 
-  let results = allEvents.filter(e => matchesQuery(e, options, allEvents));
+  let results: ChronicleEvent[];
 
-  // Sort by world time descending
-  results.sort((a, b) => b.t_world - a.t_world);
+  // Handle --tree specially: get event and all descendants
+  if (options.tree) {
+    results = getEventTree(options.tree, allEvents);
+    if (results.length === 0) {
+      console.log(`Event '${options.tree}' not found.`);
+      return;
+    }
+    // Sort tree by depth then by t_local (to show hierarchy)
+    results.sort((a, b) => {
+      const depthA = a.t_depth ?? 0;
+      const depthB = b.t_depth ?? 0;
+      if (depthA !== depthB) return depthA - depthB;
+      return (a.t_local ?? 0) - (b.t_local ?? 0);
+    });
+  } else {
+    results = allEvents.filter(e => matchesQuery(e, options, allEvents));
+    // Sort by world time descending
+    results.sort((a, b) => b.t_world - a.t_world);
+  }
 
   // Apply --last limit
   if (options.last && options.last > 0) {

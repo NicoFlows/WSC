@@ -13,7 +13,11 @@ The chronicle is an append-only event log that records everything that happens i
 ```json
 {
   "id": "evt_10001",
-  "t_world": 1042.5,
+  "t_world": 1042,
+  "t_scale": "galactic",
+  "t_local": 8.0,
+  "t_parent": null,
+  "t_depth": 0,
   "t_stream": "02:14:33",
   "type": "battle.resolved",
   "where": "region.vega",
@@ -26,6 +30,30 @@ The chronicle is an append-only event log that records everything that happens i
   "narrative_summary": "Human-readable description..."
 }
 ```
+
+## Hierarchical Time System
+
+Events use hierarchical time to support recursive drill-downs across simulation scales:
+
+| Field | Description |
+|-------|-------------|
+| `t_world` | Parent tick at the top simulation level (integer) |
+| `t_scale` | Which simulation scale generated this event: `galactic`, `continental`, `city`, `scene`, `action` |
+| `t_local` | Local time within the current scale's context (optional) |
+| `t_parent` | Event ID that triggered this drill-down (for sub-scale events) |
+| `t_depth` | Nesting depth: 0 = top level, 1 = first drill-down, 2 = drill-down within drill-down, etc. |
+
+### Example Flow
+
+1. **Galactic tick 1000**: galactic-4x creates opportunity `evt_10500`
+2. **Scene drill-down**: party-rpg resolves scene, emits `evt_10501`:
+   ```json
+   { "t_world": 1000, "t_scale": "scene", "t_local": 15.5, "t_parent": "evt_10500", "t_depth": 1 }
+   ```
+3. **Action drill-down**: action-sim resolves combat within scene, emits `evt_10502`:
+   ```json
+   { "t_world": 1000, "t_scale": "action", "t_local": 47.2, "t_parent": "evt_10501", "t_depth": 2 }
+   ```
 
 ## Event Types
 
@@ -45,13 +73,37 @@ The chronicle is an append-only event log that records everything that happens i
 ### Emit an Event
 
 ```bash
+# Top-level galactic event
 npx tsx .claude/skills/wsc-chronicle/scripts/emit.ts \
   --type battle.resolved \
   --where region.vega \
   --who force.7th_fleet,force.raiders \
   --data '{"outcome": "raider_victory"}' \
+  --scale galactic \
   --importance 0.8 \
   --summary "Raiders ambushed the 7th Fleet..."
+
+# Scene drill-down event
+npx tsx .claude/skills/wsc-chronicle/scripts/emit.ts \
+  --type dialogue.occurred \
+  --where locale.port_nexus \
+  --who agent.reva,agent.zara \
+  --scale scene \
+  --parent evt_10500 \
+  --t-local 15.5 \
+  --depth 1 \
+  --importance 0.5
+
+# Action drill-down within scene
+npx tsx .claude/skills/wsc-chronicle/scripts/emit.ts \
+  --type combat.round \
+  --where locale.port_nexus \
+  --who agent.reva,agent.assassin \
+  --scale action \
+  --parent evt_10501 \
+  --t-local 47.2 \
+  --depth 2 \
+  --importance 0.6
 ```
 
 ### Query Events
@@ -74,9 +126,25 @@ npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --min-importance 0.7
 
 # Time range
 npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --after 1040 --before 1050
+```
 
-# Combined
-npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --type conflict.* --where region.vega --min-importance 0.5
+### Query by Scale
+
+```bash
+# Only top-level galactic events
+npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --scale galactic
+
+# Only scene-level events
+npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --scale scene
+
+# Events drilled down from a specific event
+npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --parent evt_10500
+
+# Only top-level events (depth 0)
+npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --depth 0
+
+# Show event tree (event and all descendants)
+npx tsx .claude/skills/wsc-chronicle/scripts/query.ts --tree evt_10500
 ```
 
 ### Trace Causality
@@ -103,5 +171,5 @@ Events carry an `importance` score (0-1) used for artifact generation:
 
 ## File Location
 
-- **Chronicle**: `src/world/chronicle.ndjson`
+- **Chronicle**: `src/worlds/{active_world}/chronicle.ndjson`
 - **Example events**: `src/examples/events/`

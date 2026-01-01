@@ -1,6 +1,10 @@
 {
   "id": "evt_10535",
-  "t_world": 1047.5,
+  "t_world": 1047,
+  "t_scale": "scene",
+  "t_local": 15.5,
+  "t_parent": "evt_10495",
+  "t_depth": 1,
   "t_stream": "01:23:45",
   "type": "dialogue.occurred",
   "where": "site.port_nexus.docking_bay_7",
